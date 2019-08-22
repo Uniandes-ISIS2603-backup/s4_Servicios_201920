@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.servicios.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -18,58 +20,78 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
 
     private String descripcion;
 
-    private Date fechaInicio;
+    @Temporal(TemporalType.DATE)
+    private String fechaInicio;
 
     private String estado;
 
     private String foto;
+
     
     public SolicitudServicioEntity()
     {
-
+        
     }
     
-    public SolicitudServicioEntity( String pDescripcion, Date pFechaInicio, String pEstado, String pFoto)
-    {
-        descripcion = pDescripcion;
-        fechaInicio = pFechaInicio;
-        estado = pEstado;
-        foto = pFoto;
-    }
-
+    
+    
+    /**
+     * @return the descripcion
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * @param descripcion the descripcion to set
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaInicio() {
+    /**
+     * @return the fechaInicio
+     */
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
+    /**
+     * @return the estado
+     */
     public String getEstado() {
         return estado;
     }
-  
+
+    /**
+     * @param estado the estado to set
+     */
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
+    /**
+     * @return the foto
+     */
     public String getFoto() {
         return foto;
     }
 
+    /**
+     * @param foto the foto to set
+     */
     public void setFoto(String foto) {
         this.foto = foto;
     }
     
     
     
-    
+   
 }

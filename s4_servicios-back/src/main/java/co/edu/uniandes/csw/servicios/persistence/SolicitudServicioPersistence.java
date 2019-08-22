@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.servicios.persistence;
 
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -17,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class SolicitudServicioPersistence {
     
-    @PersistenceContext(unitName = "ServiciosPU")
+    @PersistenceContext(unitName = "serviciosPU")
     protected EntityManager em;
     
     public SolicitudServicioEntity create (SolicitudServicioEntity solicitudServicioEntity)
@@ -26,5 +28,14 @@ public class SolicitudServicioPersistence {
         return solicitudServicioEntity;
     }
     
+    public SolicitudServicioEntity find (Long solicitudServicioId)
+    {
+        return em.find(SolicitudServicioEntity.class, solicitudServicioId);
+    }
     
+    public List<SolicitudServicioEntity> findAll()
+    {
+        TypedQuery<SolicitudServicioEntity> query = em.createQuery("select u from SolicitudServicioEntity u", SolicitudServicioEntity.class);
+        return query.getResultList();
+    }
 }
