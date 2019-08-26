@@ -16,11 +16,34 @@ import javax.persistence.*;
 public class ClienteEntity extends BaseEntity {
     
     @Id
+    /**
+     * El identificador del cliente en la base de datos
+     */
     private Long id;
+    
+    /**
+     * El nombre del cliente
+     */
     private String nombre; 
+    
+    /**
+     * El teléfono del cliente
+     */
     private int telefono;
+    
+    /**
+     * El correo electrónico del cliente
+     */
     private String mail;
+    
+    /**
+     * El usuario con el que el cliente ingresa al sistema
+     */
     private String usuario;
+    
+    /**
+     * La contraseña del cliente
+     */
     private String contrasena;
     
     @Override
