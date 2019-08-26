@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.servicios.entities;
 
+import java.util.Collection;
 import javax.persistence.*;
 
 /**
@@ -20,6 +21,24 @@ public class ClienteEntity extends BaseEntity {
      * El identificador del cliente en la base de datos
      */
     private Long id;
+    
+    //TODO: Meter clase AdministradorEntity para que funcione el código
+    /**
+     * Atributo que representa el administrador de los clientes
+     * Se hace la anotación ManyToOne porque MUCHOS(Many) clientes tienen UN(One) sólo administrador
+     */
+//    @ManyToOne()
+//    AdministradorEntity administrador;
+    
+    
+    //TODO: Meter clase SolicitudServicioEntity para que funcione el código. 
+    /**
+     * Atributo que representa todos los servicios que ha pedido el cliente
+     * Se hace la anotación OneToMany porque UN(One) cliente tiene MUCHOS(Many) servicios
+     * En  la clase SolicitudServicio se refiere al cliente como "cliene"
+     */
+//    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+//    Collection<SolicitudServicioEntity> servicios;
     
     /**
      * El nombre del cliente
