@@ -43,7 +43,7 @@ public class ServicioOfrecidoPersistence {
     
     public ServicioOfrecidoEntity update(ServicioOfrecidoEntity servicioOfrecido)
     {
-        return null;
+        return em.merge(servicioOfrecido);
     }
     
     public void delete(Long ServicioOfrecidoId){
