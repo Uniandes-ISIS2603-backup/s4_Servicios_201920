@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.test.persistence;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
 import co.edu.uniandes.csw.servicios.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -35,13 +36,24 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ClientePersistenceTest {
     
+    /**
+     * Injección de la dependencia a la clase ClientePersistence que va a ser probado
+     */
     @Inject
-    UserTransaction utx;
+    private ClientePersistence persistence;
     
+    /**
+     * El Persistence context que se va a usar para acceder a la base de daos de prueba
+     */
     @PersistenceContext
     private EntityManager em;
     
-    private ClientePersistence persistence;
+    /**
+     * Variable que se va a usar para marcar las transacciones del EntityManager cuando se modifica la base
+     */
+    UserTransaction utx;
+    
+    private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -57,6 +69,20 @@ public class ClientePersistenceTest {
     
     @BeforeClass
     public static void setUpClass() {
+        
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from ClienteEntity").executeUpdate();
+    }
+    
+    private void insertData(){
+        PodamFactory factory = new PodamFactoryImpl();
+        for(int i = 0; i< 3; i ++){
+            ClienteEntity entidad = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entidad);
+            data.add(entidad);
+        }
     }
     
     @AfterClass
@@ -65,6 +91,20 @@ public class ClientePersistenceTest {
     
     @Before
     public void setUp() {
+        try{
+            utx.begin();
+            em.joinTransaction();
+            //clearData();
+            //insertData();
+            utx.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+            try{
+                utx.rollback();
+            } catch(Exception e1){
+                e1.printStackTrace();
+            }
+        }
     }
     
     @After
