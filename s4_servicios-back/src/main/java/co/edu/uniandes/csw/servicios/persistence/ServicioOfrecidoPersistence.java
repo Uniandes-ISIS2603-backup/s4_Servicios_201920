@@ -40,4 +40,17 @@ public class ServicioOfrecidoPersistence {
         
         return query.getResultList();
     }
+    
+    public ServicioOfrecidoEntity update(ServicioOfrecidoEntity servicioOfrecido)
+    {
+        return null;
+    }
+    
+    public void delete(Long ServicioOfrecidoId){
+        
+        em.remove(em.find(ServicioOfrecidoEntity.class, ServicioOfrecidoId));
+        
+    }
+    
+   
 }
