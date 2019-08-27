@@ -5,11 +5,16 @@
  */
 package co.edu.uniandes.csw.servicios.entities;
 
+import co.edu.uniandes.csw.servicios.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -21,11 +26,32 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
     private String descripcion;
 
     @Temporal(TemporalType.DATE)
-    private String fechaInicio;
+    @PodamStrategyValue(DateStrategy.class)
+    private Date fechaInicio;
 
     private String estado;
 
     private String foto;
+    
+   //@PodamExclude
+   // @ManyToOne
+   //private ClienteEntity cliente;
+    
+   //@PodamExclude
+   // @ManyToOne
+   //private TrabajadorEntity trabajador;
+    
+   //@PodamExclude
+   //@OneToMany
+   //private Collection<ServicioOfrecidoEntity> servicios;
+    
+    //@PodamExclude
+    //@OneToOne
+    //private FacturaEntity factura;
+    
+    @PodamExclude
+    @OneToOne
+    private CalificacionEntity calificacion;
 
     
     public SolicitudServicioEntity()
@@ -52,14 +78,14 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
     /**
      * @return the fechaInicio
      */
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
@@ -89,6 +115,20 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
      */
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    /**
+     * @return the calificacion
+     */
+    public CalificacionEntity getCalificacion() {
+        return calificacion;
+    }
+
+    /**
+     * @param calificacion the calificacion to set
+     */
+    public void setCalificacion(CalificacionEntity calificacion) {
+        this.calificacion = calificacion;
     }
     
     

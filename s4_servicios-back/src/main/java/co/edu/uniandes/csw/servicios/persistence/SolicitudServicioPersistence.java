@@ -38,4 +38,16 @@ public class SolicitudServicioPersistence {
         TypedQuery<SolicitudServicioEntity> query = em.createQuery("select u from SolicitudServicioEntity u", SolicitudServicioEntity.class);
         return query.getResultList();
     }
+    
+    public SolicitudServicioEntity update(SolicitudServicioEntity solicitudServicioEntity)
+    {
+        return em.merge(solicitudServicioEntity);
+                
+    }
+    
+    public void delete(Long solicitudServicioId)
+    {
+        SolicitudServicioEntity solicitudServicioEntity = em.find(SolicitudServicioEntity.class, solicitudServicioId);
+        em.remove(solicitudServicioEntity);
+    }
 }
