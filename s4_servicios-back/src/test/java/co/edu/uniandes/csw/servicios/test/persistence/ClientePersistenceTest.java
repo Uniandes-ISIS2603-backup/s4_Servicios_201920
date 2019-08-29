@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.servicios.test.persistence;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.persistence.*;
+import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -53,6 +53,9 @@ public class ClientePersistenceTest {
      */
     UserTransaction utx;
     
+    /**
+     * Lista con los datos que se van a contener al principio y facilitan las preubas. 
+     */
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
     
     @Deployment
@@ -94,8 +97,8 @@ public class ClientePersistenceTest {
         try{
             utx.begin();
             em.joinTransaction();
-            //clearData();
-            //insertData();
+            clearData();
+            insertData();
             utx.commit();
         } catch(Exception e){
             e.printStackTrace();
@@ -115,12 +118,12 @@ public class ClientePersistenceTest {
      * Test of create method, of class ClientePersistence.
      */
     @Test
-    public void testCreate() throws Exception {
+    public void testCreate() {
         PodamFactory factory = new PodamFactoryImpl();
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         ClienteEntity resultado;
         resultado = persistence.create(newEntity);
-        //Assert.assertNotNull(result);
+        Assert.assertNotNull(resultado);
         ClienteEntity entity = em.find(ClienteEntity.class, resultado.getId());
         Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
@@ -132,8 +135,15 @@ public class ClientePersistenceTest {
     @Test
     public void testFindAll() throws Exception {
         List<ClienteEntity> lista = persistence.findAll();
-        //Assert.assertEquals(data.size(), list.size());
-        
+        Assert.assertEquals(data.size(), lista.size());
+        for(ClienteEntity ent : lista){
+            boolean found = false;
+            for(ClienteEntity entity : data) {
+                if(ent.getId().equals(entity.getId()))
+                    found = true;
+            }
+            Assert.assertTrue(found);
+        }
     }
 
     /**
@@ -141,7 +151,10 @@ public class ClientePersistenceTest {
      */
     @Test
     public void testFind() throws Exception {
-        fail("testFind");
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = persistence.find(entity);
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }
 
     /**
@@ -149,7 +162,13 @@ public class ClientePersistenceTest {
      */
     @Test
     public void testUpdate() throws Exception {
-        fail("testUpdate");
+        ClienteEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ClienteEntity newEntity =factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setId(entity.getId());
+        persistence.update(newEntity);
+        ClienteEntity resp = em.find(ClienteEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
     }
 
     /**
@@ -157,7 +176,11 @@ public class ClientePersistenceTest {
      */
     @Test
     public void testDelete() throws Exception {
-        fail("testDelete");
+        ClienteEntity entity = data.get(0);
+        persistence.delete(entity);
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        Assert.assertNotNull(deleted);
+        
     }
     
 }
