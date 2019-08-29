@@ -131,7 +131,27 @@ public class FacturaPersistenceTest {
         Assert.assertNull(entity2);
     }
       
-            
+         @Test
+    public void updateServicioOfrecidoTest()
+    {
+        PodamFactory factory= new PodamFactoryImpl();
+        
+        FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        
+       entity= fp.create(entity);
+        
+        newEntity= fp.update(newEntity);
+        
+       FacturaEntity entitySearch = fm.find(FacturaEntity.class, newEntity.getId());  
+       Assert.assertNotNull(entitySearch);
+      // Assert.assertNull(em.find(ServicioOfrecidoEntity.class, entity.getId()));
+       
+       Assert.assertEquals(newEntity.getId(), entitySearch.getId());
+       Assert.assertEquals(newEntity.getDuracion(), entitySearch.getDuracion());
+        
+        
+    }       
             
     
 
