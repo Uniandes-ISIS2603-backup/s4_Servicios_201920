@@ -39,7 +39,7 @@ public class TrabajadorPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(TrabajadorEntity.class.getPackage())
                 .addPackage(TrabajadorPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistance.xml","persistance.xml")
+                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
     
