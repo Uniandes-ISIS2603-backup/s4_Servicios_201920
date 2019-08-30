@@ -23,10 +23,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.*;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
@@ -51,12 +49,13 @@ public class ClientePersistenceTest {
     /**
      * Variable que se va a usar para marcar las transacciones del EntityManager cuando se modifica la base
      */
+    @Inject
     UserTransaction utx;
     
     /**
      * Lista con los datos que se van a contener al principio y facilitan las preubas. 
      */
-    private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
+    private List<ClienteEntity> data = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -133,7 +132,7 @@ public class ClientePersistenceTest {
      * Test of findAll method, of class ClientePersistence.
      */
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindAll() {
         List<ClienteEntity> lista = persistence.findAll();
         Assert.assertEquals(data.size(), lista.size());
         for(ClienteEntity ent : lista){
@@ -150,7 +149,7 @@ public class ClientePersistenceTest {
      * Test of find method, of class ClientePersistence.
      */
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
         ClienteEntity entity = data.get(0);
         ClienteEntity newEntity = persistence.find(entity);
         Assert.assertNotNull(newEntity);
@@ -161,7 +160,7 @@ public class ClientePersistenceTest {
      * Test of update method, of class ClientePersistence.
      */
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdate() {
         ClienteEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         ClienteEntity newEntity =factory.manufacturePojo(ClienteEntity.class);
@@ -175,12 +174,11 @@ public class ClientePersistenceTest {
      * Test of delete method, of class ClientePersistence.
      */
     @Test
-    public void testDelete() throws Exception {
+    public void testDelete() {
         ClienteEntity entity = data.get(0);
-        persistence.delete(entity);
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        persistence.delete(entity);
         Assert.assertNotNull(deleted);
-        
     }
     
 }
