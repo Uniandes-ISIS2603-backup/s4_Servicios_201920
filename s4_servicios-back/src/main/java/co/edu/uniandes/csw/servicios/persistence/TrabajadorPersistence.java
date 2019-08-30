@@ -37,4 +37,13 @@ public class TrabajadorPersistence {
         TypedQuery query = em.createQuery("select u from TrabajadorEntity", TrabajadorEntity.class);
         return query.getResultList();
     }
+
+    public void delete(Long tID){
+        TrabajadorEntity trabajadorEntity = em.find(TrabajadorEntity.class, tID);
+        em.remove(trabajadorEntity);
+    }
+
+    public TrabajadorEntity update(TrabajadorEntity t) {
+        return em.merge(t);
+    }
 }
