@@ -26,3 +26,4 @@ hs_err_pid*
 # Jar y bat de la cascara.
 !Cascara.jar
 !Cascara.bat
+/s4_servicios-back/nbproject/
