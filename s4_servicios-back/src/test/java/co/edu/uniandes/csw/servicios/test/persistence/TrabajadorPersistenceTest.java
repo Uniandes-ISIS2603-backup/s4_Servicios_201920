@@ -13,11 +13,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,7 +71,7 @@ public class TrabajadorPersistenceTest {
     }
     
       private void clearData() {
-        em.createQuery("delete from SolicitudServicioEntity").executeUpdate();
+        em.createQuery("delete from TrabajadorEntity").executeUpdate();
     }
     
      private void insertData() {
@@ -115,17 +115,22 @@ public class TrabajadorPersistenceTest {
     
      @Test
     public void getTrabajadorTest() {
-        TrabajadorEntity entity = data.get(0);
-        TrabajadorEntity newEntity = ep.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
-        Assert.assertEquals(entity.getFechaInicio(), newEntity.getFechaInicio());
-        Assert.assertEquals(entity.getEstado(), newEntity.getEstado());
-        Assert.assertEquals(entity.getFoto(), newEntity.getFoto());
+        TrabajadorEntity newEntity = data.get(0);
+        TrabajadorEntity resp = ep.find(newEntity.getId());
+        
+        Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
+        Assert.assertEquals(newEntity.getContrasena(), resp.getContrasena());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getFoto(), resp.getFoto());
+        Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(newEntity.getUsuario(), resp.getUsuario());
+        Assert.assertEquals(newEntity.getSeguroSocial(), resp.getSeguroSocial());
+        Assert.assertEquals(newEntity.getFoto(),resp.getFoto());
+        Assert.assertEquals(newEntity.getRiesgos(), resp.getRiesgos());
     }
     
       @Test
-    public void updateBookTest() {
+    public void updateTrabajadorTest() {
         TrabajadorEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
@@ -136,10 +141,16 @@ public class TrabajadorPersistenceTest {
 
         TrabajadorEntity resp = em.find(TrabajadorEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getFechaInicio(), resp.getFechaInicio());
-        Assert.assertEquals(newEntity.getDescripcion(), resp.getDescripcion());
-        Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
+        Assert.assertEquals(newEntity.getCorreo(), resp.getCorreo());
+        Assert.assertEquals(newEntity.getContrasena(), resp.getContrasena());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
         Assert.assertEquals(newEntity.getFoto(), resp.getFoto());
+        Assert.assertEquals(newEntity.getTelefono(), resp.getTelefono());
+        Assert.assertEquals(newEntity.getUsuario(), resp.getUsuario());
+        Assert.assertEquals(newEntity.getSeguroSocial(), resp.getSeguroSocial());
+        Assert.assertEquals(newEntity.getFoto(),resp.getFoto());
+        Assert.assertEquals(newEntity.getRiesgos(), resp.getRiesgos());
+    
     }
     
      @Test

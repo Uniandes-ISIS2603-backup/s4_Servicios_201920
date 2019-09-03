@@ -34,7 +34,7 @@ public class TrabajadorPersistence {
     }
     
     public List<TrabajadorEntity> findAll(){
-        TypedQuery query = em.createQuery("select u from TrabajadorEntity", TrabajadorEntity.class);
+        TypedQuery query = em.createQuery("select u from TrabajadorEntity u", TrabajadorEntity.class);
         return query.getResultList();
     }
 
