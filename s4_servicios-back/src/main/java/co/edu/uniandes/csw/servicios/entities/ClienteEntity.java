@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.servicios.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -14,7 +16,7 @@ import javax.persistence.*;
  */
         
 @Entity            
-public class ClienteEntity extends BaseEntity {
+public class ClienteEntity extends BaseEntity implements Serializable{
     
     @Id
     /**
@@ -27,8 +29,8 @@ public class ClienteEntity extends BaseEntity {
      * Atributo que representa el administrador de los clientes
      * Se hace la anotación ManyToOne porque MUCHOS(Many) clientes tienen UN(One) sólo administrador
      */
-//    @ManyToOne()
-//    AdministradorEntity administrador;
+    //@ManyToOne()
+    //AdministradorEntity administrador;
     
     
     //TODO: Meter clase SolicitudServicioEntity para que funcione el código. 
@@ -37,8 +39,9 @@ public class ClienteEntity extends BaseEntity {
      * Se hace la anotación OneToMany porque UN(One) cliente tiene MUCHOS(Many) servicios
      * En  la clase SolicitudServicio se refiere al cliente como "cliene"
      */
-//    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-//    Collection<SolicitudServicioEntity> servicios;
+   /* @PodamExclude
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    Collection<SolicitudServicioEntity> servicios;
     
     /**
      * El nombre del cliente
