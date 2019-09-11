@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * @author Violeta Rodriguez
  */
 @Stateless
-public class SerivicioOfrecidoLogic 
+public class ServicioOfrecidoLogic 
 {
     @Inject
     private ServicioOfrecidoPersistence persistencia;
@@ -27,15 +27,21 @@ public class SerivicioOfrecidoLogic
     public ServicioOfrecidoEntity createServicioOfrecido(ServicioOfrecidoEntity newService) throws BusinessLogicException
     {
         // Validamos que no haya otro servicio con el mismo nnombre:
-        ServicioOfrecidoEntity old = persistencia.findByName(newService.getNombre());
+        ServicioOfrecidoEntity old = null; // persistencia.findByName(newService.getNombre());
         String tipo = newService.getTipo();
-        if(old == null && isInType(tipo))
+        if(old != null ) 
         {
-            newService=persistencia.create(newService);
+            throw new BusinessLogicException("Ya existe un servio con ese nombre");
         }
+        else if(!isInType(tipo))
+        {
+             throw new BusinessLogicException("El tipo del servicio ofrecido que se queire agregar, no se encuentra dentro de la oferta");   
+        }
+                
         else
         {
-            newService=null;
+          
+            newService=persistencia.create(newService);
         }
         
         return newService;      
