@@ -41,6 +41,25 @@ public class ServicioOfrecidoPersistence {
         return query.getResultList();
     }
     
+    /**
+     * Busca en la base de datos el servicio ofrecido conle nombre dado
+     * @param nombre nombre del servicio a buscar
+     * @return retona la entidad de el servicio ofrecido con le nombre dado. Si no encuentra el servicio, retorna null. 
+     */
+    public ServicioOfrecidoEntity findByName(String nombre)
+    {
+       //Creamos un query para buscar el servicio con el nombre. Aquí voy a gaurdar los resultados de la búsqueda.
+        TypedQuery query= em.createQuery("SELECT e FROM ServicioOfrecidoEntity e WHERE e.nombre = :nombre", ServicioOfrecidoEntity.class);
+        
+        query = query.setParameter("nombre", nombre );
+        
+        ServicioOfrecidoEntity sameName = (ServicioOfrecidoEntity) query.getSingleResult();
+        
+        return sameName;
+                    
+        
+    }
+    
     public ServicioOfrecidoEntity update(ServicioOfrecidoEntity servicioOfrecido)
     {
         return em.merge(servicioOfrecido);

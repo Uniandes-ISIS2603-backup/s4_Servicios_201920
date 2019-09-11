@@ -105,6 +105,7 @@ public class ServicioOfrecidoPersistenceTest {
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
         Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1);
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
        
     }
     
@@ -122,8 +123,28 @@ public class ServicioOfrecidoPersistenceTest {
         Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
         Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1); 
+        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1);
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
+    
+       @Test
+    public void findByNameTest()       
+    {
+        PodamFactory factory= new PodamFactoryImpl();
+        ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
+        
+        //No está sirviendo la parte de persistir desde la clase de pruebas
+        ServicioOfrecidoEntity ee= sop.create(newEntity);
+        
+        ServicioOfrecidoEntity entity =sop.findByName(ee.getNombre());
+        
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1);
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+    }
+ 
     
     @Test 
     public void findAllServicioOfrecidoTest()
@@ -147,16 +168,20 @@ public class ServicioOfrecidoPersistenceTest {
        Assert.assertEquals(newEntity1.getTipo(), lista.get(0).getTipo());
        Assert.assertEquals(newEntity1.getDescripcion(), lista.get(0).getDescripcion());
        Assert.assertEquals(newEntity1.getPrecio(),lista.get(0).getPrecio(), 0.1); 
+       Assert.assertEquals(newEntity1.getNombre(), lista.get(0).getNombre());
+       
         
        Assert.assertNotNull(lista.get(1));
        Assert.assertEquals(newEntity2.getTipo(), lista.get(1).getTipo());
        Assert.assertEquals(newEntity2.getDescripcion(), lista.get(1).getDescripcion());
        Assert.assertEquals(newEntity2.getPrecio(),lista.get(1).getPrecio(), 0.1); 
+       Assert.assertEquals(newEntity2.getNombre(), lista.get(1).getNombre());
        
        Assert.assertNotNull(lista.get(2));
        Assert.assertEquals(newEntity3.getTipo(), lista.get(2).getTipo());
        Assert.assertEquals(newEntity3.getDescripcion(), lista.get(2).getDescripcion());
-       Assert.assertEquals(newEntity3.getPrecio(),lista.get(2).getPrecio(), 0.1);   
+       Assert.assertEquals(newEntity3.getPrecio(),lista.get(2).getPrecio(), 0.1); 
+       Assert.assertEquals(newEntity3.getNombre(), lista.get(2).getNombre());
     }
     
     @Test
@@ -178,6 +203,7 @@ public class ServicioOfrecidoPersistenceTest {
        Assert.assertEquals(newEntity.getTipo(), entitySearch.getTipo());
        Assert.assertEquals(newEntity.getDescripcion(), entitySearch.getDescripcion());
        Assert.assertEquals(newEntity.getPrecio(),entitySearch.getPrecio(), 0.1);
+       Assert.assertEquals(newEntity.getNombre(), entitySearch.getNombre());
         
         
     }

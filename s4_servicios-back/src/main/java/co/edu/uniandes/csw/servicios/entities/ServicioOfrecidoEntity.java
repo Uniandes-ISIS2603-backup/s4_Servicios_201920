@@ -20,10 +20,14 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
     public static final int PINTURA =3;
     
     public static final int ELECTRICIDAD =4;
+
+  
     
     public static final int CERRAJERIA =5;
     
     public static final int VENTANERIA=6;
+    
+    public static final int CARPINTERIA=7;
     
   
     
@@ -43,9 +47,23 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
      */
     private double precio;
     
+    /**
+     * Nombre del servio a ofrecer
+     */
+    
+    private String nombre;
+    
     public  ServicioOfrecidoEntity ()
     {
         
+    }
+    
+     public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -90,4 +108,7 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
         this.precio = precio;
     }
     
+    
+    
 }
+
