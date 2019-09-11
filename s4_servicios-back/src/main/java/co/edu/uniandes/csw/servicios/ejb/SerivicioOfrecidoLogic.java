@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.servicios.ejb;
 
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
+import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ServicioOfrecidoPersistence;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,11 +19,40 @@ import javax.inject.Inject;
 public class SerivicioOfrecidoLogic 
 {
     @Inject
-    private ServicioOfrecidoPersistence persitencia;
+    private ServicioOfrecidoPersistence persistencia;
     
-    public ServicioOfrecidoEntity createService(ServicioOfrecidoEntity servicioOfecidoEntity)
+    private final String[] tipos ={"Pintura", "Plomeria", "Electricidad", "Cerrajeria", "Ventaneria", "Carpinteria", "Aseo"};
+    
+    
+    public ServicioOfrecidoEntity createServicioOfrecido(ServicioOfrecidoEntity newService) throws BusinessLogicException
     {
-        // Validamo que no haya otro servicio con el mismo nnombre:
+        // Validamos que no haya otro servicio con el mismo nnombre:
+        ServicioOfrecidoEntity old = persistencia.findByName(newService.getNombre());
+        String tipo = newService.getTipo();
+        if(old == null && isInType(tipo))
+        {
+            newService=persistencia.create(newService);
+        }
+        else
+        {
+            newService=null;
+        }
         
+        return newService;      
+    }
+    
+        public boolean isInType(String tipo)
+    {
+        int i=0;
+        boolean isIn= false;
+        while ( i < tipos.length  && !isIn)
+        {
+            if(tipo.equalsIgnoreCase(tipos[i]))
+            {
+                isIn=true;
+            }
+            i++;
+        }
+        return isIn;
     }
 }
