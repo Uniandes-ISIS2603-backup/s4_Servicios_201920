@@ -99,7 +99,7 @@ public class ClienteLogic {
      * @param clienteId Identificador de la instancia a eliminar.
      * @throws BusinessLogicException si el cliente tiene servicios asociados.
      */
-    public void deleteAuthor(Long clienteId) throws BusinessLogicException {
+    public void deleteCliente(Long clienteId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         List<SolicitudServicioEntity> servicios = getCliente(clienteId).getServicios();
         if (servicios != null && !servicios.isEmpty()) {

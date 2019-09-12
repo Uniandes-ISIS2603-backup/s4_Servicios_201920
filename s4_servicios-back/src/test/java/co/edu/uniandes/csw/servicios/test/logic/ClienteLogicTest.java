@@ -103,16 +103,11 @@ public class ClienteLogicTest {
             entity.setServicios(new ArrayList<>());
             data.add(entity);
         }
-        ClienteEntity author = data.get(2);
+        ClienteEntity cliente = data.get(2);
         SolicitudServicioEntity entity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        entity.getClientes().add(author);
-        em.persist(entity);
-        author.getBooks().add(entity);
-
-        PrizeEntity prize = factory.manufacturePojo(PrizeEntity.class);
-        prize.setAuthor(data.get(1));
-        em.persist(prize);
-        data.get(1).getPrizes().add(prize);
+        ArrayList<SolicitudServicioEntity> arreglo = new ArrayList<SolicitudServicioEntity>();
+        arreglo.add(entity);
+        cliente.setServicios(arreglo);
     }
 
     /**

@@ -74,16 +74,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     private String direccion;
     
-    /**
-     * El número de la tarjeta de crédito del cliente
-     */
-    private int noTarjeta;
-    
-    /**
-     * El nombre del banco al que pertenece la tarjeta del cliente
-     */
-    private String banco;
-    
     @Override
     public Long getId(){
         return id;
@@ -127,22 +117,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     }
     
     /**
-     * Retorna el nombre del banco del cliente
-     * @return el banco
-     */
-    public String getBanco(){
-        return banco;
-    }
-    
-    /**
-     * Cambia el banco del cliente por uno dado por parámetro
-     * @param pBanco - El nuevo banco del cliente
-     */
-    public void setBanco(String pBanco){
-        banco = pBanco;
-    }
-    
-    /**
      * Retorna el nombre del cliente
      * @return el nombre
      */
@@ -156,22 +130,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     public void setNombre(String pNombre){
         nombre = pNombre;
-    }
-    
-    /**
-     * Retorna elnúmero de la tarjeta del cliente
-     * @return el número de la tarjeta del cliente
-     */
-    public int getNoTarjeta(){
-        return noTarjeta;
-    }
-    
-    /**
-     * Cambia el número de la tarjeta del cliente por uno dado por parámetro
-     * @param pNoTarjeta - El nuevo número de la tarjeta del cliente
-     */
-    public void setNoTarjeta(int pNoTarjeta){
-        noTarjeta = pNoTarjeta;
     }
     
     /**
