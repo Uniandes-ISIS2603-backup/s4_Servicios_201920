@@ -26,12 +26,14 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ *Pruebas de persistencia de Calificacion
+ * 
  * @author ca.torrese
  */
 
 @RunWith(Arquillian.class)
 public class CalificacionPersistenceTest {
+    
     
     
     @Inject
@@ -100,7 +102,7 @@ public class CalificacionPersistenceTest {
         
         CalificacionEntity entity = em.find(CalificacionEntity.class, ce.getId());
         
-        
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertTrue(newEntity.getPuntaje() == entity.getPuntaje());
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
         
@@ -127,6 +129,7 @@ public class CalificacionPersistenceTest {
         CalificacionEntity newEntity = cp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertTrue(entity.getPuntaje() == newEntity.getPuntaje());
         Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
     }
@@ -143,7 +146,7 @@ public class CalificacionPersistenceTest {
 
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
 
-        
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertTrue(newEntity.getPuntaje() == resp.getPuntaje());
         Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
     } 
