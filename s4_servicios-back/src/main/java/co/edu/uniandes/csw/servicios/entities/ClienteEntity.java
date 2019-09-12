@@ -42,11 +42,15 @@ public class ClienteEntity extends BaseEntity implements Serializable{
    /* @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     Collection<SolicitudServicioEntity> servicios;
-    
+   
     /**
      * El nombre del cliente
      */
     private String nombre; 
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private PagoTarjetaEntity tarjeta;
     
     /**
      * El teléfono del cliente
