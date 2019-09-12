@@ -105,35 +105,36 @@ public class ClienteLogicTest {
         }
         ClienteEntity cliente = data.get(2);
         SolicitudServicioEntity entity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        ArrayList<SolicitudServicioEntity> arreglo = new ArrayList<SolicitudServicioEntity>();
+        ArrayList<SolicitudServicioEntity> arreglo = new ArrayList<>();
         arreglo.add(entity);
         cliente.setServicios(arreglo);
     }
 
     /**
-     * Prueba para crear un Author.
+     * Prueba para crear un Cliente.
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
-    public void createAuthorTest() {
-        AuthorEntity newEntity = factory.manufacturePojo(AuthorEntity.class);
-        AuthorEntity result = authorLogic.createAuthor(newEntity);
+    public void createClienteTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
         Assert.assertNotNull(result);
-        AuthorEntity entity = em.find(AuthorEntity.class, result.getId());
+        ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getBirthDate(), entity.getBirthDate());
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
     }
 
     /**
-     * Prueba para consultar la lista de Authors.
+     * Prueba para consultar la lista de Clientes.
      */
     @Test
-    public void getAuthorsTest() {
-        List<AuthorEntity> list = authorLogic.getAuthors();
+    public void getClientesTest() {
+        List<ClienteEntity> list = clienteLogic.getClientes();
         Assert.assertEquals(data.size(), list.size());
-        for (AuthorEntity entity : list) {
+        for (ClienteEntity entity : list) {
             boolean found = false;
-            for (AuthorEntity storedEntity : data) {
+            for (ClienteEntity storedEntity : data) {
                 if (entity.getId().equals(storedEntity.getId())) {
                     found = true;
                 }
@@ -143,67 +144,58 @@ public class ClienteLogicTest {
     }
 
     /**
-     * Prueba para consultar un Author.
+     * Prueba para consultar un Cliente.
      */
     @Test
-    public void getAuthorTest() {
-        AuthorEntity entity = data.get(0);
-        AuthorEntity resultEntity = authorLogic.getAuthor(entity.getId());
+    public void getClienteTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity resultEntity = clienteLogic.getCliente(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
-        Assert.assertEquals(entity.getName(), resultEntity.getName());
-        Assert.assertEquals(entity.getBirthDate(), resultEntity.getBirthDate());
+        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
+        Assert.assertEquals(entity.getDireccion(), resultEntity.getDireccion());
     }
 
     /**
-     * Prueba para actualizar un Author.
+     * Prueba para actualizar un Cliente.
      */
     @Test
-    public void updateAuthorTest() {
-        AuthorEntity entity = data.get(0);
-        AuthorEntity pojoEntity = factory.manufacturePojo(AuthorEntity.class);
+    public void updateClienteTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity pojoEntity = factory.manufacturePojo(ClienteEntity.class);
 
         pojoEntity.setId(entity.getId());
 
-        authorLogic.updateAuthor(pojoEntity.getId(), pojoEntity);
+        clienteLogic.updateCliente(pojoEntity.getId(), pojoEntity);
 
-        AuthorEntity resp = em.find(AuthorEntity.class, entity.getId());
+        ClienteEntity resp = em.find(ClienteEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getName(), resp.getName());
-        Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
+        Assert.assertEquals(entity.getNombre(), resp.getNombre());
+        Assert.assertEquals(entity.getDireccion(), resp.getDireccion());
     }
 
     /**
-     * Prueba para eliminar un Author
+     * Prueba para eliminar un Cliente
      *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
-    public void deleteAuthorTest() throws BusinessLogicException {
-        AuthorEntity entity = data.get(0);
-        authorLogic.deleteAuthor(entity.getId());
-        AuthorEntity deleted = em.find(AuthorEntity.class, entity.getId());
+    public void deleteClienteTest() throws BusinessLogicException {
+        ClienteEntity entity = data.get(0);
+        clienteLogic.deleteCliente(entity.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
     /**
      * Prueba para eliminar un Author asociado a un libro
      *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
-    public void deleteAuthorConLibroTest() throws BusinessLogicException {
-        authorLogic.deleteAuthor(data.get(2).getId());
+    public void deleteClienteConServicioTest() throws BusinessLogicException {
+        clienteLogic.deleteCliente(data.get(2).getId());
     }
 
-    /**
-     * Prueba para eliminar un Author asociado a un premio
-     *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void deleteAuthorConPremioTest() throws BusinessLogicException {
-        authorLogic.deleteAuthor(data.get(1).getId());
-    }
 }
