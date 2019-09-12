@@ -151,7 +151,7 @@ public class ClientePersistenceTest {
     @Test
     public void testFind() {
         ClienteEntity entity = data.get(0);
-        ClienteEntity newEntity = persistence.find(entity);
+        ClienteEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }

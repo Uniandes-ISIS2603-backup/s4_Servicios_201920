@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -39,9 +40,9 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * Se hace la anotación OneToMany porque UN(One) cliente tiene MUCHOS(Many) servicios
      * En  la clase SolicitudServicio se refiere al cliente como "cliene"
      */
-   /* @PodamExclude
+    @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    Collection<SolicitudServicioEntity> servicios;
+    List<SolicitudServicioEntity> servicios;
     
     /**
      * El nombre del cliente
@@ -107,6 +108,22 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     public void setDireccion(String pDireccion){
         direccion = pDireccion;
+    }
+    
+    /**
+     * Retorna una lista con los servicios del cliente
+     * @return los servicios
+     */
+    public List<SolicitudServicioEntity> getServicios(){
+        return servicios;
+    }
+    
+    /**
+     * Cambia los servicios del cliente por unos dados por parámetro
+     * @param pServicios - La nueva lsita de servicios del cliente
+     */
+    public void setServicios(List<SolicitudServicioEntity> pServicios){
+        servicios = pServicios;
     }
     
     /**
