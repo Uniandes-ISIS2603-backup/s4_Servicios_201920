@@ -43,6 +43,9 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
     @ManyToOne
     private SolicitudServicioEntity solServicio;
 
+       @PodamExclude
+    @ManyToOne
+    private TrabajadorEntity trabajador;
     
     public  ServicioOfrecidoEntity ()
     {
