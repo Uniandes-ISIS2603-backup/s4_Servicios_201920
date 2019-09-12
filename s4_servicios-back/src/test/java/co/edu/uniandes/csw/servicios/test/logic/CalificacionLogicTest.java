@@ -110,8 +110,9 @@ public class CalificacionLogicTest {
      * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
-    public void createEditorialTest() throws BusinessLogicException {
+    public void createCalificacionTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setPuntaje(2);
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());

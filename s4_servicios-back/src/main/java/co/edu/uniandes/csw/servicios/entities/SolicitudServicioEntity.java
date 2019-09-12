@@ -7,12 +7,9 @@ package co.edu.uniandes.csw.servicios.entities;
 
 import co.edu.uniandes.csw.servicios.podam.DateStrategy;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,21 +33,21 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
 
     private String foto;
     
-   @PodamExclude
-   @ManyToOne
-   private ClienteEntity cliente;
+   //@PodamExclude
+   // @ManyToOne
+   //private ClienteEntity cliente;
     
-   @PodamExclude
-   @ManyToOne
-   private TrabajadorEntity trabajador;
+   //@PodamExclude
+   // @ManyToOne
+   //private TrabajadorEntity trabajador;
     
-   @PodamExclude
-   @OneToMany(mappedBy = "solicitudServicio", fetch = FetchType.LAZY)
-   private Collection<ServicioOfrecidoEntity> servicios;
+   //@PodamExclude
+   //@OneToMany
+   //private Collection<ServicioOfrecidoEntity> servicios;
     
-    @PodamExclude
-    @OneToOne
-    private FacturaEntity factura;
+    //@PodamExclude
+    //@OneToOne
+    //private FacturaEntity factura;
     
     @PodamExclude
     @OneToOne
@@ -132,62 +129,6 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
      */
     public void setCalificacion(CalificacionEntity calificacion) {
         this.calificacion = calificacion;
-    }
-
-    /**
-     * @return the servicios
-     */
-    public Collection<ServicioOfrecidoEntity> getServicios() {
-        return servicios;
-    }
-
-    /**
-     * @param servicios the servicios to set
-     */
-    public void setServicios(Collection<ServicioOfrecidoEntity> servicios) {
-        this.servicios = servicios;
-    }
-
-    /**
-     * @return the cliente
-     */
-    public ClienteEntity getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteEntity cliente) {
-        this.cliente = cliente;
-    }
-
-    /**
-     * @return the trabajador
-     */
-    public TrabajadorEntity getTrabajador() {
-        return trabajador;
-    }
-
-    /**
-     * @param trabajador the trabajador to set
-     */
-    public void setTrabajador(TrabajadorEntity trabajador) {
-        this.trabajador = trabajador;
-    }
-
-    /**
-     * @return the factura
-     */
-    public FacturaEntity getFactura() {
-        return factura;
-    }
-
-    /**
-     * @param factura the factura to set
-     */
-    public void setFactura(FacturaEntity factura) {
-        this.factura = factura;
     }
     
     

@@ -5,14 +5,11 @@
  */
 package co.edu.uniandes.csw.servicios.entities;
 
-import co.edu.uniandes.csw.servicios.podam.PuntajeStrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -21,18 +18,18 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
     
-    @PodamStrategyValue(PuntajeStrategy.class)
-    private int puntaje;
+    
+    private double puntaje;
     
     private String comentario;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy = "calificacion", fetch = FetchType.LAZY)
     private SolicitudServicioEntity solicitud;
     
-    @PodamExclude
-    @ManyToOne
-    private TrabajadorEntity trabajador;
+    //@PodamExclude
+    //@ManyToOne
+    //private TrabajadorEntity trabajador;
     
     public CalificacionEntity()
     {
@@ -42,14 +39,14 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * @return the puntaje
      */
-    public int getPuntaje() {
+    public double getPuntaje() {
         return puntaje;
     }
 
     /**
      * @param puntaje the puntaje to set
      */
-    public void setPuntaje(int puntaje) {
+    public void setPuntaje(double puntaje) {
         this.puntaje = puntaje;
     }
 
