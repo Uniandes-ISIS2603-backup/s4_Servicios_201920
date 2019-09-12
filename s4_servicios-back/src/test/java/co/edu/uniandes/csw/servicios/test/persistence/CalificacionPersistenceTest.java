@@ -105,6 +105,8 @@ public class CalificacionPersistenceTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertTrue(newEntity.getPuntaje() == entity.getPuntaje());
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
+        Assert.assertEquals(newEntity.getSolicitud(), entity.getSolicitud());
+
         
     }
     
@@ -132,6 +134,8 @@ public class CalificacionPersistenceTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertTrue(entity.getPuntaje() == newEntity.getPuntaje());
         Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
+        Assert.assertEquals(newEntity.getSolicitud(), entity.getSolicitud());
+
     }
     
      @Test

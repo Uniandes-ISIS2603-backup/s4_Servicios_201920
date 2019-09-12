@@ -40,10 +40,7 @@ public class CalificacionLogic {
     public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la calificacion");
-        if(persistence.findAll().size() != 0)
-        {
-            throw new BusinessLogicException( "Ya existe una calificación para este servicio.");
-        }
+        
         if(calificacion.getPuntaje() < 1 || calificacion.getPuntaje() > 5)
         {
             throw new BusinessLogicException( "El puntaje no es válido. Debe ser un número entre 1 y 5.");

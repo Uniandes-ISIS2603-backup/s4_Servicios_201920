@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.servicios.podam.PuntajeStrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
@@ -26,12 +27,12 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     private String comentario;
     
     @PodamExclude
-    @OneToOne(mappedBy = "calificacion", fetch = FetchType.LAZY)
+    @OneToOne
     private SolicitudServicioEntity solicitud;
     
-    //@PodamExclude
-    //@ManyToOne
-    //private TrabajadorEntity trabajador;
+    @PodamExclude
+    @ManyToOne
+    private TrabajadorEntity trabajador;
     
     public CalificacionEntity()
     {
@@ -69,15 +70,15 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * @return the solicitud
      */
-   // public SolicitudServicioEntity getSolicitud() {
-    //    return solicitud;
-   // }
+    public SolicitudServicioEntity getSolicitud() {
+        return solicitud;
+    }
 
     /**
      * @param solicitud the solicitud to set
      */
-    //public void setSolicitud(SolicitudServicioEntity solicitud) {
-   //     this.solicitud = solicitud;
-   // }
+    public void setSolicitud(SolicitudServicioEntity solicitud) {
+        this.solicitud = solicitud;
+    }
     
 }

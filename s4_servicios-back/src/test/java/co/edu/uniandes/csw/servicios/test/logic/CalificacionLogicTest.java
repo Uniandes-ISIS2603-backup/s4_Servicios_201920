@@ -96,9 +96,12 @@ public class CalificacionLogicTest {
      * pruebas.
      */
     private void insertData() {
-       
-           
-        
+         
+         for (int i = 0; i < 3; i++) {
+            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            em.persist(entity);
+            data.add(entity);
+         }
     }
     
      /**
@@ -141,16 +144,5 @@ public class CalificacionLogicTest {
         calificacionLogic.createCalificacion(newEntity);
     }
 
-     /**
-     * Prueba para crear 2 Calificacion para el mismo servicio.
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void createDosCalificaciones() throws BusinessLogicException {
-        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.createCalificacion(newEntity);
-        CalificacionEntity newEntity2 = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.createCalificacion(newEntity2);
-    }
+    
 }
