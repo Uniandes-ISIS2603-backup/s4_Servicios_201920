@@ -112,13 +112,14 @@ public class CalificacionLogicTest {
     @Test
     public void createCalificacionTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        newEntity.setPuntaje(2);
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
         Assert.assertTrue(newEntity.getPuntaje() == entity.getPuntaje());
+        Assert.assertEquals(newEntity.getSolicitud(), entity.getSolicitud());
+
     }
     
      /**
@@ -145,5 +146,65 @@ public class CalificacionLogicTest {
         calificacionLogic.createCalificacion(newEntity);
     }
 
+    /**
+     * Prueba para consultar la lista de Calificacions.
+     */
+    @Test
+    public void getCalificacionesTest() {
+        List<CalificacionEntity> list = calificacionLogic.getCalificaciones();
+        Assert.assertEquals(data.size(), list.size());
+        for (CalificacionEntity entity : list) {
+            boolean found = false;
+            for (CalificacionEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+     /**
+     * Prueba para consultar un Calificacion.
+     */
+    @Test
+    public void getCalificacionTest() {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity resultEntity = calificacionLogic.getCalificacion(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getPuntaje(), resultEntity.getPuntaje());
+        Assert.assertEquals(entity.getComentario(), resultEntity.getComentario());
+        Assert.assertEquals(entity.getSolicitud(), resultEntity.getSolicitud());
+
+    }
+    
+    /**
+     * Prueba para actualizar un Calificacion.
+     */
+    @Test
+    public void updateCalificacionTest() {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
+        pojoEntity.setId(entity.getId());
+        calificacionLogic.updateCalificacion(pojoEntity.getId(), pojoEntity);
+        CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
+        Assert.assertEquals(pojoEntity.getPuntaje(), resp.getPuntaje());
+        Assert.assertEquals(pojoEntity.getSolicitud(), resp.getSolicitud());
+    }
+    
+    /**
+     * Prueba para eliminar un Calificacion.
+     *
+     */
+    @Test
+    public void deleteCalificacionTest()  {
+        CalificacionEntity entity = data.get(1);
+        calificacionLogic.deleteCalificacion(entity.getId());
+        CalificacionEntity deleted = em.find(CalificacionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
     
 }
