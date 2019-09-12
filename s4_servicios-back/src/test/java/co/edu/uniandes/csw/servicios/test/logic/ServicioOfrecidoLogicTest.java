@@ -153,7 +153,7 @@ public class ServicioOfrecidoLogicTest {
         ServicioOfrecidoEntity creadoEntity = servicioOfrecidoLogic.createServicioOfrecido(newEntity);
         ServicioOfrecidoEntity newEntityName = factory.manufacturePojo(ServicioOfrecidoEntity.class);
         newEntityName.setNombre("Prueba");
-         creadoEntity = servicioOfrecidoLogic.createServicioOfrecido(newEntityName);
+        creadoEntity = servicioOfrecidoLogic.createServicioOfrecido(newEntityName);
         
         Assert.fail("Debería lanzar excepción cuando el nombre es repetido");
         }
