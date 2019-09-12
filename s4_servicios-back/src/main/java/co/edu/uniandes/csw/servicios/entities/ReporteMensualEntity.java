@@ -2,6 +2,8 @@ package co.edu.uniandes.csw.servicios.entities;
 
 import co.edu.uniandes.csw.servicios.podam.DateStrategy;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamStrategyValue;
@@ -16,6 +18,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  *
  * @author Estudiante
  */
+@Entity
 public class ReporteMensualEntity 
 {
     /**
@@ -39,6 +42,8 @@ public class ReporteMensualEntity
      * Número de servicios prestados en el mes.
      */
     private int numSerivico;
+    @Id
+    private Long id;
 
 
     public ReporteMensualEntity()
@@ -76,6 +81,14 @@ public class ReporteMensualEntity
 
     public void setNumSerivico(int numSerivico) {
         this.numSerivico = numSerivico;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     

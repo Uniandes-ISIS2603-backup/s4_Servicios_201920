@@ -73,7 +73,7 @@ public class ServicioOfrecidoPersistenceTest {
      
     
      private void clearData() {
-        em.createQuery("delete from EditorialEntity").executeUpdate();
+        em.createQuery("delete from ServicioOfrecidoEntity").executeUpdate();
     }
      
      private void insertData() {

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.persistence;
 
 import co.edu.uniandes.csw.servicios.entities.ReporteMensualEntity;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,6 +16,8 @@ import javax.persistence.TypedQuery;
  *
  * @author Violeta Rodríguez
  */
+
+@Stateless
 public class ReporteMensualPersistence 
 {
  @PersistenceContext(unitName = "serviciosPU")
@@ -32,7 +35,7 @@ public class ReporteMensualPersistence
 
     public List<ReporteMensualEntity> findAll() {
         
-        TypedQuery<ReporteMensualEntity> query= em.createQuery("select u from ServicioOfrecidoEntity u", ReporteMensualEntity.class);
+        TypedQuery<ReporteMensualEntity> query= em.createQuery("select u from ReporteMensualEntity u", ReporteMensualEntity.class);
         
         return query.getResultList();
     }
