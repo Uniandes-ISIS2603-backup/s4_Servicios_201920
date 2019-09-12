@@ -59,6 +59,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     private String mail;
     
+    
     /**
      * El usuario con el que el cliente ingresa al sistema
      */
