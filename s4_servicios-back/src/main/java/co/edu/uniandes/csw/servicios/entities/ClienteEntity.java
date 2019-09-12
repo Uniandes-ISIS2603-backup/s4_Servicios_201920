@@ -42,7 +42,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-
     List<SolicitudServicioEntity> servicios;
 
     //Collection<SolicitudServicioEntity> servicios;
