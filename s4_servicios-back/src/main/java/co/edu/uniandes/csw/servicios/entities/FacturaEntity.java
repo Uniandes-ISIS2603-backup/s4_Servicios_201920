@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.entities;
 
 import java.util.Date;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -21,6 +22,18 @@ public class FacturaEntity extends BaseEntity{
     
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    
+    private boolean pagada;
+    
+    private boolean primerPago;
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private SolicitudServicioEntity solicitud;
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private PagoTarjetaEntity tarjetaPago;
     
     public FacturaEntity(){
         
@@ -55,5 +68,41 @@ public class FacturaEntity extends BaseEntity{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public boolean isPagada() {
+        return pagada;
+    }
+    
+    public void setPagada(boolean pagada) {
+        this.pagada = pagada;
+    }
+
+    public boolean isPrimerPago() {
+        return primerPago;
+    }
+
+    public void setPrimerPago(boolean primerPago) {
+        this.primerPago = primerPago;
+    }
+
+    public SolicitudServicioEntity getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(SolicitudServicioEntity solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public PagoTarjetaEntity getTarjetaPago() {
+        return tarjetaPago;
+    }
+
+    public void setTarjetaPago(PagoTarjetaEntity tarjetaPago) {
+        this.tarjetaPago = tarjetaPago;
+    }
+    
+    
+    
+    
     
 }
