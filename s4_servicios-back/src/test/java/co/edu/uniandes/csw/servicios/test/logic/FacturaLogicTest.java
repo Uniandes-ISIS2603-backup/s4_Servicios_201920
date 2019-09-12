@@ -38,7 +38,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class FacturaLogicTest {
 
     private static final Logger LOGGER = Logger.getLogger(FacturaLogicTest.class.getName());
-    
+
     private PodamFactory podam = new PodamFactoryImpl();
 
     @Inject
@@ -87,7 +87,7 @@ public class FacturaLogicTest {
         }
     }
 
-    private void clearData(){
+    private void clearData() {
         em.createQuery("delete from FacturaEntity").executeUpdate();
     }
 
@@ -106,16 +106,44 @@ public class FacturaLogicTest {
         Assert.assertEquals(entity.getDuracion(), result.getDuracion());
         Assert.assertEquals(entity.getSolicitud(), entity.getSolicitud());
     }
-    
+
     @Test(expected = BusinessLogicException.class)
-    public void createFacturaDuracionTest() throws BusinessLogicException{
+    public void createFacturaDuracionTest() throws BusinessLogicException {
         FacturaEntity newEntity = podam.manufacturePojo(FacturaEntity.class);
         newEntity.setDuracion(-1);
         FacturaEntity result = facturaLogic.createFactura(newEntity);
     }
 
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaPrecioTest() throws BusinessLogicException {
+        FacturaEntity newEntity = podam.manufacturePojo(FacturaEntity.class);
+        newEntity.setPrecioMateriales(-1);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaFechaTest() throws BusinessLogicException {
+        FacturaEntity newEntity = podam.manufacturePojo(FacturaEntity.class);
+        newEntity.setFecha(null);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaPrimerPagoTest() throws BusinessLogicException {
+        FacturaEntity newEntity = podam.manufacturePojo(FacturaEntity.class);
+        newEntity.setPrimerPago(false);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaPagadaTest() throws BusinessLogicException {
+        FacturaEntity newEntity = podam.manufacturePojo(FacturaEntity.class);
+        newEntity.setPagada(true);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+
     @Test
-    public void getAuthorsTest()  {
+    public void getAuthorsTest() {
         List<FacturaEntity> list = facturaLogic.getFacturas();
         Assert.assertEquals(data.size(), list.size());
         for (FacturaEntity entity : list) {
@@ -140,7 +168,7 @@ public class FacturaLogicTest {
     }
 
     @Test
-    public void updateAuthorTest() throws BusinessLogicException{
+    public void updateAuthorTest() throws BusinessLogicException {
         FacturaEntity entity = data.get(0);
         FacturaEntity pojoEntity = podam.manufacturePojo(FacturaEntity.class);
         pojoEntity.setId(entity.getId());
@@ -152,7 +180,7 @@ public class FacturaLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getDuracion(), resp.getDuracion());
     }
-    
+
     @Test
     public void deleteAuthorTest() throws BusinessLogicException {
         FacturaEntity entity = data.get(0);
@@ -160,8 +188,7 @@ public class FacturaLogicTest {
         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-    
+
     @Test(expected = BusinessLogicException.class)
     public void updateFacturaFinalizadoTest() throws BusinessLogicException {
         FacturaEntity entity = data.get(0);
