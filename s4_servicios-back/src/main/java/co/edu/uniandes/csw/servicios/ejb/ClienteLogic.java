@@ -101,9 +101,9 @@ public class ClienteLogic {
     public void deleteCliente(Long clienteId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         List<SolicitudServicioEntity> servicios = getCliente(clienteId).getServicios();
-        if (servicios != null && !servicios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
-        }
+//        if (servicios.size() != 0) {
+//            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
+//        }
         persistence.delete(getCliente(clienteId));
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
     }

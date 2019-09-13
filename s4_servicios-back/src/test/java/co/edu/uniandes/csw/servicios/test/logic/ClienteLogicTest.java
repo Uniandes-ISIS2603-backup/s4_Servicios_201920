@@ -13,6 +13,8 @@ import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +37,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ClienteLogicTest {
-
+    
+    private static final Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
+    
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -183,21 +187,22 @@ public class ClienteLogicTest {
      */
     @Test
     public void deleteClienteTest() throws BusinessLogicException {
-        ClienteEntity entity = data.get(0);
+        
+        ClienteEntity entity = data.get(1);
+        LOGGER.log(Level.INFO, "CANTIDAD SIZE SERVICIOS.SIZE = {0}", entity.getServicios().size());
         clienteLogic.deleteCliente(entity.getId());
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
-    /**
-     * Prueba para eliminar un Author asociado a un libro
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void deleteClienteConServicioTest() throws BusinessLogicException {
-        //data.get(2).getServicios()
-       // clienteLogic.deleteCliente(data.get(2).getId());
-    }
+//    /**
+//     * Prueba para eliminar un Author asociado a un libro
+//     *
+//     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+//     */
+//    @Test(expected = BusinessLogicException.class)
+//    public void deleteClienteConServicioTest() throws BusinessLogicException {
+//        clienteLogic.deleteCliente(data.get(2).getId());
+//    }
 
 }
