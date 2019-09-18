@@ -57,12 +57,12 @@ public class ClientePersistence {
     /**
      * Método que devuele un cliente específico de la base de datos
      * Corresponde a la R de CRUD en los requisitos de bases de datos
-     * @param pClienteEntity - El cliente que se quiere buscar en la base de datos
+     * @param clienteId - El cliente que se quiere buscar en la base de datos
      * @return - El cliente encontrado
      */
-    public ClienteEntity find(ClienteEntity pClienteEntity){
-        LOGGER.log(Level.INFO, "Se está buscando el cliente con id", pClienteEntity.getId());
-        return em.find(ClienteEntity.class, pClienteEntity.getId());
+    public ClienteEntity find(long clienteId){
+        LOGGER.log(Level.INFO, "Se está buscando el cliente con id", clienteId);
+        return em.find(ClienteEntity.class, clienteId);
     }
     
     /**

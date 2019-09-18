@@ -96,7 +96,7 @@ public class PagoTarjetaPersistenceTest {
         PagoTarjetaEntity fe = fp.create(newPagoEntity);
         Assert.assertNotNull(fe);
         PagoTarjetaEntity entity = fm.find(PagoTarjetaEntity.class, fe.getId());
-        Assert.assertEquals(newPagoEntity.getBanco(), entity.getBanco());
+        Assert.assertEquals(newPagoEntity.getCsv(), entity.getCsv());
     }
 
     @Test
@@ -120,7 +120,7 @@ public class PagoTarjetaPersistenceTest {
         PagoTarjetaEntity entity2 = fp.find(entity.getId());
         Assert.assertNotNull(entity2);
         Assert.assertEquals(entity.getId(), entity2.getId());
-        Assert.assertEquals(entity.getBanco(), entity2.getBanco());
+        Assert.assertEquals(entity.getCsv(), entity2.getCsv());
     }
 
     @Test
@@ -147,7 +147,7 @@ public class PagoTarjetaPersistenceTest {
        Assert.assertNotNull(entitySearch);
        
        Assert.assertEquals(newEntity.getId(), entitySearch.getId());
-       Assert.assertEquals(newEntity.getBanco(), entitySearch.getBanco());
+       Assert.assertEquals(newEntity.getCsv(), entitySearch.getCsv());
         
         
     }       

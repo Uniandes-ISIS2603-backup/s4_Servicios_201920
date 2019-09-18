@@ -18,11 +18,19 @@ public class PagoTarjetaEntity extends BaseEntity{
         
     private int numTarjeta;
     
-    private String banco; 
+    private int csv;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fechaV;
     
     @PodamExclude
     @OneToOne(cascade = CascadeType.ALL)
     private FacturaEntity factura;
+    
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private ClienteEntity cliente;
     
     public PagoTarjetaEntity(){
         
@@ -36,14 +44,22 @@ public class PagoTarjetaEntity extends BaseEntity{
         this.numTarjeta = numTarjeta;
     }
 
-    public String getBanco() {
-        return banco;
+    public int getCsv() {
+        return csv;
     }
 
-    public void setBanco(String banco) {
-        this.banco = banco;
+    public void setCsv(int csv) {
+        this.csv = csv;
     }
 
+    public Date getFechaV() {
+        return fechaV;
+    }
+
+    public void setFechaV(Date fechaV) {
+        this.fechaV = fechaV;
+    }
+    
     public FacturaEntity getFactura() {
         return factura;
     }

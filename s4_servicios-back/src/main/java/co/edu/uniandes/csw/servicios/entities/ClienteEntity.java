@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -18,12 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity            
 public class ClienteEntity extends BaseEntity implements Serializable{
     
-    @Id
-    /**
-     * El identificador del cliente en la base de datos
-     */
-    private Long id;
-    
+   
     //TODO: Meter clase AdministradorEntity para que funcione el código
     /**
      * Atributo que representa el administrador de los clientes
@@ -39,14 +35,20 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * Se hace la anotación OneToMany porque UN(One) cliente tiene MUCHOS(Many) servicios
      * En  la clase SolicitudServicio se refiere al cliente como "cliene"
      */
-   /* @PodamExclude
+    @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    Collection<SolicitudServicioEntity> servicios;
-    
+    List<SolicitudServicioEntity> servicios;
+
+    //Collection<SolicitudServicioEntity> servicios;
+   
     /**
      * El nombre del cliente
      */
     private String nombre; 
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private PagoTarjetaEntity tarjeta;
     
     /**
      * El teléfono del cliente
@@ -58,6 +60,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     private String mail;
     
+    
     /**
      * El usuario con el que el cliente ingresa al sistema
      */
@@ -68,14 +71,41 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     private String contrasena;
     
-    @Override
-    public Long getId(){
-        return id;
+    /**
+     * La dirección del cliente
+     */
+    private String direccion;
+    
+    /**
+     * Retorna la dirección del cliente
+     * @return la dirección
+     */
+    public String getDireccion(){
+        return direccion;
     }
     
-    @Override
-    public void setId(Long pId){
-        id = pId;
+    /**
+     * Cambia la dirección actual del cliente por una dada por parámetro
+     * @param pDireccion - la nueva dirección del cliente. 
+     */
+    public void setDireccion(String pDireccion){
+        direccion = pDireccion;
+    }
+    
+    /**
+     * Retorna una lista con los servicios del cliente
+     * @return los servicios
+     */
+    public List<SolicitudServicioEntity> getServicios(){
+        return servicios;
+    }
+    
+    /**
+     * Cambia los servicios del cliente por unos dados por parámetro
+     * @param pServicios - La nueva lsita de servicios del cliente
+     */
+    public void setServicios(List<SolicitudServicioEntity> pServicios){
+        servicios = pServicios;
     }
     
     /**
