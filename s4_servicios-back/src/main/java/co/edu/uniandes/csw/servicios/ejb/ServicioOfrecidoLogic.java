@@ -27,7 +27,7 @@ public class ServicioOfrecidoLogic
     public ServicioOfrecidoEntity createServicioOfrecido(ServicioOfrecidoEntity newService) throws BusinessLogicException
     {
         // Validamos que no haya otro servicio con el mismo nnombre:
-        ServicioOfrecidoEntity old = null; // persistencia.findByName(newService.getNombre());
+        ServicioOfrecidoEntity old = persistencia.findByName(newService.getNombre());
         String tipo = newService.getTipo();
         if(old != null ) 
         {

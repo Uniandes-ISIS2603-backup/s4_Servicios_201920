@@ -11,8 +11,6 @@ import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ServicioOfrecidoPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -106,7 +104,7 @@ public class ServicioOfrecidoLogicTest {
     }
     
     /**
-     * Prueba para crear un Book
+     * Prueba para crear un SerivicioOfrecdo
      *
      * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
      */
