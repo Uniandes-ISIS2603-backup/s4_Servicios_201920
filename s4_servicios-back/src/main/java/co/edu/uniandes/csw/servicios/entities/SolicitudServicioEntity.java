@@ -33,9 +33,9 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
 
     private String foto;
     
-   //@PodamExclude
-   // @ManyToOne
-   //private ClienteEntity cliente;
+   @PodamExclude
+   @ManyToOne
+   private ClienteEntity cliente;
     
    //@PodamExclude
    // @ManyToOne

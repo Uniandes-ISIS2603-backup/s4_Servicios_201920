@@ -19,12 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity            
 public class ClienteEntity extends BaseEntity implements Serializable{
     
-    @Id
-    /**
-     * El identificador del cliente en la base de datos
-     */
-    private Long id;
-    
+   
     //TODO: Meter clase AdministradorEntity para que funcione el código
     /**
      * Atributo que representa el administrador de los clientes
@@ -43,11 +38,17 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     List<SolicitudServicioEntity> servicios;
-    
+
+    //Collection<SolicitudServicioEntity> servicios;
+   
     /**
      * El nombre del cliente
      */
     private String nombre; 
+    
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.ALL)
+    private PagoTarjetaEntity tarjeta;
     
     /**
      * El teléfono del cliente
@@ -58,6 +59,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * El correo electrónico del cliente
      */
     private String mail;
+    
     
     /**
      * El usuario con el que el cliente ingresa al sistema
@@ -73,16 +75,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * La dirección del cliente
      */
     private String direccion;
-    
-    @Override
-    public Long getId(){
-        return id;
-    }
-    
-    @Override
-    public void setId(Long pId){
-        id = pId;
-    }
     
     /**
      * Retorna la dirección del cliente

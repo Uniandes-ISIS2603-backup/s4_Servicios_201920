@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -30,6 +33,20 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     private String seguroSocial;
     private String riesgos;
 
+    //asociaciones
+    @PodamExclude
+    @OneToMany
+    private Collection<SolicitudServicioEntity>solicitudes;
+    
+    @PodamExclude
+    @OneToMany
+    private Collection<CalificacionEntity>calificaciones;
+    
+    @PodamExclude
+    @OneToMany
+    private Collection<ServicioOfrecidoEntity>servicios;
+    
+    
     /**
      * constructor
      */
@@ -189,5 +206,47 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
      */
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
+    }
+
+    /**
+     * @return the solicitudes
+     */
+    public Collection<SolicitudServicioEntity> getSolicitudes() {
+        return solicitudes;
+    }
+
+    /**
+     * @param solicitudes the solicitudes to set
+     */
+    public void setSolicitudes(Collection<SolicitudServicioEntity> solicitudes) {
+        this.solicitudes = solicitudes;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public Collection<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the servicios
+     */
+    public Collection<ServicioOfrecidoEntity> getServicios() {
+        return servicios;
+    }
+
+    /**
+     * @param servicios the servicios to set
+     */
+    public void setServicios(Collection<ServicioOfrecidoEntity> servicios) {
+        this.servicios = servicios;
     }
 }

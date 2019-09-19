@@ -30,24 +30,23 @@ public class ClienteLogic {
      *
      * @param clienteEntity Objeto de ClienteEntity con los datos nuevos
      * @return Objeto de ClienteEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     public ClienteEntity createCliente (ClienteEntity clienteEntity) throws BusinessLogicException {
-        boolean valido = true;
-        if(clienteEntity.getNombre().equals(null) 
-                ||!clienteEntity.getMail().matches("^(.+)@(.+)$")
-                /*|| Integer.toString(clienteEntity.getTelefono()).matches("^\+(?:[0-9] ?){6,14}[0-9]$")*/
-                ){
-            valido = false;
-            throw new BusinessLogicException("No se puede borrar el autor con id = " + clienteEntity.getId() + " porque tiene books asociados");
-        }
-        if(valido == true){
+//        boolean valido = true;
+//        if(clienteEntity.getNombre().equals(null) 
+//                ||!clienteEntity.getMail().matches("^(.+)@(.+)$")
+//                /*|| Integer.toString(clienteEntity.getTelefono()).matches("^\+(?:[0-9] ?){6,14}[0-9]$")*/
+//                ){
+//            valido = false;
+//            throw new BusinessLogicException("No se puede borrar el autor con id = " + clienteEntity.getId() + " porque tiene books asociados");
+//        }
+        
             LOGGER.log(Level.INFO, "Inicia proceso de creación del autor");
             ClienteEntity newAuthorEntity = persistence.create(clienteEntity);
             LOGGER.log(Level.INFO, "Termina proceso de creación del autor");
             return newAuthorEntity;
-        }
-        else
-            return null;
+        
     }
     
     
@@ -102,9 +101,9 @@ public class ClienteLogic {
     public void deleteCliente(Long clienteId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         List<SolicitudServicioEntity> servicios = getCliente(clienteId).getServicios();
-        if (servicios != null && !servicios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
-        }
+//        if (servicios.size() != 0) {
+//            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
+//        }
         persistence.delete(getCliente(clienteId));
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
     }
