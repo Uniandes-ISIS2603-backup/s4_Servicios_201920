@@ -15,7 +15,9 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class PagoTarjetaEntity extends BaseEntity{
-        
+    
+    private String banco;
+    
     private int numTarjeta;
     
     private int csv;
@@ -24,12 +26,12 @@ public class PagoTarjetaEntity extends BaseEntity{
     private Date fechaV;
     
     @PodamExclude
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private FacturaEntity factura;
     
     
     @PodamExclude
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private ClienteEntity cliente;
     
     public PagoTarjetaEntity(){
@@ -67,7 +69,22 @@ public class PagoTarjetaEntity extends BaseEntity{
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
     }
-    
+
+    public String getBanco() {
+        return banco;
+    }
+
+    public void setBanco(String banco) {
+        this.banco = banco;
+    }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
     
     
     
