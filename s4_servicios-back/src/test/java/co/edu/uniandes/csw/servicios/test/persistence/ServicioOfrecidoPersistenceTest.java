@@ -76,9 +76,7 @@ public class ServicioOfrecidoPersistenceTest {
      private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-
             ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-
             em.persist(newEntity);
             data.add(newEntity);
         }
@@ -152,8 +150,7 @@ public class ServicioOfrecidoPersistenceTest {
     @Test
     public void updateServicioOfrecidoTest()
     {
-        PodamFactory factory= new PodamFactoryImpl();
-        
+        PodamFactory factory= new PodamFactoryImpl();        
         ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
         
         newEntity.setId(data.get(0).getId());
@@ -161,7 +158,7 @@ public class ServicioOfrecidoPersistenceTest {
         
        ServicioOfrecidoEntity entitySearch =em.find(ServicioOfrecidoEntity.class, newEntity.getId());  
        Assert.assertNotNull(entitySearch);
-       
+      
        Assert.assertEquals(newEntity.getTipo(), entitySearch.getTipo());
        Assert.assertEquals(newEntity.getDescripcion(), entitySearch.getDescripcion());
        Assert.assertEquals(newEntity.getPrecio(),entitySearch.getPrecio(), 0.1);

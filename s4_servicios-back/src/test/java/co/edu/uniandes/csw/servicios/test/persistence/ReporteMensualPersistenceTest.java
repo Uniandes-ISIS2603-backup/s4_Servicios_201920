@@ -41,6 +41,8 @@ public class ReporteMensualPersistenceTest
     @Inject 
     UserTransaction utx;
     
+     private ArrayList<ReporteMensualEntity> data = new ArrayList();
+    
   
     
     @Deployment
@@ -58,6 +60,7 @@ public class ReporteMensualPersistenceTest
             utx.begin();
             em.joinTransaction();
             clearData();
+            insertData();
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,6 +75,15 @@ public class ReporteMensualPersistenceTest
      private void clearData() {
         em.createQuery("delete from ReporteMensualEntity").executeUpdate();
     } 
+     
+      private void insertData() {
+        PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+            ReporteMensualEntity newEntity = factory.manufacturePojo(ReporteMensualEntity.class);
+            em.persist(newEntity);
+            data.add(newEntity);
+        }
+     }
      
     @Test
     public void createReposteMensualTest()
@@ -93,91 +105,57 @@ public class ReporteMensualPersistenceTest
     @Test
     public void findReporteMensualTest()
     {
-        PodamFactory factory= new PodamFactoryImpl();
-        ReporteMensualEntity newEntity = factory.manufacturePojo(ReporteMensualEntity.class);
-        
-        //No está sirviendo la parte de persistir desde la clase de pruebas
-        ReporteMensualEntity ee= rmp.create(newEntity);
-        
-        ReporteMensualEntity entity =rmp.find(ee.getId());
+        ReporteMensualEntity entity =rmp.find(data.get(1).getId());
         
         Assert.assertNotNull(entity);
-        Assert.assertEquals(newEntity.getEgresos(), entity.getEgresos(),0.1);
-        Assert.assertEquals(newEntity.getIngresos(), entity.getIngresos(),0.1);
-        Assert.assertEquals(newEntity.getMes(), entity.getMes());
+        Assert.assertEquals(data.get(1).getEgresos(), entity.getEgresos(),0.1);
+        Assert.assertEquals(data.get(1).getIngresos(), entity.getIngresos(),0.1);
+        Assert.assertEquals(data.get(1).getMes(), entity.getMes());
     }
    
     @Test 
     public void findAllReporteMensualTest()
-    {
-        //clearData();
-        PodamFactory factory= new PodamFactoryImpl();
-        
-        ReporteMensualEntity newEntity1 = factory.manufacturePojo(ReporteMensualEntity.class);
-        ReporteMensualEntity newEntity2 = factory.manufacturePojo(ReporteMensualEntity.class);
-        ReporteMensualEntity newEntity3 = factory.manufacturePojo(ReporteMensualEntity.class);
-        
-        rmp.create(newEntity1);
-        rmp.create(newEntity2);
-        rmp.create(newEntity3);
-        
-       List<ReporteMensualEntity> lista = rmp.findAll();
+    {        
+        List<ReporteMensualEntity> lista = rmp.findAll();
        
        Assert.assertFalse(lista.isEmpty());
-       System.out.println(lista.size());
-       Assert.assertEquals(lista.size() , 3);
+       Assert.assertEquals(lista.size(), data.size());
        
-       
-       Assert.assertNotNull(lista.get(0));
-       Assert.assertEquals(newEntity1.getEgresos(), lista.get(0).getEgresos(), 0.1);
-       Assert.assertEquals(newEntity1.getIngresos(), lista.get(0).getIngresos(),0.1);
-       Assert.assertEquals(newEntity1.getMes(),lista.get(0).getMes()); 
-     
-       Assert.assertNotNull(lista.get(1));
-       Assert.assertEquals(newEntity2.getEgresos(), lista.get(1).getEgresos(),0.1);
-       Assert.assertEquals(newEntity2.getIngresos(), lista.get(1).getIngresos(),0.1);
-       Assert.assertEquals(newEntity2.getMes(),lista.get(1).getMes());
-       
-       Assert.assertNotNull(lista.get(2));
-       Assert.assertEquals(newEntity3.getEgresos(), lista.get(2).getEgresos(),0.1);
-       Assert.assertEquals(newEntity3.getIngresos(), lista.get(2).getIngresos(),0.1);
-       Assert.assertEquals(newEntity3.getMes(),lista.get(2).getMes());
+       for(ReporteMensualEntity i: lista)
+       {
+           Assert.assertNotNull(i);
+           ReporteMensualEntity expected = em.find(ReporteMensualEntity.class, i.getId());
+           Assert.assertNotNull("Debería haber una instancia con el id reportado.", expected);
+           Assert.assertEquals(i.getEgresos(), expected.getEgresos(),0.1);
+           Assert.assertEquals(i.getIngresos(), expected.getIngresos(),0.1);
+           Assert.assertEquals(i.getMes(),expected.getMes()); 
+       }
     }
     
     @Test
     public void updateReporteMensualTest()
     {
-        PodamFactory factory= new PodamFactoryImpl();
+       PodamFactory factory= new PodamFactoryImpl();
+       ReporteMensualEntity newEntity = factory.manufacturePojo(ReporteMensualEntity.class);
         
-        ReporteMensualEntity entity = factory.manufacturePojo(ReporteMensualEntity.class);
-        ReporteMensualEntity newEntity = factory.manufacturePojo(ReporteMensualEntity.class);
-        
-       entity=rmp.create(entity);
-        
-        newEntity= rmp.update(newEntity);
+       newEntity.setId(data.get(0).getId());
+       newEntity= rmp.update(newEntity);
         
        ReporteMensualEntity entitySearch =em.find(ReporteMensualEntity.class, newEntity.getId());  
        Assert.assertNotNull(entitySearch);
 
        Assert.assertEquals(newEntity.getEgresos(), entitySearch.getEgresos(), 0.1);
        Assert.assertEquals(newEntity.getIngresos(), entitySearch.getIngresos(),0.1);
-       Assert.assertEquals(newEntity.getMes(),entitySearch.getMes());
-        
-        
+       Assert.assertEquals(newEntity.getMes(),entitySearch.getMes()); 
     }
     
     @Test
     public void deleteReporteMensualTest()
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        ReporteMensualEntity entity = factory.manufacturePojo(ReporteMensualEntity.class);
-        
-        //Validar luego porque no sirve persistence 
-        rmp.create(entity);
-        rmp.delete(entity.getId());
+        rmp.delete(data.get(1).getId());
         
        
-        Assert.assertNull(em.find(ReporteMensualEntity.class, entity.getId()));
+        Assert.assertNull(em.find(ReporteMensualEntity.class, data.get(1).getId()));
     }
 
     
