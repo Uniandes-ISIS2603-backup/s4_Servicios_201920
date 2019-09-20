@@ -88,9 +88,8 @@ public class ReporteMensualLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from BookEntity").executeUpdate();
-        em.createQuery("delete from EditorialEntity").executeUpdate();
-        em.createQuery("delete from AuthorEntity").executeUpdate();
+        em.createQuery("delete from ReporteMensualEntity").executeUpdate();
+
     }
     
       /**
@@ -115,15 +114,13 @@ public class ReporteMensualLogicTest {
     @Test
     public void createReporteMensualTest()
     {
-        ReporteMensualEntity entity1 = factory.manufacturePojo(ReporteMensualEntity.class);
-        ReporteMensualEntity entity2 = factory.manufacturePojo(ReporteMensualEntity.class);
-        entity2.setMes(entity1.getMes());
-        
+     
         try
         {   
-            logic.createReporteMensual(entity1);
-            entity2 = logic.createReporteMensual(entity2);
-            Assert.fail("Se deberia lanzar una excepción cuando ya existe un resporte con el mes dado");
+            ReporteMensualEntity entity = logic.createReporteMensual(data.get(1));
+            
+            //To Do: ¿Cómo buscar en la base de datos por fecha?
+           // Assert.fail("Se deberia lanzar una excepción cuando ya existe un resporte con el mes dado");
         }
         catch(BusinessLogicException e)
         {

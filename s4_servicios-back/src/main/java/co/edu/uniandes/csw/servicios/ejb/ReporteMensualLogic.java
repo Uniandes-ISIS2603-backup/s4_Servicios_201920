@@ -21,8 +21,7 @@ public class ReporteMensualLogic {
     
     public ReporteMensualEntity createReporteMensual(ReporteMensualEntity entity) throws BusinessLogicException
     {
-        
-        return null;
+       return null;
     }
     
     
