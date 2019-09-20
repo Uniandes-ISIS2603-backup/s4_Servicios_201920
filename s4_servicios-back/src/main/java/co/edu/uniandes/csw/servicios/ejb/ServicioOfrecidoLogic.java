@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.servicios.ejb;
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ServicioOfrecidoPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -28,7 +29,17 @@ public class ServicioOfrecidoLogic
     {
         // Validamos que no haya otro servicio con el mismo nnombre:
         ServicioOfrecidoEntity old = persistencia.findByName(newService.getNombre());
+        String nombre = newService.getNombre();
+        /**List<ServicioOfrecidoEntity> list = persistencia.findAll();
+        for(ServicioOfrecidoEntity i: list)
+        {
+            if(i.getNombre().equals(nombre))
+                old=i;
+        }
+        **/
         String tipo = newService.getTipo();
+        
+      
         if(old != null ) 
         {
             throw new BusinessLogicException("Ya existe un servio con ese nombre");

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.servicios.test.persistence;
+package co.edu.uniandes.csw.servicios.test.logic;
 
 import co.edu.uniandes.csw.servicios.ejb.ReporteMensualLogic;
 import co.edu.uniandes.csw.servicios.entities.ReporteMensualEntity;

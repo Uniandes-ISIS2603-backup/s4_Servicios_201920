@@ -38,7 +38,7 @@ public class ReporteMensualPersistenceTest
     @PersistenceContext
     private EntityManager em;
     
-    @Inject
+    @Inject 
     UserTransaction utx;
     
   

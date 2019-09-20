@@ -8,8 +8,6 @@ package co.edu.uniandes.csw.servicios.ejb;
 import co.edu.uniandes.csw.servicios.entities.ReporteMensualEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ReporteMensualPersistence;
-import java.util.Date;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -23,20 +21,8 @@ public class ReporteMensualLogic {
     
     public ReporteMensualEntity createReporteMensual(ReporteMensualEntity entity) throws BusinessLogicException
     {
-        List<ReporteMensualEntity> list = persistencia.findAll();
-        int mes = entity.getMes().getMonth();
         
-        for (ReporteMensualEntity i : list)
-        {
-            if (i.getMes().getMonth() == mes)
-            {
-                
-                throw new BusinessLogicException("Ya existe un reporte para el mes indicado");
-            }
-        }
-        
-        persistencia.create(entity);
-        return entity;
+        return null;
     }
     
     

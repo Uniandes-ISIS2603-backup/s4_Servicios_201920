@@ -37,11 +37,10 @@ public class ServicioOfrecidoPersistenceTest {
     @PersistenceContext
     private EntityManager em;
     
-     private ArrayList<ServicioOfrecidoEntity> data = new ArrayList();
+    private ArrayList<ServicioOfrecidoEntity> data = new ArrayList();
+    
     @Inject
     UserTransaction utx;
-    
-  
     
     @Deployment
     public static JavaArchive createDeployment(){
@@ -69,8 +68,6 @@ public class ServicioOfrecidoPersistenceTest {
             }
         }
     }
-     
-     
     
      private void clearData() {
         em.createQuery("delete from ServicioOfrecidoEntity").executeUpdate();
@@ -78,17 +75,14 @@ public class ServicioOfrecidoPersistenceTest {
      
      private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        data = new ArrayList(3);
         for (int i = 0; i < 3; i++) {
 
             ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
 
-            sop.create(newEntity);
+            em.persist(newEntity);
             data.add(newEntity);
         }
-     }
-     
-     
+     }   
      
     @Test
     public void createServicioOfrecidoTest()
@@ -111,77 +105,48 @@ public class ServicioOfrecidoPersistenceTest {
     
     @Test
     public void findSerivicioOfrecidoTest()
-    {
-        PodamFactory factory= new PodamFactoryImpl();
-        ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        
-        //No está sirviendo la parte de persistir desde la clase de pruebas
-        ServicioOfrecidoEntity ee= sop.create(newEntity);
-        
-        ServicioOfrecidoEntity entity =sop.find(ee.getId());
+    {     
+        ServicioOfrecidoEntity entity =sop.find(data.get(1).getId());
         
         Assert.assertNotNull(entity);
-        Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
-        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1);
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(data.get(1).getTipo(), entity.getTipo());
+        Assert.assertEquals(data.get(1).getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(data.get(1).getPrecio(), entity.getPrecio(), 0.1);
+        Assert.assertEquals(data.get(1).getNombre(), entity.getNombre());
+    }
+    
+       @Test 
+    public void findAllServicioOfrecidoTest()
+    {   
+       List<ServicioOfrecidoEntity> lista = sop.findAll();
+       
+       Assert.assertFalse(lista.isEmpty());
+       Assert.assertEquals(lista.size(), data.size());
+       
+       for(ServicioOfrecidoEntity i: lista)
+       {
+           Assert.assertNotNull(i);
+           ServicioOfrecidoEntity expected = em.find(ServicioOfrecidoEntity.class, i.getId());
+           Assert.assertNotNull("Debería haber una instancia con el id reportado.", expected);
+           Assert.assertEquals(i.getTipo(), expected.getTipo());
+           Assert.assertEquals(i.getDescripcion(), expected.getDescripcion());
+           Assert.assertEquals(i.getPrecio(),expected.getPrecio(), 0.1); 
+           Assert.assertEquals(i.getNombre(), expected.getNombre());
+           
+       }
+       
     }
     
        @Test
     public void findByNameTest()       
-    {
-        PodamFactory factory= new PodamFactoryImpl();
-        ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        
-        //No está sirviendo la parte de persistir desde la clase de pruebas
-        ServicioOfrecidoEntity ee= sop.create(newEntity);
-        
-        ServicioOfrecidoEntity entity =sop.findByName(ee.getNombre());
+    {        
+        ServicioOfrecidoEntity entity =sop.findByName(data.get(2).getNombre());
         
         Assert.assertNotNull(entity);
-        Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
-        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio(), 0.1);
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-    }
- 
-    
-    @Test 
-    public void findAllServicioOfrecidoTest()
-    {
-        PodamFactory factory= new PodamFactoryImpl();
-        
-        ServicioOfrecidoEntity newEntity1 = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        ServicioOfrecidoEntity newEntity2 = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        ServicioOfrecidoEntity newEntity3 = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        
-        sop.create(newEntity1);
-        sop.create(newEntity2);
-        sop.create(newEntity3);
-        
-       List<ServicioOfrecidoEntity> lista = sop.findAll();
-       
-       Assert.assertFalse(lista.isEmpty());
-       Assert.assertEquals(lista.size() , 3);
-       
-       Assert.assertNotNull(lista.get(0));
-       Assert.assertEquals(newEntity1.getTipo(), lista.get(0).getTipo());
-       Assert.assertEquals(newEntity1.getDescripcion(), lista.get(0).getDescripcion());
-       Assert.assertEquals(newEntity1.getPrecio(),lista.get(0).getPrecio(), 0.1); 
-       Assert.assertEquals(newEntity1.getNombre(), lista.get(0).getNombre());
-       
-        
-       Assert.assertNotNull(lista.get(1));
-       Assert.assertEquals(newEntity2.getTipo(), lista.get(1).getTipo());
-       Assert.assertEquals(newEntity2.getDescripcion(), lista.get(1).getDescripcion());
-       Assert.assertEquals(newEntity2.getPrecio(),lista.get(1).getPrecio(), 0.1); 
-       Assert.assertEquals(newEntity2.getNombre(), lista.get(1).getNombre());
-       
-       Assert.assertNotNull(lista.get(2));
-       Assert.assertEquals(newEntity3.getTipo(), lista.get(2).getTipo());
-       Assert.assertEquals(newEntity3.getDescripcion(), lista.get(2).getDescripcion());
-       Assert.assertEquals(newEntity3.getPrecio(),lista.get(2).getPrecio(), 0.1); 
-       Assert.assertEquals(newEntity3.getNombre(), lista.get(2).getNombre());
+        Assert.assertEquals(data.get(2).getTipo(), entity.getTipo());
+        Assert.assertEquals(data.get(2).getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(data.get(2).getPrecio(), entity.getPrecio(), 0.1);
+        Assert.assertEquals(data.get(2).getNombre(), entity.getNombre());
     }
     
     @Test
@@ -189,37 +154,26 @@ public class ServicioOfrecidoPersistenceTest {
     {
         PodamFactory factory= new PodamFactoryImpl();
         
-        ServicioOfrecidoEntity entity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
         ServicioOfrecidoEntity newEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
         
-       entity=sop.create(entity);
-        
+        newEntity.setId(data.get(0).getId());
         newEntity= sop.update(newEntity);
         
        ServicioOfrecidoEntity entitySearch =em.find(ServicioOfrecidoEntity.class, newEntity.getId());  
        Assert.assertNotNull(entitySearch);
-      // Assert.assertNull(em.find(ServicioOfrecidoEntity.class, entity.getId()));
        
        Assert.assertEquals(newEntity.getTipo(), entitySearch.getTipo());
        Assert.assertEquals(newEntity.getDescripcion(), entitySearch.getDescripcion());
        Assert.assertEquals(newEntity.getPrecio(),entitySearch.getPrecio(), 0.1);
-       Assert.assertEquals(newEntity.getNombre(), entitySearch.getNombre());
-        
-        
+       Assert.assertEquals(newEntity.getNombre(), entitySearch.getNombre());        
     }
     
     @Test
     public void deleteSerivicioOfrecidoTest()
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        ServicioOfrecidoEntity entity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        
-        //Validar luego porque no sirve persistence 
-        sop.create(entity);
-        sop.delete(entity.getId());
-        
+        sop.delete(data.get(1).getId()); 
        
-        Assert.assertNull(em.find(ServicioOfrecidoEntity.class, entity.getId()));
+        Assert.assertNull(em.find(ServicioOfrecidoEntity.class, data.get(1).getId()));
     }
 
     

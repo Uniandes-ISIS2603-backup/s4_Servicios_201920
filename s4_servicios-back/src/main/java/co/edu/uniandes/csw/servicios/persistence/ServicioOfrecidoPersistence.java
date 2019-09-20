@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -36,7 +37,7 @@ public class ServicioOfrecidoPersistence {
 
     public List<ServicioOfrecidoEntity> findAll() {
         
-        TypedQuery<ServicioOfrecidoEntity> query= em.createQuery("select u from ServicioOfrecidoEntity u", ServicioOfrecidoEntity.class);
+        Query query= em.createQuery("select u from ServicioOfrecidoEntity u");
         
         return query.getResultList();
     }
@@ -49,7 +50,7 @@ public class ServicioOfrecidoPersistence {
     public ServicioOfrecidoEntity findByName(String nombre)
     {
        //Creamos un query para buscar el servicio con el nombre. Aquí voy a gaurdar los resultados de la búsqueda.
-        TypedQuery query= em.createQuery("SELECT e FROM ServicioOfrecidoEntity e WHERE e.nombre = :nombre", ServicioOfrecidoEntity.class);
+        TypedQuery query= em.createQuery("Select e from ServicioOfrecidoEntity e where e.nombre = :nombre", ServicioOfrecidoEntity.class);
         
         query = query.setParameter("nombre", nombre );
         
