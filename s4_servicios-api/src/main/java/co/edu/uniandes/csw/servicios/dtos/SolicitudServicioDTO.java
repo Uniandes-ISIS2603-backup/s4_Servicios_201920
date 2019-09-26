@@ -45,7 +45,7 @@ public class SolicitudServicioDTO implements Serializable{
     * Relación a un trabajador  
     * dado que esta tiene cardinalidad 1.
     */
-    //private TrabajadorDTO trabajador;
+    private TrabajadorDTO trabajador;
     
     /*
     * Relación a una factura  
@@ -80,12 +80,21 @@ public class SolicitudServicioDTO implements Serializable{
             this.fechaInicio = solicitudServicioEntity.getFechaInicio();
             this.estado = solicitudServicioEntity.getEstado();
             this.foto = solicitudServicioEntity.getFoto();
-            //if (solicitudServicioEntity.getTrabajador() != null) {
-            //this.trabajador = new TrabajadorDTO(solicitudServicioEntity.getTrabajador());
-            //}
-            //else{
-            //this.trabajador = null;
-            //}
+
+            if (solicitudServicioEntity.getTrabajador() != null) {
+            this.trabajador = new TrabajadorDTO(solicitudServicioEntity.getTrabajador());
+            }
+            else{
+            this.trabajador = null;
+            }
+
+            if (solicitudServicioEntity.getTrabajador() != null) {
+            this.trabajador = new TrabajadorDTO(solicitudServicioEntity.getTrabajador());
+            }
+            else{
+            this.trabajador = null;
+            }
+
             if (solicitudServicioEntity.getCliente() != null) {
             this.cliente = new ClienteDTO(solicitudServicioEntity.getCliente());
             }
@@ -219,6 +228,21 @@ public class SolicitudServicioDTO implements Serializable{
         this.factura = factura;
     }
     
+
+     /**
+     * @return the trabajador
+     */
+    public TrabajadorDTO getTrabajador() {
+        return trabajador;
+    }
+
+    /**
+     * @param trabajador the trabajador to set
+     */
+    public void setTrabajador(TrabajadorDTO trabajador) {
+        this.trabajador = trabajador;
+    }
+
     
     /**
      * Convertir DTO a Entity
@@ -232,9 +256,15 @@ public class SolicitudServicioDTO implements Serializable{
         solicitudEntity.setFechaInicio(this.fechaInicio);
         solicitudEntity.setEstado(this.estado);
         solicitudEntity.setFoto(this.foto);
-        // if (this.trabajador != null) {
-        //solicitudEntity.setTrabajador(this.trabajador);
-       // }
+
+         if (this.trabajador != null) {
+        solicitudEntity.setTrabajador(this.trabajador.toEntity());
+        }
+
+         if (this.getTrabajador() != null) {
+        solicitudEntity.setTrabajador(this.getTrabajador().toEntity());
+        }
+
          if (this.getCliente() != null) {
         solicitudEntity.setCliente(this.getCliente().toEntity());
         }
@@ -252,5 +282,5 @@ public class SolicitudServicioDTO implements Serializable{
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
-    
+
 }
