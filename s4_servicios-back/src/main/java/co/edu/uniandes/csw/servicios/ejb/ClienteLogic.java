@@ -41,12 +41,23 @@ public class ClienteLogic {
 //            valido = false;
 //            throw new BusinessLogicException("No se puede borrar el autor con id = " + clienteEntity.getId() + " porque tiene books asociados");
 //        }
-        
-            LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
-            ClienteEntity newClienteEntity = persistence.create(clienteEntity);
-            LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
-            return newClienteEntity;
-        
+//        boolean valido = true;
+//        if(clienteEntity.getNombre() == null || clienteEntity.getNombre().equals("")){
+//            valido = false;
+//            throw new BusinessLogicException("No se puede borrar el cliente ocn id " + clienteEntity.getId() + "porque el nombre es vacío");
+//        }
+//        if(!clienteEntity.getMail().matches("^(.+)@(.+)$")){
+//            valido = false;
+//            throw new BusinessLogicException("No se puede borrar el cliente ocn id " + clienteEntity.getId() + "porque el correo es inválido");
+//        }
+//        if(clienteEntity.getUsuario() == null || clienteEntity.getUsuario().equals("")){
+//            valido = false;
+//            throw new BusinessLogicException("No se puede borrar el cliente ocn id " + clienteEntity.getId() + "porque el usuario es inválido");
+//        }
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
+        ClienteEntity newClienteEntity = persistence.create(clienteEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
+        return newClienteEntity;
     }
     
     
