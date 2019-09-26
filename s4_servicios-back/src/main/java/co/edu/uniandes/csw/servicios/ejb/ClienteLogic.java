@@ -42,10 +42,10 @@ public class ClienteLogic {
 //            throw new BusinessLogicException("No se puede borrar el autor con id = " + clienteEntity.getId() + " porque tiene books asociados");
 //        }
         
-            LOGGER.log(Level.INFO, "Inicia proceso de creación del autor");
-            ClienteEntity newAuthorEntity = persistence.create(clienteEntity);
-            LOGGER.log(Level.INFO, "Termina proceso de creación del autor");
-            return newAuthorEntity;
+            LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
+            ClienteEntity newClienteEntity = persistence.create(clienteEntity);
+            LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
+            return newClienteEntity;
         
     }
     
