@@ -78,4 +78,10 @@ public class ServicioOfrecidoLogic
        List<ServicioOfrecidoEntity> services = persistencia.findAll();
        return  services;
    }
+   
+   
+   public ServicioOfrecidoEntity getServicioOfrecido(Long idServicio)
+   {
+        return persistencia.find(idServicio);
+   }
 }
