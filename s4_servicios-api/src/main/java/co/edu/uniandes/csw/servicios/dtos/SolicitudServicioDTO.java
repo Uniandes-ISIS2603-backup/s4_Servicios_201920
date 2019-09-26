@@ -39,19 +39,19 @@ public class SolicitudServicioDTO implements Serializable{
     * Relación a un cliente  
     * dado que esta tiene cardinalidad 1.
     */
-    //private ClienteDTO cliente;
+    private ClienteDTO cliente;
     
     /*
     * Relación a un trabajador  
     * dado que esta tiene cardinalidad 1.
     */
-    //private TrabajadorDTO trabajador;
+    private TrabajadorDTO trabajador;
     
     /*
     * Relación a una factura  
     * dado que esta tiene cardinalidad 1.
     */
-    //private FacturaDTO factura;
+    private FacturaDTO factura;
     
     /*
     * Relación a un calificacion  
@@ -80,24 +80,24 @@ public class SolicitudServicioDTO implements Serializable{
             this.fechaInicio = solicitudServicioEntity.getFechaInicio();
             this.estado = solicitudServicioEntity.getEstado();
             this.foto = solicitudServicioEntity.getFoto();
-            //if (solicitudServicioEntity.getTrabajador() != null) {
-            //this.trabajador = new TrabajadorDTO(solicitudServicioEntity.getTrabajador());
-            //}
-            //else{
-            //this.trabajador = null;
-            //}
-            //if (solicitudServicioEntity.getCliente() != null) {
-            //this.cliente = new ClienteDTO(solicitudServicioEntity.getCliente());
-            //}
-            //else{
-            //this.cliente = null;
-            //}
-            //if (solicitudServicioEntity.getFactura() != null) {
-            //this.factura = new FacturaDTO(solicitudServicioEntity.getFactura());
-            //}
-            //else{
-            //this.factura = null;
-            //}
+            if (solicitudServicioEntity.getTrabajador() != null) {
+            this.trabajador = new TrabajadorDTO(solicitudServicioEntity.getTrabajador());
+            }
+            else{
+            this.trabajador = null;
+            }
+            if (solicitudServicioEntity.getCliente() != null) {
+            this.cliente = new ClienteDTO(solicitudServicioEntity.getCliente());
+            }
+            else{
+            this.cliente = null;
+            }
+            if (solicitudServicioEntity.getFactura() != null) {
+            this.factura = new FacturaDTO(solicitudServicioEntity.getFactura());
+            }
+            else{
+            this.factura = null;
+            }
             if (solicitudServicioEntity.getCalificacion()!= null) {
             this.calificacion= new CalificacionDTO(solicitudServicioEntity.getCalificacion());
             }
@@ -192,6 +192,48 @@ public class SolicitudServicioDTO implements Serializable{
     }
     
     /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the factura
+     */
+    public FacturaDTO getFactura() {
+        return factura;
+    }
+
+    /**
+     * @param factura the factura to set
+     */
+    public void setFactura(FacturaDTO factura) {
+        this.factura = factura;
+    }
+    
+     /**
+     * @return the trabajador
+     */
+    public TrabajadorDTO getTrabajador() {
+        return trabajador;
+    }
+
+    /**
+     * @param trabajador the trabajador to set
+     */
+    public void setTrabajador(TrabajadorDTO trabajador) {
+        this.trabajador = trabajador;
+    }
+    
+    /**
      * Convertir DTO a Entity
      *
      * @return Un Entity con los valores del DTO
@@ -203,15 +245,15 @@ public class SolicitudServicioDTO implements Serializable{
         solicitudEntity.setFechaInicio(this.fechaInicio);
         solicitudEntity.setEstado(this.estado);
         solicitudEntity.setFoto(this.foto);
-        // if (this.trabajador != null) {
-        //solicitudEntity.setTrabajador(this.trabajador);
-       // }
-        // if (this.cliente != null) {
-        //solicitudEntity.setCliente(this.cliente);
-       // }
-        // if (this.factura != null) {
-        //solicitudEntity.setFactura(this.factura);
-       // }
+         if (this.getTrabajador() != null) {
+        solicitudEntity.setTrabajador(this.getTrabajador().toEntity());
+        }
+         if (this.getCliente() != null) {
+        solicitudEntity.setCliente(this.getCliente().toEntity());
+        }
+         if (this.getFactura() != null) {
+        solicitudEntity.setFactura(this.getFactura().toEntity());
+        }
         if (this.calificacion != null) {
             solicitudEntity.setCalificacion(this.calificacion.toEntity());
         }
@@ -222,5 +264,8 @@ public class SolicitudServicioDTO implements Serializable{
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
+   
+
     
 }
