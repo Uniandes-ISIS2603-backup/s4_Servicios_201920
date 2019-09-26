@@ -72,4 +72,10 @@ public class ServicioOfrecidoLogic
         }
         return isIn;
     }
+        
+   public   List<ServicioOfrecidoEntity> getServiciosOfrecidos()
+   {
+       List<ServicioOfrecidoEntity> services = persistencia.findAll();
+       return  services;
+   }
 }

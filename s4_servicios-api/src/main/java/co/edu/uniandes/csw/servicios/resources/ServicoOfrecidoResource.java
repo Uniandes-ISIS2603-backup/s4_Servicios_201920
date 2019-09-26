@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.servicios.resources;
 
 import co.edu.uniandes.csw.servicios.dtos.ServicioOfrecidoDTO;
 import co.edu.uniandes.csw.servicios.ejb.ServicioOfrecidoLogic;
+import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -45,11 +47,22 @@ public class ServicoOfrecidoResource
     }
     
     @GET 
-    public List<ServicioOfrecidoDTO> getServicioOfrecidos() {
+    public List<ServicioOfrecidoDTO> getServiciosOfrecidos() {
        
-        List<ServicioOfrecidoDTO> listaServicioOfrecidos = null; // listEntity2DetailDTO(ServicioOfrecidoLogic.getServicioOfrecidos());
+        List<ServicioOfrecidoDTO> listaServicioOfrecidos = toDTO(servicioLogic.getServiciosOfrecidos());
        
         return listaServicioOfrecidos;
     }
     
+    
+   private List<ServicioOfrecidoDTO> toDTO (List<ServicioOfrecidoEntity> entityList)
+   {
+        List<ServicioOfrecidoDTO> list = new ArrayList<>();
+        for (ServicioOfrecidoEntity entity : entityList) {
+            list.add(new ServicioOfrecidoDTO(entity));
+        }
+        return list;
+       
+       
+   }
 }
