@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
-import co.edu.uniandes.csw.servicos.persistence.SolicitudServicioPersistence;
+import co.edu.uniandes.csw.servicios.persistence.SolicitudServicioPersistence;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
@@ -40,7 +40,7 @@ public class ClienteSolicitudServicioLogic {
         SolicitudServicioEntity solicitudServicioEntity = solicitudServicioPersistence.find(solicitudServiciosId);
         solicitudServicioEntity.setCliente(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle una solicitud de servicio a un cliente con id = {0}", clientesId);
-        return SolicitudServicioPersistence.find(solicitudServiciosId);
+        return solicitudServicioPersistence.find(solicitudServiciosId);
     }
 
 
@@ -71,12 +71,4 @@ public class ClienteSolicitudServicioLogic {
         return clienteEntity.getServicios();
     }
 
-   
-    public void removeSolicitudServicio(Long clientesId, Long solicitudServiciosId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar un servicio del cliente con id = {0}", clientesId);
-        ClienteEntity clienteEntity = clientePersistence.find(clientesId);
-        SolicitudServicioEntity servicioEntity = solicitudServicioPersistence.find(solicitudServiciosId);
-        servicioEntity.getAuthors().remove(authorEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar un libro del author con id = {0}", authorsId);
-    }
 }
