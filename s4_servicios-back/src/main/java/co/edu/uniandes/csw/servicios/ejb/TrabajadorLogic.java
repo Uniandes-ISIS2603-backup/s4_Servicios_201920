@@ -43,7 +43,7 @@ public class TrabajadorLogic {
         return lista;
     }
     
-     public TrabajadorEntity getAuthor(Long trabajadorId) {
+     public TrabajadorEntity getTrabajador(Long trabajadorId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el trabajador con id = x", trabajadorId);
         TrabajadorEntity trabajadorEntity = persistence.find(trabajadorId);
         if (trabajadorEntity == null) {
@@ -53,7 +53,7 @@ public class TrabajadorLogic {
         return trabajadorEntity;
     }
      
-     public TrabajadorEntity updateAuthor(Long trabajadorId, TrabajadorEntity trabajadorEntity) throws BusinessLogicException {
+     public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajadorEntity) throws BusinessLogicException {
         TrabajadorEntity trabajador = persistence.find(trabajadorId);
         if (trabajador != null) {
             throw new BusinessLogicException("Ya existe un trabajador con este id");

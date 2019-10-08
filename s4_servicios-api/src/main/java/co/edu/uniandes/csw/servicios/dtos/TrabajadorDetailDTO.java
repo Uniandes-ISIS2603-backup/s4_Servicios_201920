@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.CalificacionEntity;
-import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
