@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.servicios.resources;
 
+import co.edu.uniandes.csw.servicios.ejb.ClienteSolicitudServicioLogic;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.mappers.WebApplicationExceptionMapper;
 import java.util.List;
@@ -33,46 +29,26 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class ClienteSolicitudServicioResource {
 
-    private static final Logger LOGGER = Logger.getLogger(AuthorBooksResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ClienteSolicitudServicioResource.class.getName());
 
     @Inject
-    private AuthorBooksLogic authorBookLogic;
+    private ClienteSolicitudServicioLogic clienteSolicitudServicioLogic;
 
     @Inject
-    private BookLogic bookLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    private SolicitudServicioLogic solicitudServicioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+
 
     /**
-     * Asocia un libro existente con un autor existente
+     * Busca y devuelve todos los servicios que existen en un cliente.
      *
-     * @param authorsId El ID del autor al cual se le va a asociar el libro
-     * @param booksId El ID del libro que se asocia
-     * @return JSON {@link BookDetailDTO} - El libro asociado.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @POST
-    @Path("{booksId: \\d+}")
-    public BookDetailDTO addBook(@PathParam("authorsId") Long authorsId, @PathParam("booksId") Long booksId) {
-        LOGGER.log(Level.INFO, "AuthorBooksResource addBook: input: authorsId {0} , booksId {1}", new Object[]{authorsId, booksId});
-        if (bookLogic.getBook(booksId) == null) {
-            throw new WebApplicationException("El recurso /books/" + booksId + " no existe.", 404);
-        }
-        BookDetailDTO detailDTO = new BookDetailDTO(authorBookLogic.addBook(authorsId, booksId));
-        LOGGER.log(Level.INFO, "AuthorBooksResource addBook: output: {0}", detailDTO);
-        return detailDTO;
-    }
-
-    /**
-     * Busca y devuelve todos los libros que existen en un autor.
-     *
-     * @param authorsId El ID del autor del cual se buscan los libros
-     * @return JSONArray {@link BookDetailDTO} - Los libros encontrados en el
-     * autor. Si no hay ninguno retorna una lista vacía.
+     * @param clientesId El ID del cliente del cual se buscan los servicios
+     * @return JSONArray {@link SolicitudServicioDTO} - Los servicios encontrados en el
+     * cliente. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<BookDetailDTO> getBooks(@PathParam("authorsId") Long authorsId) {
-        LOGGER.log(Level.INFO, "AuthorBooksResource getBooks: input: {0}", authorsId);
-        List<BookDetailDTO> lista = booksListEntity2DTO(authorBookLogic.getBooks(authorsId));
+    public List<SolicitudServicioDTO> getServicios(@PathParam("clientesId") Long clientesId) {
+        LOGGER.log(Level.INFO, "ClienteSolicitudServicioResource getServicios: input: {0}", clientesId);
+        List<SolicitudServicioDTO> lista = serviciosListEntity2DTO(authorBookLogic.getBooks(authorsId));
         LOGGER.log(Level.INFO, "AuthorBooksResource getBooks: output: {0}", lista);
         return lista;
     }
@@ -145,15 +121,15 @@ public class ClienteSolicitudServicioResource {
     }
 
     /**
-     * Convierte una lista de BookEntity a una lista de BookDetailDTO.
+     * Convierte una lista de SolicitudServicioEntity a una lista de SolicitudServicioDTO.
      *
-     * @param entityList Lista de BookEntity a convertir.
-     * @return Lista de BookDetailDTO convertida.
+     * @param entityList Lista de SolicitudServicioEntity a convertir.
+     * @return Lista de SolicitudServicioDTO convertida.
      */
-    private List<BookDetailDTO> booksListEntity2DTO(List<BookEntity> entityList) {
-        List<BookDetailDTO> list = new ArrayList<>();
-        for (BookEntity entity : entityList) {
-            list.add(new BookDetailDTO(entity));
+    private List<SolicitudServicioDTO> serviciosListEntity2DTO(List<SolicitudServicioEntity> entityList) {
+        List<SolicitudServicioDTO> list = new ArrayList<>();
+        for (SolicitudServicioEntity entity : entityList) {
+            list.add(new SolicitudServicioDTO(entity));
         }
         return list;
     }
