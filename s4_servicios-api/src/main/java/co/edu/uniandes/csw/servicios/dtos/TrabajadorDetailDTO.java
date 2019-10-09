@@ -41,14 +41,7 @@ public class TrabajadorDetailDTO extends TrabajadorDTO implements Serializable{
                 servicios.add(new ServicioOfrecidoDTO(servicio));
             }
         }
-        if(trabajadorEntity.getCalificaciones() != null)
-        {
-            calificaciones = new ArrayList<>();
-            for(CalificacionEntity calificacion: trabajadorEntity.getCalificaciones())
-            {
-                calificaciones.add(new CalificacionDTO(calificacion));
-            }
-        }
+        
     }
     
     @Override
@@ -68,13 +61,7 @@ public class TrabajadorDetailDTO extends TrabajadorDTO implements Serializable{
             }
                     trabajadorEntity.setServicios(serviciosEntity);
         }
-         if(getCalificaciones() != null){
-            List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
-            for(CalificacionDTO calificacion : getCalificaciones()){
-                calificacionesEntity.add(calificacion.toEntity());
-            }
-                    trabajadorEntity.setCalificaciones(calificacionesEntity);
-        }
+         
         return trabajadorEntity;
     }
 

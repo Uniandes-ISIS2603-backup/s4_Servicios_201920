@@ -10,10 +10,10 @@ import co.edu.uniandes.csw.servicios.dtos.TrabajadorDetailDTO;
 import co.edu.uniandes.csw.servicios.ejb.TrabajadorLogic;
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -36,6 +36,9 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class TrabajadorResource {
+    
+        private static final Logger LOGGER = Logger.getLogger(TrabajadorResource.class.getName());
+
     
     @Inject
     private TrabajadorLogic trabajadorLogic;
