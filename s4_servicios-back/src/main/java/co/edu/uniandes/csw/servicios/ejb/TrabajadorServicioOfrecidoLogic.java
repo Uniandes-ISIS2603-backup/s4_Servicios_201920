@@ -37,7 +37,7 @@ public class TrabajadorServicioOfrecidoLogic
         
         TrabajadorEntity  trabajadorEntity = trabajadorPersistence.find(trabajadorId);
         ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(servicioOfrecidoId);
-        //trabajadorEntity. Falta meotod de agregar trabajador. 
+        trabajadorEntity.getServicios().add(servicioOfrecidoEntity);
         
         return servicioOfrecidoPersistence.find(servicioOfrecidoId);
     }
@@ -50,44 +50,57 @@ public class TrabajadorServicioOfrecidoLogic
      * @return Colección de instancias ServicioOfrecidokEntity asociadas a la instancia de
      * Trabajador
      */
-    public List<ServicioOfrecidoEntity> getBooks(Long trabajadorId) {
+    public List<ServicioOfrecidoEntity> getServiciosOfrecidos(Long trabajadorId) {
         return (List<ServicioOfrecidoEntity>) trabajadorPersistence.find(trabajadorId).getServicios();
     }
     
     /**
-     * Obtiene una instancia de BookEntity asociada a una instancia de Author
+     * Obtiene una instancia de ServicioOfrecidoEntity asociada a una instancia de Author
      *
-     * @param authorsId Identificador de la instancia de Author
-     * @param booksId Identificador de la instancia de Book
+     * @param trabajadorId Identificador de la instancia de Author
+     * @param servicioOfrecidoId Identificador de la instancia de Book
      * @return La entidadd de Libro del autor
      * @throws BusinessLogicException Si el libro no está asociado al autor
      */
-    public ServicioOfrecidoEntity getBook(Long authorsId, Long booksId) throws BusinessLogicException {
+    public ServicioOfrecidoEntity getServicioOfrecido   (Long trabajadorId, Long servicioOfrecidoId) throws BusinessLogicException {
       
-        List<ServicioOfrecidoEntity> servicios = (List<ServicioOfrecidoEntity>) trabajadorPersistence.find(authorsId).getServicios();
-        ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(booksId);
+        List<ServicioOfrecidoEntity> servicios = (List<ServicioOfrecidoEntity>) trabajadorPersistence.find(trabajadorId).getServicios();
+        ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(servicioOfrecidoId);
         int index = servicios.indexOf(servicioOfrecidoEntity);
         if (index >= 0) {
             return servicios.get(index);
         }
-        throw new BusinessLogicException("El libro no está asociado al autor");
+        throw new BusinessLogicException("El trbajador no ofrece el servicio");
         
     }
     
     /**
-     * Desasocia un Book existente de un Author existente
+     * Desasocia un servicioOfrecido existente de un Trabajador existente
      *
      * @param authorsId Identificador de la instancia de Author
      * @param booksId Identificador de la instancia de Book
      */
-    public void removeBook(Long trabajadorId, Long servicioOfrecidoId) {
+    public void removeServicioOfrecido(Long trabajadorId, Long servicioOfrecidoId) {
         TrabajadorEntity trabajadorEntity = trabajadorPersistence.find(trabajadorId);
         ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(servicioOfrecidoId);
-        //trabajadorEntity.remove (servicioEntity); No est'a en la calse remove. 
+        trabajadorEntity.getServicios().remove(servicioOfrecidoEntity); 
     }
         
         
-       
+    public List<ServicioOfrecidoEntity> replaceServicioOfrecido(Long trabajadorId, List<ServicioOfrecidoEntity> servicios )
+    {
+        TrabajadorEntity trabajadorEntity = trabajadorPersistence.find(trabajadorId);
+        List<ServicioOfrecidoEntity> servicioList= servicioOfrecidoPersistence.findAll();
+        for (ServicioOfrecidoEntity servicio:servicioList )
+        {
+            if(servicios.contains(servicio))
+            {
+               trabajadorEntity.getServicios().remove(servicio);
+            }
+            trabajadorEntity.setServicios(servicios);
+        }
+        return (List<ServicioOfrecidoEntity>) trabajadorEntity.getServicios();
+    }
    
      
    

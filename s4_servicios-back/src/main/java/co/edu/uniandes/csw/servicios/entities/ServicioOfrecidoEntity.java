@@ -25,7 +25,7 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
     /**
      * Decripción del servicio ofrecido
      */
-    private String descripcion;
+    private      String descripcion;
     
     /**
      * Precio por hora del servicio ofrecido. 
