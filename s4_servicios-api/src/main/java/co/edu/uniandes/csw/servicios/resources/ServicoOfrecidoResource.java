@@ -100,7 +100,7 @@ public class ServicoOfrecidoResource
         servicio.setId(servicioId);
         
         if (servicioLogic.getServicioOfrecido(servicioId) == null) {
-            throw new WebApplicationException("El recurso /servicios/" + servicioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioId + " no existe.", 404);
         }
         
         ServicioOfrecidoDTO servicioDTO = new ServicioOfrecidoDTO(servicioLogic.updateServicioOfrecido(servicioId, servicio.toEntity()));
@@ -110,11 +110,11 @@ public class ServicoOfrecidoResource
     
     @DELETE
     @Path("{servicioOfrecidoId: \\d+}")
-    public void deleteSErvicioOfrecido (@PathParam("servicioOfrecidoId: \\d+") Long servicioId) throws BusinessLogicException
+    public void deleteServicioOfrecido (@PathParam("servicioOfrecidoId") Long servicioId) throws BusinessLogicException
     {
        ServicioOfrecidoEntity entity = servicioLogic.getServicioOfrecido(servicioId);
        if (entity == null) {
-            throw new WebApplicationException("El recurso /servicioOfrecido/" + servicioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioId + " no existe.", 404);
         }
        servicioLogic.deleteServicioOfrecido(servicioId);
     }

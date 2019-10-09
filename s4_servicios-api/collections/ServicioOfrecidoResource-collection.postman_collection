@@ -1,0 +1,600 @@
+{
+	"info": {
+		"_postman_id": "e7c9331d-34f7-402d-b3c2-c9fb038290a4",
+		"name": "ServicioOfrecido",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un servicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ef78d7f-036f-4e56-95f1-9dbfcb3020a0",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la labodora del cliente\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 123.2,\r\n\"tipo\": \"Plomeria\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un servicioOfrecido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "992b4ed8-4eb9-4636-90ae-fb6cff2a536e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"descripcion\": \"Se cambia el color de una habitación según preferencias del cliente\",\r\n\"nombre\": \"Pintar habitación\",\r\n\"precio\": 23.08,\r\n\"tipo\": \"Pintura\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un servicioOfrecido con tipo erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55e0335c-738c-4cd5-a70a-c91de5df87d5",
+						"exec": [
+							"tests[\"No crea un servicio con un tipo invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"no se encuentra dentro de la oferta\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"descripcion\": \"Se revisa y repara un tubo\",\r\n\"nombre\": \"Reparación tubo\",\r\n\"precio\": 123,\r\n\"tipo\": \"Plomeria-fail\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un servicio con el mimso nombre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed8788ab-642a-41c7-8c60-8c90ee42ab20",
+						"exec": [
+							"tests[\"No crea un servicio con el unombre otro ya existente\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"existe un servicio con ese nombre\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"descripcion\": \"Se limpia y previene posibles fallas en la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 323.2,\r\n\"tipo\": \"Plomeria\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los serviciosOfrecidos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea81078b-df1d-47c8-9b92-b707ee825ed7",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de servicios\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				},
+				"description": "Se crea un nuevo servicio ofrecido"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/s4_servicios-api/ServicioOfrecido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s4_servicios-api",
+								"ServicioOfrecido"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Obtener un servicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un servicioOfrecdio que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b5bc40c-ad14-4b45-8f31-7140e3014684",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /serviciosOfrecidos/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un servicioOfrecido que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dc4c764-0003-487f-9b60-1fec86f24a72",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /serviciosOfrecidos/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n    \"nombre\": \"Mantenimiento de lavadora\",\r\n    \"precio\": 300.0,\r\n    \"tipo\": \"Plomeria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un servicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n    \"nombre\": \"Mantenimiento de lavadora\",\r\n    \"precio\": 300.0,\r\n    \"tipo\": \"Plomeria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un ServicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un ServicioOfrecido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un servicioOfrecido que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58202f84-cad3-4db8-9fc7-20ee897edc43",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /serviciosOfrecidos/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

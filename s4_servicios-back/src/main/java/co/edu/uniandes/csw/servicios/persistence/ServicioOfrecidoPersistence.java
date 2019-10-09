@@ -16,7 +16,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
- *
  * @author Violeta Rodríguez
  */
 @Stateless
@@ -66,9 +65,9 @@ public class ServicioOfrecidoPersistence {
         return em.merge(servicioOfrecido);
     }
     
-    public void delete(Long ServicioOfrecidoId){
+    public void delete(Long servicioOfrecidoId){
         
-        em.remove(em.find(ServicioOfrecidoEntity.class, ServicioOfrecidoId));
+        em.remove(em.find(ServicioOfrecidoEntity.class, servicioOfrecidoId));
         
     }
     
