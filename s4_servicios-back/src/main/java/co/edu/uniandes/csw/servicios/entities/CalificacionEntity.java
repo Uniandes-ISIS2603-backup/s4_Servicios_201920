@@ -30,10 +30,6 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     @OneToOne
     private SolicitudServicioEntity solicitud;
     
-    @PodamExclude
-    @ManyToOne
-    private TrabajadorEntity trabajador;
-    
     public CalificacionEntity()
     {
         
@@ -79,20 +75,6 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      */
     public void setSolicitud(SolicitudServicioEntity solicitud) {
         this.solicitud = solicitud;
-    }
-
-    /**
-     * @return the trabajador
-     */
-    public TrabajadorEntity getTrabajador() {
-        return trabajador;
-    }
-
-    /**
-     * @param trabajador the trabajador to set
-     */
-    public void setTrabajador(TrabajadorEntity trabajador) {
-        this.trabajador = trabajador;
     }
     
 }
