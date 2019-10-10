@@ -156,7 +156,7 @@ public class SolicitudServicioResource {
      * servicio.
      * @return El servicio de ServicioOfrecido para ese autor en paricular.
      */
-    @Path("{authorsId: \\d+}/books")
+    @Path("{solicitudId: \\d+}/servicios")
     public Class<SolicitudServicioServicioOfrecidosResource> getSolicitudServicioServicioOfrecidosResource(@PathParam("solicitudId") Long solicitudId) {
         if (solicitudServicioLogic.getSolicitudServicio(solicitudId) == null) {
             throw new WebApplicationException("El recurso /solicitudes/" + solicitudId + " no existe.", 404);
