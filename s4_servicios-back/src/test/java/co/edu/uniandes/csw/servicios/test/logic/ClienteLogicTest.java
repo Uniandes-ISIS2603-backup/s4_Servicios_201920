@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica de Authors
+ * Pruebas de logica de los clientes
  *
  * @author ISIS2603
  */
@@ -107,12 +107,12 @@ public class ClienteLogicTest {
             entity.setServicios(new ArrayList<>());
             data.add(entity);
         }
-        ClienteEntity cliente = data.get(2);
-        SolicitudServicioEntity entity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        ArrayList<SolicitudServicioEntity> arreglo = new ArrayList<>();
-        arreglo.add(entity);
-        cliente.setServicios(arreglo);
-        em.merge(cliente);
+//        ClienteEntity cliente = data.get(2);
+//        SolicitudServicioEntity entity = factory.manufacturePojo(SolicitudServicioEntity.class);
+//        ArrayList<SolicitudServicioEntity> arreglo = new ArrayList<>();
+//        arreglo.add(entity);
+//        cliente.setServicios(arreglo);
+//        em.merge(cliente);
     }
 
     /**
@@ -127,7 +127,7 @@ public class ClienteLogicTest {
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-        Assert.assertEquals(newEntity.getDireccion(), entity.getDireccion());
+        Assert.assertEquals(newEntity.getMail(), entity.getMail());
     }
 
     /**
@@ -194,15 +194,27 @@ public class ClienteLogicTest {
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
-//    /**
-//     * Prueba para eliminar un Author asociado a un libro
-//     *
-//     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-//     */
-//    @Test(expected = BusinessLogicException.class)
-//    public void deleteClienteConServicioTest() throws BusinessLogicException {
-//        clienteLogic.deleteCliente(data.get(2).getId());
-//    }
+    
+    /**
+     * Prueba para crear un cliente con un mal correo asociado a un libro
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteConMalCorreoTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setMail("mal correito");
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un cliente con un mal telefono asociado a un libro
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteConMalTelefonoTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setTelefono(-1);
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
 
 }

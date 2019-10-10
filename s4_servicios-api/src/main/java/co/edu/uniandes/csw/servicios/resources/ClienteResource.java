@@ -134,25 +134,18 @@ public class ClienteResource {
         LOGGER.info("ClienteResource deleteCliente: output: void");
     }
 
-//    /**
-//     * Conexión con el servicio de servicios para un cliente.
-//     * {@link AuthorBooksResource}
-//     *
-//     * Este método conecta la ruta de /clientes con las rutas de /servicioss que
-//     * dependen del cliente, es una redirección al servicio que maneja el segmento
-//     * de la URL que se encarga de los servicioss.
-//     *
-//     * @param clientesId El ID del autor con respecto al cual se accede al
-//     * servicio.
-//     * @return El servicio de Servicios para ese autor en paricular.
-//     */
-//    @Path("{clientesId: \\d+}/clientes")
-//    public Class<AuthorBooksResource> getAuthorBooksResource(@PathParam("authorsId") Long authorsId) {
-//        if (authorLogic.getAuthor(authorsId) == null) {
-//            throw new WebApplicationException("El recurso /authors/" + authorsId + " no existe.", 404);
-//        }
-//        return AuthorBooksResource.class;
-//    }
+    /*
+     * @param clientesId El ID del cliente con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Servicios para ese autor en paricular.
+     */
+    @Path("{clientesId: \\d+}/servicios")
+    public Class<ClienteSolicitudServicioResource> getAuthorBooksResource(@PathParam("clientesId") Long clientesId) {
+        if (clienteLogic.getCliente(clientesId) == null) {
+            throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
+        }
+        return ClienteSolicitudServicioResource.class;
+    }
 
     /**
      * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
