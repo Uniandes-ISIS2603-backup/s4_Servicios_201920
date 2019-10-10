@@ -39,11 +39,7 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany
     private Collection<SolicitudServicioEntity>solicitudes;
-    
-    @PodamExclude
-    @OneToMany
-    private Collection<CalificacionEntity>calificaciones;
-    
+
     @PodamExclude
     @OneToMany
     private Collection<ServicioOfrecidoEntity>servicios;
@@ -223,21 +219,6 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     public void setSolicitudes(Collection<SolicitudServicioEntity> solicitudes) {
         this.solicitudes = solicitudes;
     }
-
-    /**
-     * @return the calificaciones
-     */
-    public Collection<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-
-    /**
-     * @param calificaciones the calificaciones to set
-     */
-    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
     /**
      * @return the servicios
      */

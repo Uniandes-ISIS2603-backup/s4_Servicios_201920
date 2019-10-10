@@ -72,4 +72,38 @@ public class ServicioOfrecidoLogic
         }
         return isIn;
     }
+    
+   public   List<ServicioOfrecidoEntity> getServiciosOfrecidos()
+   {
+       List<ServicioOfrecidoEntity> services = persistencia.findAll();
+       return  services;
+   }
+   
+   /**
+    * Devuelve el servicio ofrecido con el id dada
+    * @param idServicio identificador del servicio que sea dea obtenr
+    * @return  Enttidad del serivcioOfrecido
+    */
+   public ServicioOfrecidoEntity getServicioOfrecido(Long idServicio)
+   {
+        return persistencia.find(idServicio);
+   }
+   
+   /**
+    * Actualiza el servicio ofrecido con el id dada con la infroamci'on dada
+    * @param servicioId identificador del servicio que se quiere actualizar.
+    * @param servicioEntity informaci'on que ser queire fijar
+    * @return servicioOfrecidoEntity actualziada
+    * @throws BusinessLogicException si no cumple las rglas de negocio
+    */
+   public ServicioOfrecidoEntity updateServicioOfrecido(Long servicioId, ServicioOfrecidoEntity servicioEntity) throws BusinessLogicException
+   {
+        ServicioOfrecidoEntity newEntity = persistencia.update(servicioEntity);
+        return newEntity;
+   }
+   
+   public void deleteServicioOfrecido(Long servicioId) throws BusinessLogicException 
+   {
+       persistencia.delete(servicioId);
+   }
 }

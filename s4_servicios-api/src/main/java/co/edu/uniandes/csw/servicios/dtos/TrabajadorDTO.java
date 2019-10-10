@@ -53,6 +53,22 @@ public TrabajadorDTO( TrabajadorEntity trabajadorEntity ){
         }
     }
         
+public TrabajadorEntity toEntity(){
+        TrabajadorEntity trabajadorEntity = new TrabajadorEntity();
+        trabajadorEntity.setId(id);
+        trabajadorEntity.setNombre(nombre);
+        trabajadorEntity.setUsuario(usuario);
+        trabajadorEntity.setContrasena(contrasena);
+        trabajadorEntity.setTelefono(telefono);
+        trabajadorEntity.setCorreo(correo);
+        trabajadorEntity.setFoto(foto);
+        trabajadorEntity.setDisponibilidad(disponibilidad);
+        trabajadorEntity.setHojaVida(hojaVida);
+        trabajadorEntity.setEsApto(esApto);
+        trabajadorEntity.setSeguroSocial(seguroSocial);
+        trabajadorEntity.setRiesgos(riesgos);
+        return trabajadorEntity;
+    }
 
     /**
      * @return the id
@@ -221,24 +237,5 @@ public TrabajadorDTO( TrabajadorEntity trabajadorEntity ){
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
     }
-    
- public TrabajadorEntity toEntity(){
-        TrabajadorEntity trabajadorEntity = new TrabajadorEntity();
-        trabajadorEntity.setId(id);
-        trabajadorEntity.setNombre(nombre);
-        trabajadorEntity.setUsuario(usuario);
-        trabajadorEntity.setContrasena(contrasena);
-        trabajadorEntity.setTelefono(telefono);
-        trabajadorEntity.setCorreo(correo);
-        trabajadorEntity.setFoto(foto);
-        trabajadorEntity.setDisponibilidad(disponibilidad);
-        trabajadorEntity.setHojaVida(hojaVida);
-        trabajadorEntity.setEsApto(esApto);
-        trabajadorEntity.setSeguroSocial(seguroSocial);
-        trabajadorEntity.setRiesgos(riesgos);
-        return trabajadorEntity;
-    }
-    
-
-   
+       
 }

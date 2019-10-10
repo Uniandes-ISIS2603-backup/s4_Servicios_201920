@@ -56,6 +56,8 @@ public class ServicioOfrecidoDTO {
             this.descripcion=entity.getDescripcion();
             this.nombre = entity.getNombre();
             this.tipo= entity.getTipo();
+            this.id=entity.getId();
+            this.precio=entity.getPrecio();
             
         }
     }
