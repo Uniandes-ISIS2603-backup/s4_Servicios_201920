@@ -6,59 +6,63 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
-
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 /**
  *
  * @author Violeta Rodríguez
  */
 @Entity
 public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
-{
-    public static final int PLOMERIA =2;
-   
-    public static final int PINTURA =3;
-    
-    public static final int ELECTRICIDAD =4;
-    
-    public static final int CERRAJERIA =5;
-    
-    public static final int VENTANERIA=6;
-    
-  
-    
-    
+{    
     /**
      * Tipo del serivicio ofrecido, según las constantes definidas. 
      */
-    private int tipo;
+    private String tipo;
     
     /**
      * Decripción del servicio ofrecido
      */
-    private String descripcion;
+    private      String descripcion;
     
     /**
      * Precio por hora del servicio ofrecido. 
      */
     private double precio;
     
+    /**
+     * Nombre del servio a ofrecer
+     */
+    
+    private String nombre;
+
+    
     public  ServicioOfrecidoEntity ()
     {
         
+    }
+    
+     public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -90,4 +94,8 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable
         this.precio = precio;
     }
     
+   
+    
+    
 }
+

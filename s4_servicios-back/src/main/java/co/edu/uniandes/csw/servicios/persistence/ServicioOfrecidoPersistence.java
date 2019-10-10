@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -36,9 +37,28 @@ public class ServicioOfrecidoPersistence {
 
     public List<ServicioOfrecidoEntity> findAll() {
         
-        TypedQuery<ServicioOfrecidoEntity> query= em.createQuery("select u from ServicioOfrecidoEntity u", ServicioOfrecidoEntity.class);
+        Query query= em.createQuery("select u from ServicioOfrecidoEntity u");
         
         return query.getResultList();
+    }
+    
+    /**
+     * Busca en la base de datos el servicio ofrecido conle nombre dado
+     * @param nombre nombre del servicio a buscar
+     * @return retona la entidad de el servicio ofrecido con le nombre dado. Si no encuentra el servicio, retorna null. 
+     */
+    public ServicioOfrecidoEntity findByName(String nombre)
+    {
+       //Creamos un query para buscar el servicio con el nombre. Aquí voy a gaurdar los resultados de la búsqueda.
+        TypedQuery query= em.createQuery("Select e from ServicioOfrecidoEntity e where e.nombre = :nombre", ServicioOfrecidoEntity.class);
+        
+        query = query.setParameter("nombre", nombre );
+        
+        ServicioOfrecidoEntity sameName = (ServicioOfrecidoEntity) query.getSingleResult();
+        
+        return sameName;
+                    
+        
     }
     
     public ServicioOfrecidoEntity update(ServicioOfrecidoEntity servicioOfrecido)

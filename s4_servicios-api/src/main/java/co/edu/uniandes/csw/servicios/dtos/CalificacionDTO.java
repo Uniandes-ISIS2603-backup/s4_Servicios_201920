@@ -26,7 +26,7 @@ public class CalificacionDTO implements Serializable{
     * Relación a un trabajador  
     * dado que esta tiene cardinalidad 1.
      */
-    //private TrabajadorDTO trabajador;
+    private TrabajadorDTO trabajador;
     
     /*
     * Relación a una solicitud  
@@ -53,12 +53,12 @@ public class CalificacionDTO implements Serializable{
             this.id = calificacionEntity.getId();
             this.comentario = calificacionEntity.getComentario();
             this.puntaje = calificacionEntity.getPuntaje();
-            //if (calificacionEntity.getTrabajador() != null) {
-            //this.trabajador = new TrabajadorDTO(calificacionEntity.getTrabajador());
-            //}
-            //else{
-            //this.trabajador = null;
-            //}
+            if (calificacionEntity.getTrabajador() != null) {
+            this.trabajador = new TrabajadorDTO(calificacionEntity.getTrabajador());
+            }
+            else{
+            this.trabajador = null;
+            }
             if (calificacionEntity.getSolicitud() != null) {
             this.solicitud= new SolicitudServicioDTO(calificacionEntity.getSolicitud());
             }
@@ -128,18 +128,18 @@ public class CalificacionDTO implements Serializable{
      *
      * @return the trabajador
      */
-  //  public String getTrabajador() {
-   //     return trabajador;
-   // }
+    public TrabajadorDTO getTrabajador() {
+        return trabajador;
+    }
 
     /**
      * Modifica el comentario de la calificacion.
      *
      * @param trabajador the trabajador to set
      */
-  //  public void setTrabajador(String trabajador) {
-    //    this.trabajador = trabajador;
-    //}
+    public void setTrabajador(TrabajadorDTO trabajador) {
+        this.trabajador = trabajador;
+    }
     
      /**
      * Devuelve la solicitud de la calificacion.
@@ -169,9 +169,9 @@ public class CalificacionDTO implements Serializable{
         calificacionEntity.setId(this.id);
         calificacionEntity.setPuntaje(this.puntaje);
         calificacionEntity.setComentario(this.comentario);
-       // if (this.trabajador != null) {
-       //calificacionEntity.setTrabajador(this.trabajador);
-       // }
+        if (this.trabajador != null) {
+        calificacionEntity.setTrabajador(this.trabajador.toEntity());
+        }
         if (this.solicitud != null) {
             calificacionEntity.setSolicitud(this.solicitud.toEntity());
         }

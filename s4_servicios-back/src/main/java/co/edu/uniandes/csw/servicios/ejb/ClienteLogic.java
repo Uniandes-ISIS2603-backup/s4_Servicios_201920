@@ -33,22 +33,26 @@ public class ClienteLogic {
      * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     public ClienteEntity createCliente (ClienteEntity clienteEntity) throws BusinessLogicException {
-//        boolean valido = true;
-//        if(clienteEntity.getNombre().equals(null) 
-//                ||!clienteEntity.getMail().matches("^(.+)@(.+)$")
-//                /*|| Integer.toString(clienteEntity.getTelefono()).matches("^\+(?:[0-9] ?){6,14}[0-9]$")*/
-//                ){
-//            valido = false;
-//            throw new BusinessLogicException("No se puede borrar el autor con id = " + clienteEntity.getId() + " porque tiene books asociados");
-//        }
-        
-            LOGGER.log(Level.INFO, "Inicia proceso de creación del autor");
-            ClienteEntity newAuthorEntity = persistence.create(clienteEntity);
-            LOGGER.log(Level.INFO, "Termina proceso de creación del autor");
-            return newAuthorEntity;
-        
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
+        ClienteEntity newClienteEntity = null;
+        if(clienteEntity.getNombre() == null || clienteEntity.getNombre().equals("")){
+            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el nombre es inválido");
+        }
+        else if(clienteEntity.getMail() == null || !clienteEntity.getMail().matches("^(.+)@(.+)$")){
+            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el correo es inválido");
+        }
+        else if(clienteEntity.getUsuario() == null || clienteEntity.getUsuario().equals("")){
+            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el usuario es inválido");
+        }
+        else if(clienteEntity.getTelefono() < 0 ){
+            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el número telefónico es inválido");
+        }
+        else{
+            newClienteEntity = persistence.create(clienteEntity);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
+        return newClienteEntity;
     }
-    
     
     /**
      * Obtiene la lista de los registros de Cliente.

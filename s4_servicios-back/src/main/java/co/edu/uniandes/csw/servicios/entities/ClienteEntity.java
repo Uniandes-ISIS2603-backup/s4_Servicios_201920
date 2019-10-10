@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.servicios.entities;
 
+import co.edu.uniandes.csw.servicios.podam.CorreoStrategy;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -58,6 +60,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     /**
      * El correo electrónico del cliente
      */
+    @PodamStrategyValue(CorreoStrategy.class)
     private String mail;
     
     

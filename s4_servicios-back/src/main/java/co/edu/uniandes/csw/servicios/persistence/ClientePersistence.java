@@ -49,7 +49,7 @@ public class ClientePersistence {
      * @return - una lista con todos los clientes
      */
     public List<ClienteEntity> findAll(){
-        LOGGER.log(Level.INFO, "Se están consultando todos los libros");
+        LOGGER.log(Level.INFO, "Se están consultando todos los clientes");
         Query q = em.createQuery("select u from ClienteEntity u");
         return q.getResultList();
     }

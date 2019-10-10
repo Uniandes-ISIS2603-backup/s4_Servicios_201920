@@ -33,7 +33,7 @@ public class CalificacionLogic {
      /**
      * Crea una calificacion en la persistencia.
      *
-     * @param CalificacionEntity La entidad que representa la calificacion a
+     * @param calificacion La entidad que representa la calificacion a
      * persistir.
      * @return La entidad de la calificacion luego de persistirla.
      * @throws BusinessLogicException Si la calificacion a persistir ya existe.

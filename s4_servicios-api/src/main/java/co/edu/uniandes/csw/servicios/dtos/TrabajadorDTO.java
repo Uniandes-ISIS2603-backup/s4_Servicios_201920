@@ -3,55 +3,87 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.servicios.entities;
+package co.edu.uniandes.csw.servicios.dtos;
 
+import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import uk.co.jemos.podam.common.PodamExclude;
+import org.eclipse.persistence.descriptors.SerializableDescriptorEventHolder;
 
 /**
  *
  * @author c.otalora
  */
-@Entity
-public class TrabajadorEntity extends BaseEntity implements Serializable {
+public class TrabajadorDTO implements Serializable{
     
+    private Long id;
+//estos van en la clase Cuenta
+private String nombre;
+private String usuario;
+private String contrasena;
+private Integer telefono;
+private String correo;
+private String foto;
     
+//atributos
+private boolean disponibilidad;
+private String hojaVida;
+private boolean esApto;
+private String seguroSocial;
+private String riesgos;
     
-    //estos van en la clase Cuenta
-    private String nombre;
-    private String usuario;
-    private String contrasena;
-    private Integer telefono;
-    private String correo;
-    private String foto;
-    
-    //atributos
-    private boolean disponibilidad;
-    private String hojaVida;
-    private boolean esApto;
-    private String seguroSocial;
-    private String riesgos;
-
-    //asociaciones
-    @PodamExclude
-    @OneToMany
-    private Collection<SolicitudServicioEntity>solicitudes;
-
-    @PodamExclude
-    @OneToMany
-    private Collection<ServicioOfrecidoEntity>servicios;
-    
-    
-    /**
-     * constructor
-     */
-    public TrabajadorEntity(){
+public TrabajadorDTO(){
         
-    }
+        
+}
     
+public TrabajadorDTO( TrabajadorEntity trabajadorEntity ){
+    if(trabajadorEntity != null){
+        id = trabajadorEntity.getId();
+        nombre = trabajadorEntity.getNombre();
+        usuario = trabajadorEntity.getUsuario();
+        contrasena = trabajadorEntity.getContrasena();
+        telefono = trabajadorEntity.getTelefono();
+        correo = trabajadorEntity.getCorreo();
+        foto = trabajadorEntity.getFoto();
+        disponibilidad = trabajadorEntity.isDisponibilidad();
+        hojaVida = trabajadorEntity.getHojaVida();
+        esApto = trabajadorEntity.isEsApto();
+        seguroSocial = trabajadorEntity.getSeguroSocial();
+        riesgos = trabajadorEntity.getRiesgos();
+        }
+    }
+        
+public TrabajadorEntity toEntity(){
+        TrabajadorEntity trabajadorEntity = new TrabajadorEntity();
+        trabajadorEntity.setId(id);
+        trabajadorEntity.setNombre(nombre);
+        trabajadorEntity.setUsuario(usuario);
+        trabajadorEntity.setContrasena(contrasena);
+        trabajadorEntity.setTelefono(telefono);
+        trabajadorEntity.setCorreo(correo);
+        trabajadorEntity.setFoto(foto);
+        trabajadorEntity.setDisponibilidad(disponibilidad);
+        trabajadorEntity.setHojaVida(hojaVida);
+        trabajadorEntity.setEsApto(esApto);
+        trabajadorEntity.setSeguroSocial(seguroSocial);
+        trabajadorEntity.setRiesgos(riesgos);
+        return trabajadorEntity;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     /**
      * @return the nombre
      */
@@ -205,31 +237,5 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
     }
-
-    /**
-     * @return the solicitudes
-     */
-    public Collection<SolicitudServicioEntity> getSolicitudes() {
-        return solicitudes;
-    }
-
-    /**
-     * @param solicitudes the solicitudes to set
-     */
-    public void setSolicitudes(Collection<SolicitudServicioEntity> solicitudes) {
-        this.solicitudes = solicitudes;
-    }
-    /**
-     * @return the servicios
-     */
-    public Collection<ServicioOfrecidoEntity> getServicios() {
-        return servicios;
-    }
-
-    /**
-     * @param servicios the servicios to set
-     */
-    public void setServicios(Collection<ServicioOfrecidoEntity> servicios) {
-        this.servicios = servicios;
-    }
+       
 }
