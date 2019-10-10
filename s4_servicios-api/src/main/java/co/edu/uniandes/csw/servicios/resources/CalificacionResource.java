@@ -109,14 +109,14 @@ public class CalificacionResource {
      * actualizar.
      */
     @PUT
-    @Path("{calificacionesId: \\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) throws WebApplicationException {
-        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: input: id:{0} , calificacion: {1}", new Object[]{calificacionesId, calificacion});
-        calificacion.setId(calificacionesId);
-        if (calificacionLogic.getCalificacion(calificacionesId) == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
+    @Path("{calificacionId: \\d+}")
+    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long calificacionId, CalificacionDTO calificacion) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: input: id:{0} , calificacion: {1}", new Object[]{calificacionId, calificacion});
+        calificacion.setId(calificacionId);
+        if (calificacionLogic.getCalificacion(calificacionId) == null) {
+            throw new WebApplicationException("El recurso /calificacion/" + calificacionId + " no existe.", 404);
         }
-        CalificacionDTO DTO = new CalificacionDTO(calificacionLogic.updateCalificacion(calificacionesId, calificacion.toEntity()));
+        CalificacionDTO DTO = new CalificacionDTO(calificacionLogic.updateCalificacion(calificacionId, calificacion.toEntity()));
         LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: output: {0}", DTO);
         return DTO;
 
