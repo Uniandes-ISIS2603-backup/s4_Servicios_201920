@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import co.edu.uniandes.csw.servicios.podam.CorreoStrategy;
+import co.edu.uniandes.csw.servicios.podam.TelefonoStrategy;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -55,6 +56,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     /**
      * El teléfono del cliente
      */
+    @PodamStrategyValue(TelefonoStrategy.class)
     private int telefono;
     
     /**
