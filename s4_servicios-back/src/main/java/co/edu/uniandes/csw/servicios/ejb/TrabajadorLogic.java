@@ -54,19 +54,16 @@ public class TrabajadorLogic {
     }
      
      public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajadorEntity) throws BusinessLogicException {
-        TrabajadorEntity trabajador = persistence.find(trabajadorId);
-        if (trabajador != null) {
-            throw new BusinessLogicException("Ya existe un trabajador con este id");
-        }
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el autor con id = {0}", trabajadorId);
-        TrabajadorEntity newAuthorEntity = persistence.update(trabajadorEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el autor con id = {0}", trabajadorId);
-        return newAuthorEntity;
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el trabajador con id = {0}", trabajadorId);
+        TrabajadorEntity newEntity = persistence.update(trabajadorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el trabajador con id = {0}", trabajadorId);
+        return newEntity;
     }
      
      public void deleteTrabajador(Long trabajadorId){
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el trabajador con id = {0}", trabajadorId);
         persistence.delete(trabajadorId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", trabajadorId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el trabajador con id = {0}", trabajadorId);
     }
 }
