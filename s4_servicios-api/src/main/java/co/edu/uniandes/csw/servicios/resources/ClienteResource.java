@@ -146,6 +146,7 @@ public class ClienteResource {
         }
         return ClienteSolicitudServicioResource.class;
     }
+    
 
     /**
      * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
