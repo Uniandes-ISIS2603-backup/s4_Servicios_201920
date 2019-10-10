@@ -27,6 +27,8 @@ public class FacturaLogic {
         if(factura.getDuracion()<=0){
             throw new BusinessLogicException("La duracion del servicio debe ser mayor a 0.");
         }
+        /**
+        
         //PrecioMateriales > 0
         if(factura.getPrecioMateriales()<0){
             throw new BusinessLogicException("El precio de los materiales no puede ser negativo.");
@@ -51,6 +53,7 @@ public class FacturaLogic {
         if(factura.getTarjetaPago() == null){
             throw new BusinessLogicException("Debe poseer una tarjeta");
         }
+        *  */
         factura = persistence.create(factura);
         return factura;
     }
