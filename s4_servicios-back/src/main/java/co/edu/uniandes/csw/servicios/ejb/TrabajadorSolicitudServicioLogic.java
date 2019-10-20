@@ -91,7 +91,7 @@ public class TrabajadorSolicitudServicioLogic {
         List<SolicitudServicioEntity> servicioList= solicitudServicioPersistence.findAll();
         for (SolicitudServicioEntity servicio:servicioList )
         {
-            if(solicitud.contains(solicitud))
+            if(solicitud.contains(servicio))
             {
                trabajadorEntity.getSolicitudes().remove(servicio);
             }
