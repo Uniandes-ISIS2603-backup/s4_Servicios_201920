@@ -92,8 +92,6 @@ public class SolicitudServicioServicioOfrecidosLogic {
     public Collection<ServicioOfrecidoEntity> replaceServicios(Long solicitudId, Collection<ServicioOfrecidoEntity> servicios) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los servicios asocidos a la solicitud con id = {0}", solicitudId);
         SolicitudServicioEntity solicitudEntity = solicitudPersistence.find(solicitudId);
-        List<ServicioOfrecidoEntity> servicioList = servicioPersistence.findAll();
-        
         solicitudEntity.setServicios(servicios);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los servicios asocidos a la solicitud con id = {0}", solicitudId);
         return solicitudEntity.getServicios();
