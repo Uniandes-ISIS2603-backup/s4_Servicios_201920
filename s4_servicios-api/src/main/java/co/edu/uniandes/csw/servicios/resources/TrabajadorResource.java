@@ -97,6 +97,16 @@ public class TrabajadorResource {
         LOGGER.info("TrabajadorResource deleteTrabajador: output: void");
     }
     
+    
+     @Path("{trabajadoresId: \\d+}/servicios")
+    public Class<TrabajadorServicioOfrecidoResource> getTrabajadorResource(@PathParam("trabajadoresId") Long trabajadoresId) {
+        if (trabajadorLogic.getTrabajador(trabajadoresId) == null) {
+            throw new WebApplicationException("El recurso /trabajadores/" + trabajadoresId + " no existe.", 404);
+        }
+        return TrabajadorServicioOfrecidoResource.class;
+    }
+    
+    
     private List<TrabajadorDetailDTO> listEntity2DTO(List<TrabajadorEntity> entityList) {
         List<TrabajadorDetailDTO> list = new ArrayList<>();
         for (TrabajadorEntity entity : entityList) {

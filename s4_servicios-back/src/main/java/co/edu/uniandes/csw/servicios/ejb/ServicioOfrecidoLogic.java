@@ -42,7 +42,7 @@ public class ServicioOfrecidoLogic
       
         if(old != null ) 
         {
-            throw new BusinessLogicException("Ya existe un servio con ese nombre");
+            throw new BusinessLogicException("Ya existe un servicio con ese nombre");
         }
         else if(!isInType(tipo))
         {

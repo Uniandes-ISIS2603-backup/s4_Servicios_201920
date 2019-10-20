@@ -23,33 +23,6 @@ public class PagoTarjetaLogic {
     private PagoTarjetaPersistence persistence;
     
     public PagoTarjetaEntity createPagoTarjeta(PagoTarjetaEntity pagoTarjeta) throws BusinessLogicException{
-        /**
-        
-        //PrecioMateriales > 0
-        if(factura.getPrecioMateriales()<0){
-            throw new BusinessLogicException("El precio de los materiales no puede ser negativo.");
-        }
-        // fecha != null
-        if(factura.getFecha()==null){
-            throw new BusinessLogicException("La factura debe tener una fecha de finalizacion.");
-        }
-        // primerPago = true
-        if(factura.isPrimerPago()==false){
-            throw new BusinessLogicException("No se puede crear la factura sin recibir el primer pago.");
-        }
-        // pagada = false
-        if(factura.isPagada()==true){
-            throw new BusinessLogicException("La factura no puede estar pagada al momento de su creacion.");
-        }
-        // solicitud != null
-        if(factura.getSolicitud()==null){
-            throw new BusinessLogicException("La factura debe tener una solicitud asociada.");
-        }
-        // tarjetaPago != null
-        if(factura.getTarjetaPago() == null){
-            throw new BusinessLogicException("Debe poseer una tarjeta");
-        }
-        *  */
         pagoTarjeta = persistence.create(pagoTarjeta);
         return pagoTarjeta;
     }
