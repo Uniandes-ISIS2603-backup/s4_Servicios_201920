@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.adapters.DateAdapter;
-import co.edu.uniandes.csw.servicios.entities.CalificacionEntity;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
-import co.edu.uniandes.csw.servicios.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
