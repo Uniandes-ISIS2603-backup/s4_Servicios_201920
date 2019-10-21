@@ -108,10 +108,12 @@ public class SolicitudServicioResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la solicitudServicio a
      * actualizar.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no se puede actualizar la Solicitud.
      */
     @PUT
     @Path("{solicitudesId: \\d+}")
-    public SolicitudServicioDetailDTO updateSolicitudServicio(@PathParam("solicitudesId") Long solicitudesId, SolicitudServicioDTO solicitudServicio) throws WebApplicationException {
+    public SolicitudServicioDetailDTO updateSolicitudServicio(@PathParam("solicitudesId") Long solicitudesId, SolicitudServicioDTO solicitudServicio) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "SolicitudServicioResource updateSolicitudServicio: input: id:{0} , solicitudServicio: {1}", new Object[]{solicitudesId, solicitudServicio});
         solicitudServicio.setId(solicitudesId);
         if (solicitudServicioLogic.getSolicitudServicio(solicitudesId) == null) {

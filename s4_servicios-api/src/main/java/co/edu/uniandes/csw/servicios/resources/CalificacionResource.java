@@ -99,7 +99,7 @@ public class CalificacionResource {
      * Actualiza la calificacion con el id recibido en la URL con la informacion
      * que se recibe en el cuerpo de la petición.
      *
-     * @param calificacionesId Identificador de la calificacion que se desea
+     * @param calificacionId Identificador de la calificacion que se desea
      * actualizar. Este debe ser una cadena de dígitos.
      * @param calificacion {@link CalificacionDTO} La calificacion que se desea
      * guardar.
@@ -107,10 +107,12 @@ public class CalificacionResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la calificacion a
      * actualizar.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no se puede actualizar la calificacion.
      */
     @PUT
     @Path("{calificacionId: \\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long calificacionId, CalificacionDTO calificacion) throws WebApplicationException {
+    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long calificacionId, CalificacionDTO calificacion) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: input: id:{0} , calificacion: {1}", new Object[]{calificacionId, calificacion});
         calificacion.setId(calificacionId);
         if (calificacionLogic.getCalificacion(calificacionId) == null) {
