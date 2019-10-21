@@ -46,6 +46,10 @@ public class CalificacionLogic {
         {
             throw new BusinessLogicException( "El puntaje no es válido. Debe ser un número entre 1 y 5.");
         }
+        if(calificacion.getSolicitud() == null)
+        {
+            throw new BusinessLogicException("La solicitud no existe.");
+        }
        calificacion = persistence.create(calificacion);
        LOGGER.log(Level.INFO, "Termina proceso de creación de la calificacion");
         return calificacion;
@@ -92,10 +96,18 @@ public class CalificacionLogic {
      * @param calificacionEntity: calificacion con los cambios para ser actualizada,
      * por ejemplo el puntaje.
      * @return la calificacion con los cambios actualizados en la base de datos.
+     * @throws BusinessLogicException Si el nuevo puntaje es inválido.
      */
-    public CalificacionEntity updateCalificacion(Long calificacionId, CalificacionEntity calificacionEntity) {
+    public CalificacionEntity updateCalificacion(Long calificacionId, CalificacionEntity calificacionEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0}", calificacionId);
-        // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
+        if(calificacionEntity.getPuntaje() > 5 || calificacionEntity.getPuntaje() < 1)
+        {
+            throw new BusinessLogicException("El puntaje es inválido");
+        }
+        if(calificacionEntity.getSolicitud() == null)
+        {
+             throw new BusinessLogicException("La calificación debe tener una solicitud.");
+        }
         CalificacionEntity newEntity = persistence.update(calificacionEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0}", calificacionEntity.getId());
         return newEntity;

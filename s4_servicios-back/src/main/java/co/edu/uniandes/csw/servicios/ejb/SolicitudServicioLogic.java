@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.servicios.ejb;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.SolicitudServicioPersistence;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +41,26 @@ public class SolicitudServicioLogic {
     public SolicitudServicioEntity createSolicitudServicio(SolicitudServicioEntity solicitud) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la solicitud");
-        
-       
+       if(solicitud.getDescripcion() == null || solicitud.getDescripcion().equals(""))
+       {
+            throw new BusinessLogicException("La solicitud debe tener descripción.");
+       }
+       if(solicitud.getEstado() == null || solicitud.getEstado().equals(""))
+       {
+           throw new BusinessLogicException("La solicitud debe tener un estado válido.");
+       }
+       if(solicitud.getFechaInicio() == null)
+       {
+           throw new BusinessLogicException("La solicitud debe tener un fecha de inicio.");
+       }
+       if(solicitud.getCliente() == null)
+       {
+           throw new BusinessLogicException("La solicitud debe tener un cliente.");
+       }
+       if(solicitud.getServicios() == null || solicitud.getServicios().isEmpty())
+       {
+           throw new BusinessLogicException("La solicitud debe tener al menos un servicio a ofrecer.");
+       }
        solicitud = persistence.create(solicitud);
        LOGGER.log(Level.INFO, "Termina proceso de creación de la solicitud");
         return solicitud;
@@ -89,10 +108,26 @@ public class SolicitudServicioLogic {
      * @param solicitudEntity: solicitud con los cambios para ser actualizada,
      * por ejemplo el nombre.
      * @return la solicitud con los cambios actualizados en la base de datos.
+     * @throws BusinessLogicException Si la solicitud a persistir ya existe.
      */
-    public SolicitudServicioEntity updateSolicitudServicio(Long solicitudId,SolicitudServicioEntity solicitudEntity) {
+    public SolicitudServicioEntity updateSolicitudServicio(Long solicitudId,SolicitudServicioEntity solicitudEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la solicitud con id = {0}", solicitudId);
-        // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
+        if(solicitudEntity.getDescripcion() == null || solicitudEntity.getDescripcion().equals(""))
+        {
+            throw new BusinessLogicException("La solicitud debe tener una descripción.");
+        }
+        if(solicitudEntity.getEstado() == null || solicitudEntity.getEstado().equals(""))
+       {
+           throw new BusinessLogicException("La solicitud debe tener un estado válido.");
+       }
+       if(solicitudEntity.getFechaInicio() == null)
+       {
+           throw new BusinessLogicException("La solicitud debe tener un fecha de inicio.");
+       }
+       if(solicitudEntity.getServicios() == null || solicitudEntity.getServicios().isEmpty())
+       {
+           throw new BusinessLogicException("La solicitud debe tener al menos un servicio a ofrecer.");
+       }
         SolicitudServicioEntity newEntity = persistence.update(solicitudEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la solicitud con id = {0}", solicitudEntity.getId());
         return newEntity;
