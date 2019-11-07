@@ -8,12 +8,14 @@ package co.edu.uniandes.csw.servicios.ejb;
 import co.edu.uniandes.csw.servicios.entities.ReporteMensualEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ReporteMensualPersistence;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Violeta Rodríguez
  */
+@Stateless
 public class ReporteMensualLogic {
     
     @Inject

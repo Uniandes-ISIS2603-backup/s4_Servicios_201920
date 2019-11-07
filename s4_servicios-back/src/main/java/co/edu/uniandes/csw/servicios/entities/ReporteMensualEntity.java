@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import co.edu.uniandes.csw.servicios.podam.DateStrategy;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  * @author Estudiante
  */
 @Entity
-public class ReporteMensualEntity 
+public class ReporteMensualEntity extends BaseEntity implements Serializable
 {
     /**
      * Mes al que corresponde el reporte
@@ -31,17 +32,17 @@ public class ReporteMensualEntity
     /**
      * Ingresos que serecibieron en el mes
      */
-    private double ingresos;
+    private Double ingresos;
     
     /**
      * Gasto que se generaron en el mes.
      */
-    private double egresos;
+    private Double egresos;
     
     /**
      * Número de servicios prestados en el mes.
      */
-    private int numSerivico;
+    private Integer numSerivico;
     @Id
     private Long id;
 
@@ -59,19 +60,19 @@ public class ReporteMensualEntity
         this.mes = mes;
     }
 
-    public double getIngresos() {
+    public Double getIngresos() {
         return ingresos;
     }
 
-    public void setIngresos(double ingresos) {
+    public void setIngresos(Double ingresos) {
         this.ingresos = ingresos;
     }
 
-    public double getEgresos() {
+    public Double getEgresos() {
         return egresos;
     }
 
-    public void setEgresos(double egresos) {
+    public void setEgresos(Double egresos) {
         this.egresos = egresos;
     }
 
@@ -79,7 +80,7 @@ public class ReporteMensualEntity
         return numSerivico;
     }
 
-    public void setNumSerivico(int numSerivico) {
+    public void setNumSerivico(Integer numSerivico) {
         this.numSerivico = numSerivico;
     }
 
