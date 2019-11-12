@@ -6,3 +6,15 @@ insert into FacturaEntity (id, duracion, preciomateriales, fecha, pagada, primer
 delete from ServicioOfrecidoEntity;
 
 delete from TrabajadorEntity
+delete from TrabajadorEntity;
+
+delete from CalificacionEntity;
+delete from SolicitudServicioEntity;
+
+insert into SolicitudServicioEntity (id, descripcion, estado, fechainicio, foto, calificacion_id, cliente_id, trabajador_id, factura_id) values (10,'Aseo casa', 'Desorden', '11/20/2019', 'foto.png', null, null, null, null);
+insert into SolicitudServicioEntity (id, descripcion, estado, fechainicio, foto, calificacion_id, cliente_id, trabajador_id, factura_id) values (20,'Arreglo auto', 'No enciende', '12/20/2019', 'foto2.png', null, null, null, null);
+
+insert into CalificacionEntity (id, comentario, puntaje, trabajador_id, solicitud_id) values (1,'Excelente', 5, null, 10);
+insert into CalificacionEntity (id, comentario, puntaje, trabajador_id, solicitud_id) values (2,'Pesimo', 1, null, 20);
+
+

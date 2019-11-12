@@ -131,7 +131,7 @@ public class SolicitudServicioPersistenceTest {
     }
     
      @Test
-    public void updateBookTest() {
+    public void updateSolicitudServicioTest() {
         SolicitudServicioEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         SolicitudServicioEntity newEntity = factory.manufacturePojo(SolicitudServicioEntity.class);

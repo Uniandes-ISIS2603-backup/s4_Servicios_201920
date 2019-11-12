@@ -108,10 +108,12 @@ public class SolicitudServicioResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la solicitudServicio a
      * actualizar.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no se puede actualizar la Solicitud.
      */
     @PUT
     @Path("{solicitudesId: \\d+}")
-    public SolicitudServicioDetailDTO updateSolicitudServicio(@PathParam("solicitudesId") Long solicitudesId, SolicitudServicioDTO solicitudServicio) throws WebApplicationException {
+    public SolicitudServicioDetailDTO updateSolicitudServicio(@PathParam("solicitudesId") Long solicitudesId, SolicitudServicioDTO solicitudServicio) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "SolicitudServicioResource updateSolicitudServicio: input: id:{0} , solicitudServicio: {1}", new Object[]{solicitudesId, solicitudServicio});
         solicitudServicio.setId(solicitudesId);
         if (solicitudServicioLogic.getSolicitudServicio(solicitudesId) == null) {
@@ -156,7 +158,7 @@ public class SolicitudServicioResource {
      * servicio.
      * @return El servicio de ServicioOfrecido para ese autor en paricular.
      */
-    @Path("{authorsId: \\d+}/books")
+    @Path("{solicitudId: \\d+}/servicios")
     public Class<SolicitudServicioServicioOfrecidosResource> getSolicitudServicioServicioOfrecidosResource(@PathParam("solicitudId") Long solicitudId) {
         if (solicitudServicioLogic.getSolicitudServicio(solicitudId) == null) {
             throw new WebApplicationException("El recurso /solicitudes/" + solicitudId + " no existe.", 404);

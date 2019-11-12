@@ -88,15 +88,7 @@ public class TrabajadorSolicitudServicioLogic {
     public List<SolicitudServicioEntity> replaceSolicitudServicio(Long trabajadorId, List<SolicitudServicioEntity> solicitud )
     {
         TrabajadorEntity trabajadorEntity = trabajadorPersistence.find(trabajadorId);
-        List<SolicitudServicioEntity> servicioList= solicitudServicioPersistence.findAll();
-        for (SolicitudServicioEntity servicio:servicioList )
-        {
-            if(solicitud.contains(solicitud))
-            {
-               trabajadorEntity.getSolicitudes().remove(servicio);
-            }
-            trabajadorEntity.setSolicitudes(solicitud);
-        }
+        trabajadorEntity.setSolicitudes(solicitud);
         return (List<SolicitudServicioEntity>) trabajadorEntity.getSolicitudes();
     }
    

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.test.logic;
 
 import co.edu.uniandes.csw.servicios.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.servicios.entities.CalificacionEntity;
+import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.CalificacionPersistence;
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public class CalificacionLogicTest {
     private UserTransaction utx;
 
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
+    
+    private List<SolicitudServicioEntity> solicitudData = new ArrayList();
     
      /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -89,6 +92,7 @@ public class CalificacionLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
+        em.createQuery("delete from SolicitudServicioEntity").executeUpdate();
     }
 
      /**
@@ -97,11 +101,17 @@ public class CalificacionLogicTest {
      */
     private void insertData() {
          
+         for(int i = 0; i < 3; i++){
+             SolicitudServicioEntity entity = factory.manufacturePojo(SolicitudServicioEntity.class);
+             em.persist(entity);
+             solicitudData.add(entity);
+         }
          for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            entity.setSolicitud(solicitudData.get(0));
             em.persist(entity);
             data.add(entity);
-         }
+         }  
     }
     
      /**
@@ -112,6 +122,7 @@ public class CalificacionLogicTest {
     @Test
     public void createCalificacionTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setSolicitud(solicitudData.get(0));
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
@@ -130,6 +141,7 @@ public class CalificacionLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCalificacionPuntajeMayorTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setSolicitud(solicitudData.get(0));
         newEntity.setPuntaje((int)(Math.random()*5) + 6 );
         calificacionLogic.createCalificacion(newEntity);
     }
@@ -142,7 +154,21 @@ public class CalificacionLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCalificacionPuntajeMenorTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        newEntity.setPuntaje(-(int)(Math.random()));
+        newEntity.setSolicitud(solicitudData.get(0));
+        newEntity.setPuntaje(-(int)(Math.random()*5));
+        calificacionLogic.createCalificacion(newEntity);
+    }
+    
+ 
+      /**
+     * Prueba para crear una Calificacion con solicitud en null.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionSolicitudNullTest() throws BusinessLogicException{
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setSolicitud(null);
         calificacionLogic.createCalificacion(newEntity);
     }
 
@@ -181,18 +207,63 @@ public class CalificacionLogicTest {
     
     /**
      * Prueba para actualizar un Calificacion.
+     * 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
-    public void updateCalificacionTest() {
+    public void updateCalificacionTest() throws BusinessLogicException {
         CalificacionEntity entity = data.get(0);
         CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
         pojoEntity.setId(entity.getId());
+        pojoEntity.setSolicitud(solicitudData.get(0));
         calificacionLogic.updateCalificacion(pojoEntity.getId(), pojoEntity);
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
         Assert.assertEquals(pojoEntity.getPuntaje(), resp.getPuntaje());
         Assert.assertEquals(pojoEntity.getSolicitud(), resp.getSolicitud());
+    }
+    
+    /**
+     * Prueba para actualizar una Calificacion con puntaje invalido.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionPuntajeInvalidoTest() throws BusinessLogicException {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
+        pojoEntity.setPuntaje(-(int)(Math.random()*5));
+        pojoEntity.setId(entity.getId());
+        calificacionLogic.updateCalificacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para actualizar una Calificacion con puntaje menor al valido.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionPuntajeInvalido2Test() throws BusinessLogicException {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
+        pojoEntity.setPuntaje((int)(Math.random()*5) + 6);
+        pojoEntity.setId(entity.getId());
+        calificacionLogic.updateCalificacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para actualizar una Calificacion con Solicitud null.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionSolicitudNullTest() throws BusinessLogicException {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
+        pojoEntity.setSolicitud(null);
+        pojoEntity.setId(entity.getId());
+        calificacionLogic.updateCalificacion(pojoEntity.getId(), pojoEntity);
     }
     
     /**
