@@ -33,7 +33,7 @@ public class ServicioOfrecidoDTO {
     /**
      * Precio por hora del servicio ofrecido. 
      */
-    private double precio;
+    private Double precio;
     
     /**
      * Nombre del servio a ofrecer
@@ -96,11 +96,11 @@ public class ServicioOfrecidoDTO {
         this.descripcion = descripcion;
     }
 
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
