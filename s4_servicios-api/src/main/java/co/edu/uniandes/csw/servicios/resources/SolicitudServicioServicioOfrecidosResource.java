@@ -49,11 +49,11 @@ public class SolicitudServicioServicioOfrecidosResource {
      */
     @POST
     @Path("{servicioId: \\d+}")
-    public SolicitudServicioDetailDTO addServicio(@PathParam("solicitudId") Long solicitudId, @PathParam("servicioId") Long servicioId) {
+    public ServicioOfrecidoDTO addServicio(@PathParam("solicitudId") Long solicitudId, @PathParam("servicioId") Long servicioId) {
         LOGGER.log(Level.INFO, "SolicitudServicioServicioOfrecidosResource addServicio: input: solicitudId {0} , servicioId {1}", new Object[]{solicitudId, servicioId});
-        SolicitudServicioDetailDTO detailDTO = new SolicitudServicioDetailDTO(soliciudServicioLogic.addServicio(solicitudId, servicioId));
-        LOGGER.log(Level.INFO, "AuthorBooksResource addBook: output: {0}", detailDTO);
-        return detailDTO;
+        ServicioOfrecidoDTO DTO = new ServicioOfrecidoDTO(soliciudServicioLogic.addServicio(solicitudId, servicioId));
+        LOGGER.log(Level.INFO, "SolicitudServicioServicioOfrecidosResource addServicio: output: {0}", DTO);
+        return DTO;
     }
     
      /**

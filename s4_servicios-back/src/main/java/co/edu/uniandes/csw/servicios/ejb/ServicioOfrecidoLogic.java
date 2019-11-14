@@ -102,7 +102,7 @@ public class ServicioOfrecidoLogic
         return newEntity;
    }
    
-   public void deleteServicioOfrecido(Long servicioId) throws BusinessLogicException 
+   public void deleteServicioOfrecido(Long servicioId) throws BusinessLogicException
    {
        persistencia.delete(servicioId);
    }
