@@ -23,26 +23,9 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class ClienteEntity extends BaseEntity implements Serializable{
     
    
-    //TODO: Meter clase AdministradorEntity para que funcione el código
-    /**
-     * Atributo que representa el administrador de los clientes
-     * Se hace la anotación ManyToOne porque MUCHOS(Many) clientes tienen UN(One) sólo administrador
-     */
-    //@ManyToOne()
-    //AdministradorEntity administrador;
-    
-    
-    //TODO: Meter clase SolicitudServicioEntity para que funcione el código. 
-    /**
-     * Atributo que representa todos los servicios que ha pedido el cliente
-     * Se hace la anotación OneToMany porque UN(One) cliente tiene MUCHOS(Many) servicios
-     * En  la clase SolicitudServicio se refiere al cliente como "cliene"
-     */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    List<SolicitudServicioEntity> servicios;
-
-    //Collection<SolicitudServicioEntity> servicios;
+    private List<SolicitudServicioEntity> servicios;
    
     /**
      * El nombre del cliente

@@ -48,7 +48,7 @@ public class ReporteMensualEntity
 
     public ReporteMensualEntity()
     {
-        
+        //Es un constructor vacio.
     }
     
     public Date getMes() {

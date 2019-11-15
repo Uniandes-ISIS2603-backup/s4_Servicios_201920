@@ -6,9 +6,7 @@
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -114,6 +112,22 @@ public class ClienteDTO implements Serializable {
     public void setNombre(String pNombre){
         nombre = pNombre;
     }
+   
+    /**
+     * Retorna el correo electrónico del cliente
+     * @return el email
+     */
+    public String getMail(){
+        return mail;
+    }
+    
+    /**
+     * Cambia el correo electrónico del cliente por uno dado por parámetro
+     * @param pMail - el nuevo correo del cliente
+     */
+    public void setMail(String pMail){
+        mail = pMail;
+    }
     
     /**
      * Retorna número de teléfono del cliente
@@ -132,21 +146,21 @@ public class ClienteDTO implements Serializable {
     }
     
     /**
-     * Retorna el correo electrónico del cliente
-     * @return el email
+     * Retorna la contraseña del usuario
+     * @return  - la contraseña
      */
-    public String getMail(){
-        return mail;
+    public String getContrasena(){
+        return contrasena;
     }
     
     /**
-     * Cambia el correo electrónico del cliente por uno dado por parámetro
-     * @param pMail - el nuevo correo del cliente
+     * Cambia la contraseña del cliente por una dada por parámetro
+     * @param pContrasena . la nueva contraseña
      */
-    public void setMail(String pMail){
-        mail = pMail;
+    public void setContrasena(String pContrasena){
+        contrasena = pContrasena;
     }
-    
+     
     /**
      * Retorna el usuario del cliente
      * @return - el usuario
@@ -161,22 +175,6 @@ public class ClienteDTO implements Serializable {
      */
     public void setUsuario(String pUsuario){
         usuario = pUsuario;
-    }
-    
-    /**
-     * Retorna la contraseña del usuario
-     * @return  - la contraseña
-     */
-    public String getContrasena(){
-        return contrasena;
-    }
-    
-    /**
-     * Cambia la contraseña del cliente por una dada por parámetro
-     * @param pContrasena . la nueva contraseña
-     */
-    public void setContrasena(String pContrasena){
-        contrasena = pContrasena;
     }
     
 }
