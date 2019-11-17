@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.servicios.ejb;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.SolicitudServicioPersistence;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

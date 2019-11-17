@@ -25,7 +25,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable{
     
     public ClienteDetailDTO(ClienteEntity clienteEntity){
         super(clienteEntity);
-        if(clienteEntity != null){
+        if(clienteEntity.getServicios() != null){
             servicios = new ArrayList<>();
             for(SolicitudServicioEntity servicio : clienteEntity.getServicios()){
                 servicios.add(new SolicitudServicioDTO(servicio));
@@ -36,11 +36,12 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable{
     @Override
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = super.toEntity();
-        if(servicios != null){
+        if(getServicios() != null){
             List<SolicitudServicioEntity> serviciosEntities = new ArrayList<>();
             for(SolicitudServicioDTO servicio : servicios){
                 serviciosEntities.add(servicio.toEntity());
             }
+            clienteEntity.setServicios(serviciosEntities);
         }
         
         return clienteEntity;

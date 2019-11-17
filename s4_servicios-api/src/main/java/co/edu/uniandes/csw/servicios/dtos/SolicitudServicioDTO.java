@@ -24,17 +24,16 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 public class SolicitudServicioDTO implements Serializable{
     
-    private Long id;
-    
     private String descripcion;
+     
+    private Long id;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaInicio;
 
-    private String estado;
-
     private String foto;
     
+     private String estado;
     /*
     * Relación a un cliente  
     * dado que esta tiene cardinalidad 1.
@@ -145,20 +144,6 @@ public class SolicitudServicioDTO implements Serializable{
     }
 
     /**
-     * @return the fechaInicio
-     */
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    /**
-     * @param fechaInicio the fechaInicio to set
-     */
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    /**
      * @return the estado
      */
     public String getEstado() {
@@ -172,6 +157,20 @@ public class SolicitudServicioDTO implements Serializable{
         this.estado = estado;
     }
 
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+    
     /**
      * @return the foto
      */
@@ -187,6 +186,20 @@ public class SolicitudServicioDTO implements Serializable{
     }
 
     /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+       this.cliente = cliente;
+    }
+    
+    /**
      * @return the calificacion
      */
     public CalificacionDTO getCalificacion() {
@@ -198,20 +211,6 @@ public class SolicitudServicioDTO implements Serializable{
      */
     public void setCalificacion(CalificacionDTO calificacion) {
         this.calificacion = calificacion;
-    }
-    
-    /**
-     * @return the cliente
-     */
-    public ClienteDTO getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteDTO cliente) {
-        this.cliente = cliente;
     }
 
     /**

@@ -6,9 +6,9 @@
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import java.io.Serializable;
-import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ClienteDTO implements Serializable {
     /**
      * El teléfono del cliente
      */
-    private int telefono;
+    private Integer telefono;
     
     /**
      * El correo electrónico del cliente
@@ -47,30 +47,45 @@ public class ClienteDTO implements Serializable {
      */
     private String direccion;
     
+     /*
+    * Relación a un pagoTarjeta  
+    * dado que esta tiene cardinalidad 1.
+    */
+    private PagoTarjetaDTO tarjeta;
+    
     public ClienteDTO(){
     }
     
     public ClienteDTO(ClienteEntity clienteEntity){
         if(clienteEntity != null){
-            id = clienteEntity.getId();
-            contrasena = clienteEntity.getContrasena();
-            direccion = clienteEntity.getDireccion();
-            mail = clienteEntity.getMail();
-            nombre = clienteEntity.getNombre();
-            telefono = clienteEntity.getTelefono();
-            usuario = clienteEntity.getUsuario();
+            this.id = clienteEntity.getId();
+            this.contrasena = clienteEntity.getContrasena();
+            this.direccion = clienteEntity.getDireccion();
+            this.mail = clienteEntity.getMail();
+            this.nombre = clienteEntity.getNombre();
+            this.telefono = clienteEntity.getTelefono();
+            this.usuario = clienteEntity.getUsuario();
+             if (clienteEntity.getTarjeta()!= null) {
+            this.tarjeta = new PagoTarjetaDTO(clienteEntity.getTarjeta());
+            }
+            else{
+            this.tarjeta = null;
+            }
         }
     }
     
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
-        clienteEntity.setId(id);
-        clienteEntity.setContrasena(contrasena);
-        clienteEntity.setDireccion(direccion);
-        clienteEntity.setMail(mail);
-        clienteEntity.setNombre(nombre);
-        clienteEntity.setTelefono(telefono);
-        clienteEntity.setUsuario(usuario);
+        clienteEntity.setId(this.id);
+        clienteEntity.setContrasena(this.contrasena);
+        clienteEntity.setDireccion(this.direccion);
+        clienteEntity.setMail(this.mail);
+        clienteEntity.setNombre(this.nombre);
+        clienteEntity.setTelefono(this.telefono);
+        clienteEntity.setUsuario(this.usuario);
+         if (this.getTarjeta() != null) {
+            clienteEntity.setTarjeta(this.getTarjeta().toEntity());
+        }
         return clienteEntity;
     }
     
@@ -79,8 +94,8 @@ public class ClienteDTO implements Serializable {
         return id;
     }
     
-    public void setId(Long pId){
-        id = pId;
+    public void setId(Long id){
+        this.id = id;
     }
     
     /**
@@ -114,23 +129,7 @@ public class ClienteDTO implements Serializable {
     public void setNombre(String pNombre){
         nombre = pNombre;
     }
-    
-    /**
-     * Retorna número de teléfono del cliente
-     * @return el teléfono
-     */
-    public int getTelefono(){
-        return telefono;
-    }
-    
-    /**
-     * Cambia el número de teléfono del cliente por uno dado por parámetro
-     * @param pTelefono - El nuevo teléfono
-     */
-    public void setTelefono(int pTelefono){
-        telefono = pTelefono;
-    }
-    
+   
     /**
      * Retorna el correo electrónico del cliente
      * @return el email
@@ -148,19 +147,11 @@ public class ClienteDTO implements Serializable {
     }
     
     /**
-     * Retorna el usuario del cliente
-     * @return - el usuario
+     * Retorna número de teléfono del cliente
+     * @return el teléfono
      */
-    public String getUsuario(){
-        return usuario;
-    }
-    
-    /**
-     * Cambia el usuario del cliente por uno dado por parámetro
-     * @param pUsuario - el nuevo usuario del cliente
-     */
-    public void setUsuario(String pUsuario){
-        usuario = pUsuario;
+    public Integer getTelefono(){
+        return telefono;
     }
     
     /**
@@ -177,6 +168,48 @@ public class ClienteDTO implements Serializable {
      */
     public void setContrasena(String pContrasena){
         contrasena = pContrasena;
+    }
+     
+    /**
+     * Retorna el usuario del cliente
+     * @return - el usuario
+     */
+    public String getUsuario(){
+        return usuario;
+    }
+    
+    /**
+     * Cambia el usuario del cliente por uno dado por parámetro
+     * @param pUsuario - el nuevo usuario del cliente
+     */
+    public void setUsuario(String pUsuario){
+        usuario = pUsuario;
+    }
+
+    /**
+     * @return the tarjeta
+     */
+    public PagoTarjetaDTO getTarjeta() {
+        return tarjeta;
+    }
+
+    /**
+     * @param tarjeta the tarjeta to set
+     */
+    public void setTarjeta(PagoTarjetaDTO tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
     }
     
 }

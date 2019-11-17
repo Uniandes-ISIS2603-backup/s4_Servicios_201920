@@ -58,7 +58,7 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienteResource createCliente: input: {0}", cliente);
         ClienteDTO clienteDTO = new ClienteDTO(clienteLogic.createCliente(cliente.toEntity()));
         LOGGER.log(Level.INFO, "ClienteResource createCliente: output: {0}", clienteDTO);
-        return clienteDTO;
+        return cliente;
     }
 
     /**

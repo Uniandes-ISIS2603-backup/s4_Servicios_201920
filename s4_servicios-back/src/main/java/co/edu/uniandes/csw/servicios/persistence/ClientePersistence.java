@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,10 +26,11 @@ public class ClientePersistence {
      */
     private static final Logger LOGGER = Logger.getLogger(ClientePersistence.class.getName());
     
-    @PersistenceContext(unitName = "serviciosPU")
+    
     /**
      * El Entity Manager de la clase Cliente
      */
+     @PersistenceContext(unitName = "serviciosPU")
     protected EntityManager em;
 
     /**
@@ -50,7 +53,7 @@ public class ClientePersistence {
      */
     public List<ClienteEntity> findAll(){
         LOGGER.log(Level.INFO, "Se están consultando todos los clientes");
-        Query q = em.createQuery("select u from ClienteEntity u");
+        TypedQuery q = em.createQuery("select u from ClienteEntity u", ClienteEntity.class);
         return q.getResultList();
     }
     
@@ -79,11 +82,10 @@ public class ClientePersistence {
     /**
      * Método que borra uno de los clientes de la base de datos 
      * Corresponde a la D de CRUD en los requisitos de bases de datos
-     * @param pClienteEntity - el cliente que se desea eliminar de la base de datos
+     * @param tID
      */
-    public void delete(ClienteEntity pClienteEntity){
-        LOGGER.log(Level.INFO, "Se quiere borrar el objeo con id", pClienteEntity.getId());
-        ClienteEntity clienteABorrar = em.find(ClienteEntity.class, pClienteEntity.getId());
-        em.remove(clienteABorrar);
+    public void delete(Long tID){
+        ClienteEntity clienteEntity = em.find(ClienteEntity.class, tID);
+        em.remove(clienteEntity);
     }
 }

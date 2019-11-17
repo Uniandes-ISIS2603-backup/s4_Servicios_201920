@@ -7,7 +7,8 @@ package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import java.io.Serializable;
-import org.eclipse.persistence.descriptors.SerializableDescriptorEventHolder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -16,21 +17,29 @@ import org.eclipse.persistence.descriptors.SerializableDescriptorEventHolder;
 public class TrabajadorDTO implements Serializable{
     
     private Long id;
-//estos van en la clase Cuenta
 private String nombre;
-private String usuario;
+
 private String contrasena;
+
 private Integer telefono;
-private String correo;
+
+private String usuario;
+
 private String foto;
-    
-//atributos
-private boolean disponibilidad;
-private String hojaVida;
+
+private String correo;
+  
 private boolean esApto;
-private String seguroSocial;
+
+private String hojaVida;
+
+private boolean disponibilidad;
+
 private String riesgos;
-    
+
+private String seguroSocial;
+
+
 public TrabajadorDTO(){
         
         
@@ -99,20 +108,6 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
-     * @return the usuario
-     */
-    public String getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    /**
      * @return the contrasena
      */
     public String getContrasena() {
@@ -127,17 +122,17 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
-     * @return the telefono
+     * @return the usuario
      */
-    public Integer getTelefono() {
-        return telefono;
+    public String getUsuario() {
+        return usuario;
     }
 
     /**
-     * @param telefono the telefono to set
+     * @param usuario the usuario to set
      */
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     /**
@@ -155,6 +150,20 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
+     * @return the telefono
+     */
+    public Integer getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
      * @return the foto
      */
     public String getFoto() {
@@ -166,20 +175,6 @@ public TrabajadorEntity toEntity(){
      */
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    /**
-     * @return the disponibilidad
-     */
-    public boolean isDisponibilidad() {
-        return disponibilidad;
-    }
-
-    /**
-     * @param disponibilidad the disponibilidad to set
-     */
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
     }
 
     /**
@@ -197,17 +192,17 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
-     * @return the esApto
+     * @return the disponibilidad
      */
-    public boolean isEsApto() {
-        return esApto;
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
 
     /**
-     * @param esApto the esApto to set
+     * @param disponibilidad the disponibilidad to set
      */
-    public void setEsApto(boolean esApto) {
-        this.esApto = esApto;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     /**
@@ -225,6 +220,20 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
+     * @return the esApto
+     */
+    public boolean isEsApto() {
+        return esApto;
+    }
+
+    /**
+     * @param esApto the esApto to set
+     */
+    public void setEsApto(boolean esApto) {
+        this.esApto = esApto;
+    }
+
+    /**
      * @return the riesgos
      */
     public String getRiesgos() {
@@ -237,5 +246,8 @@ public TrabajadorEntity toEntity(){
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
     }
-       
+       @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

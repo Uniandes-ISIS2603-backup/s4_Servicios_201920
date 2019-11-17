@@ -120,8 +120,7 @@ public class ClientePersistenceTest {
     public void testCreate() {
         PodamFactory factory = new PodamFactoryImpl();
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
-        ClienteEntity resultado;
-        resultado = persistence.create(newEntity);
+        ClienteEntity resultado = persistence.create(newEntity);
         Assert.assertNotNull(resultado);
         ClienteEntity entity = em.find(ClienteEntity.class, resultado.getId());
         Assert.assertNotNull(entity);
@@ -176,9 +175,10 @@ public class ClientePersistenceTest {
     @Test
     public void testDelete() {
         ClienteEntity entity = data.get(0);
-        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
-        persistence.delete(entity);
-        Assert.assertNotNull(deleted);
+        persistence.delete(entity.getId());
+                ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+
+        Assert.assertNull(deleted);
     }
     
 }
