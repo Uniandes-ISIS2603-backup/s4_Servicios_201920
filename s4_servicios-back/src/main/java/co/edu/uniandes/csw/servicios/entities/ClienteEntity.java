@@ -123,7 +123,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * Retorna número de teléfono del cliente
      * @return el teléfono
      */
-    public int getTelefono(){
+    public Integer getTelefono(){
         return telefono;
     }
     
@@ -131,7 +131,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * Cambia el número de teléfono del cliente por uno dado por parámetro
      * @param pTelefono - El nuevo teléfono
      */
-    public void setTelefono(int pTelefono){
+    public void setTelefono(Integer pTelefono){
         telefono = pTelefono;
     }
     
