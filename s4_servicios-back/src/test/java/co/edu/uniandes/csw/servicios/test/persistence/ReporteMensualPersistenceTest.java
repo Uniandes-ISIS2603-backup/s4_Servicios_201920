@@ -100,6 +100,7 @@ public class ReporteMensualPersistenceTest
         Assert.assertEquals(newEntity.getEgresos(), entity.getEgresos(),0.1);
         Assert.assertEquals(newEntity.getIngresos(), entity.getIngresos(),0.1);
         Assert.assertEquals(newEntity.getMes(), entity.getMes());
+        Assert.assertEquals(newEntity.getNumSerivico(), entity.getNumSerivico());
     }
       
     @Test
@@ -111,6 +112,7 @@ public class ReporteMensualPersistenceTest
         Assert.assertEquals(data.get(1).getEgresos(), entity.getEgresos(),0.1);
         Assert.assertEquals(data.get(1).getIngresos(), entity.getIngresos(),0.1);
         Assert.assertEquals(data.get(1).getMes(), entity.getMes());
+        Assert.assertEquals(data.get(1).getNumSerivico(), entity.getNumSerivico());
     }
    
     @Test 
@@ -129,6 +131,7 @@ public class ReporteMensualPersistenceTest
            Assert.assertEquals(i.getEgresos(), expected.getEgresos(),0.1);
            Assert.assertEquals(i.getIngresos(), expected.getIngresos(),0.1);
            Assert.assertEquals(i.getMes(),expected.getMes()); 
+           Assert.assertEquals(i.getNumSerivico(),expected.getNumSerivico()); 
        }
     }
     
@@ -147,6 +150,7 @@ public class ReporteMensualPersistenceTest
        Assert.assertEquals(newEntity.getEgresos(), entitySearch.getEgresos(), 0.1);
        Assert.assertEquals(newEntity.getIngresos(), entitySearch.getIngresos(),0.1);
        Assert.assertEquals(newEntity.getMes(),entitySearch.getMes()); 
+       Assert.assertEquals(newEntity.getNumSerivico(),entitySearch.getNumSerivico());
     }
     
     @Test

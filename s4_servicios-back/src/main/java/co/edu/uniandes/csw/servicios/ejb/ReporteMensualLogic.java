@@ -22,7 +22,7 @@ public class ReporteMensualLogic {
     private ReporteMensualPersistence persistencia;
     
     public ReporteMensualEntity createReporteMensual(ReporteMensualEntity entity) throws BusinessLogicException
-    {
+    {   
        return null;
     }
     

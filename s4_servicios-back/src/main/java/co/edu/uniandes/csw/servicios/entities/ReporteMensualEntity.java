@@ -76,7 +76,7 @@ public class ReporteMensualEntity extends BaseEntity implements Serializable
         this.egresos = egresos;
     }
 
-    public int getNumSerivico() {
+    public Integer getNumSerivico() {
         return numSerivico;
     }
 

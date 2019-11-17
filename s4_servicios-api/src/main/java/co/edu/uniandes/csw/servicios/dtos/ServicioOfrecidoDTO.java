@@ -6,12 +6,14 @@
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Estudiante
  */
-public class ServicioOfrecidoDTO {
+public class ServicioOfrecidoDTO implements Serializable
+{
     
     
     /**
@@ -104,13 +106,6 @@ public class ServicioOfrecidoDTO {
         this.precio = precio;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public String getNombre() {
         return nombre;

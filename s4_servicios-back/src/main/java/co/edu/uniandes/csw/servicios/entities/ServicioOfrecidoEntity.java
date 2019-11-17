@@ -88,7 +88,7 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable {
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
