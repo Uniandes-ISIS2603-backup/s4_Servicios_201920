@@ -6,9 +6,9 @@
 package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import java.io.Serializable;
-import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ClienteDTO implements Serializable {
     /**
      * El teléfono del cliente
      */
-    private int telefono;
+    private Integer telefono;
     
     /**
      * El correo electrónico del cliente
@@ -47,30 +47,45 @@ public class ClienteDTO implements Serializable {
      */
     private String direccion;
     
+     /*
+    * Relación a un pagoTarjeta  
+    * dado que esta tiene cardinalidad 1.
+    */
+    private PagoTarjetaDTO tarjeta;
+    
     public ClienteDTO(){
     }
     
     public ClienteDTO(ClienteEntity clienteEntity){
         if(clienteEntity != null){
-            id = clienteEntity.getId();
-            contrasena = clienteEntity.getContrasena();
-            direccion = clienteEntity.getDireccion();
-            mail = clienteEntity.getMail();
-            nombre = clienteEntity.getNombre();
-            telefono = clienteEntity.getTelefono();
-            usuario = clienteEntity.getUsuario();
+            this.id = clienteEntity.getId();
+            this.contrasena = clienteEntity.getContrasena();
+            this.direccion = clienteEntity.getDireccion();
+            this.mail = clienteEntity.getMail();
+            this.nombre = clienteEntity.getNombre();
+            this.telefono = clienteEntity.getTelefono();
+            this.usuario = clienteEntity.getUsuario();
+             if (clienteEntity.getTarjeta()!= null) {
+            this.tarjeta = new PagoTarjetaDTO(clienteEntity.getTarjeta());
+            }
+            else{
+            this.tarjeta = null;
+            }
         }
     }
     
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
-        clienteEntity.setId(id);
-        clienteEntity.setContrasena(contrasena);
-        clienteEntity.setDireccion(direccion);
-        clienteEntity.setMail(mail);
-        clienteEntity.setNombre(nombre);
-        clienteEntity.setTelefono(telefono);
-        clienteEntity.setUsuario(usuario);
+        clienteEntity.setId(this.id);
+        clienteEntity.setContrasena(this.contrasena);
+        clienteEntity.setDireccion(this.direccion);
+        clienteEntity.setMail(this.mail);
+        clienteEntity.setNombre(this.nombre);
+        clienteEntity.setTelefono(this.telefono);
+        clienteEntity.setUsuario(this.usuario);
+         if (this.getTarjeta() != null) {
+            clienteEntity.setTarjeta(this.getTarjeta().toEntity());
+        }
         return clienteEntity;
     }
     
@@ -79,8 +94,8 @@ public class ClienteDTO implements Serializable {
         return id;
     }
     
-    public void setId(Long pId){
-        id = pId;
+    public void setId(Long id){
+        this.id = id;
     }
     
     /**
@@ -114,6 +129,22 @@ public class ClienteDTO implements Serializable {
     public void setNombre(String pNombre){
         nombre = pNombre;
     }
+   
+    /**
+     * Retorna el correo electrónico del cliente
+     * @return el email
+     */
+    public String getMail(){
+        return mail;
+    }
+    
+    /**
+     * Cambia el correo electrónico del cliente por uno dado por parámetro
+     * @param pMail - el nuevo correo del cliente
+     */
+    public void setMail(String pMail){
+        mail = pMail;
+    }
     
     /**
      * Retorna número de teléfono del cliente
@@ -132,21 +163,21 @@ public class ClienteDTO implements Serializable {
     }
     
     /**
-     * Retorna el correo electrónico del cliente
-     * @return el email
+     * Retorna la contraseña del usuario
+     * @return  - la contraseña
      */
-    public String getMail(){
-        return mail;
+    public String getContrasena(){
+        return contrasena;
     }
     
     /**
-     * Cambia el correo electrónico del cliente por uno dado por parámetro
-     * @param pMail - el nuevo correo del cliente
+     * Cambia la contraseña del cliente por una dada por parámetro
+     * @param pContrasena . la nueva contraseña
      */
-    public void setMail(String pMail){
-        mail = pMail;
+    public void setContrasena(String pContrasena){
+        contrasena = pContrasena;
     }
-    
+     
     /**
      * Retorna el usuario del cliente
      * @return - el usuario
@@ -162,21 +193,24 @@ public class ClienteDTO implements Serializable {
     public void setUsuario(String pUsuario){
         usuario = pUsuario;
     }
-    
+
     /**
-     * Retorna la contraseña del usuario
-     * @return  - la contraseña
+     * @return the tarjeta
      */
-    public String getContrasena(){
-        return contrasena;
+    public PagoTarjetaDTO getTarjeta() {
+        return tarjeta;
+    }
+
+    /**
+     * @param tarjeta the tarjeta to set
+     */
+    public void setTarjeta(PagoTarjetaDTO tarjeta) {
+        this.tarjeta = tarjeta;
     }
     
-    /**
-     * Cambia la contraseña del cliente por una dada por parámetro
-     * @param pContrasena . la nueva contraseña
-     */
-    public void setContrasena(String pContrasena){
-        contrasena = pContrasena;
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
 }

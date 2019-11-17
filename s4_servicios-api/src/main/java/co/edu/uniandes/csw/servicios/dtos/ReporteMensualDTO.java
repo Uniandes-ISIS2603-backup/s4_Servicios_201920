@@ -69,14 +69,6 @@ public class ReporteMensualDTO
          return entity;
      }
     
-    public Date getMes() {
-        return mes;
-    }
-
-    public void setMes(Date mes) {
-        this.mes = mes;
-    }
-
     public double getIngresos() {
         return ingresos;
     }
@@ -85,12 +77,12 @@ public class ReporteMensualDTO
         this.ingresos = ingresos;
     }
 
-    public double getEgresos() {
-        return egresos;
+    public Date getMes() {
+        return mes;
     }
 
-    public void setEgresos(double egresos) {
-        this.egresos = egresos;
+    public void setMes(Date mes) {
+        this.mes = mes;
     }
 
     public int getNumSerivico() {
@@ -99,6 +91,14 @@ public class ReporteMensualDTO
 
     public void setNumSerivico(int numSerivico) {
         this.numSerivico = numSerivico;
+    }
+
+    public double getEgresos() {
+        return egresos;
+    }
+
+    public void setEgresos(double egresos) {
+        this.egresos = egresos;
     }
 
     public Long getId() {

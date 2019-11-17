@@ -86,9 +86,7 @@ public class ServicioOfrecidoLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from BookEntity").executeUpdate();
-        em.createQuery("delete from EditorialEntity").executeUpdate();
-        em.createQuery("delete from AuthorEntity").executeUpdate();
+        em.createQuery("delete from ServicioOfrecidoEntity").executeUpdate();
     }
 
     /**
@@ -97,16 +95,16 @@ public class ServicioOfrecidoLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ServicioOfrecidoEntity editorial = factory.manufacturePojo(ServicioOfrecidoEntity.class);
-            em.persist(editorial);
-            data.add(editorial);
+            ServicioOfrecidoEntity servicio = factory.manufacturePojo(ServicioOfrecidoEntity.class);
+            em.persist(servicio);
+            data.add(servicio);
         }
     }
     
     /**
      * Prueba para crear un SerivicioOfrecdo
      *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
     public void createServicioOfrecidoTest()
@@ -145,7 +143,7 @@ public class ServicioOfrecidoLogicTest {
        //Probamos que la regla de negocio para el nombre se cumpla. No se debe poder agregar un servicio con nombre repetido.
        
         newEntity.setTipo("Aseo");
-        newEntity.setNombre("Preuba");
+        newEntity.setNombre("Prueba");
         try
         {
         ServicioOfrecidoEntity creadoEntity = servicioOfrecidoLogic.createServicioOfrecido(newEntity);
@@ -162,4 +160,98 @@ public class ServicioOfrecidoLogicTest {
         
     }
     
+     /**
+     * Prueba para consultar la lista de Servicios.
+     */
+    @Test
+    public void getServiciosTest() {
+        List<ServicioOfrecidoEntity> list = servicioOfrecidoLogic.getServiciosOfrecidos();
+        Assert.assertEquals(data.size(), list.size());
+        for (ServicioOfrecidoEntity entity : list) {
+            boolean found = false;
+            for (ServicioOfrecidoEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+     /**
+     * Prueba para consultar un Servicio1.
+     */
+    @Test
+    public void getServicio1Test() {
+        ServicioOfrecidoEntity entity = data.get(0);
+        ServicioOfrecidoEntity resultEntity = servicioOfrecidoLogic.getServicioOfrecido(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(resultEntity.getId(), entity.getId());
+        Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
+        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+    }
+    
+    /**
+     * Prueba para consultar un Servicio2.
+     */
+    @Test
+    public void getServicio2Test() {
+        ServicioOfrecidoEntity entity = data.get(1);
+        ServicioOfrecidoEntity resultEntity = servicioOfrecidoLogic.getServicioOfrecido(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(resultEntity.getId(), entity.getId());
+        Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
+        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+    }
+    
+    /**
+     * Prueba para consultar un Servicio3.
+     */
+    @Test
+    public void getServicio3Test() {
+        ServicioOfrecidoEntity entity = data.get(2);
+        ServicioOfrecidoEntity resultEntity = servicioOfrecidoLogic.getServicioOfrecido(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(resultEntity.getId(), entity.getId());
+        Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
+        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+    }
+    
+    /**
+     * Prueba para actualizar un Servicio.
+     * 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void updateServicioTest()throws BusinessLogicException {
+        ServicioOfrecidoEntity entity = data.get(0);
+        ServicioOfrecidoEntity pojoEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
+        pojoEntity.setId(entity.getId());
+        servicioOfrecidoLogic.updateServicioOfrecido(pojoEntity.getId(), pojoEntity);
+        ServicioOfrecidoEntity resp = em.find(ServicioOfrecidoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
+        Assert.assertTrue(pojoEntity.getPrecio() == resp.getPrecio());
+    }
+    
+      /**
+     * Prueba para eliminar un Servicio.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void deleteServicioTest() throws BusinessLogicException {
+        ServicioOfrecidoEntity entity = data.get(1);
+        servicioOfrecidoLogic.deleteServicioOfrecido(entity.getId());
+        ServicioOfrecidoEntity deleted = em.find(ServicioOfrecidoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

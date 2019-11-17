@@ -49,7 +49,7 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
      * constructor
      */
     public TrabajadorEntity(){
-        
+        //Es un constructor vacio.
     }
     
     /**

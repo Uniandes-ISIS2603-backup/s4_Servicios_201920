@@ -49,7 +49,7 @@ public class ReporteMensualEntity extends BaseEntity implements Serializable
 
     public ReporteMensualEntity()
     {
-        
+        //Es un constructor vacio.
     }
     
     public Date getMes() {

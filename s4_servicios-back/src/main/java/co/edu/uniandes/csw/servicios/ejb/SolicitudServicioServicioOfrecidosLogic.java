@@ -37,15 +37,15 @@ public class SolicitudServicioServicioOfrecidosLogic {
      *
      * @param solicitudId Identificador de la instancia de SolicitudServicio
      * @param servicioId Identificador de la instancia de ServicioOfrecido
-     * @return Instancia de SolicitudServicioEntity a la que fue asociada el ServicioOfrecido
+     * @return Instancia de ServicioOfrecidoEntity que fue asociada a la solicitud
      */
-    public SolicitudServicioEntity addServicio(Long solicitudId, Long servicioId) {
+    public ServicioOfrecidoEntity addServicio(Long solicitudId, Long servicioId) {
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un servicio a la solicitud con id = {0}",solicitudId);
         SolicitudServicioEntity solicitudEntity = solicitudPersistence.find(solicitudId);
         ServicioOfrecidoEntity servicioEntity = servicioPersistence.find(servicioId);
         solicitudEntity.getServicios().add(servicioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un servicio a la solicitud con id = {0}", solicitudId);
-        return solicitudPersistence.find(solicitudId);
+        return servicioPersistence.find(servicioId);
     }
     
     /**
@@ -75,7 +75,7 @@ public class SolicitudServicioServicioOfrecidosLogic {
         ServicioOfrecidoEntity servicioEntity = servicioPersistence.find(servicioId);
         boolean contiene = servicios.contains(servicioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar el servicio con id = {0} de la solicitud con id = " + solicitudId, servicioId);
-        if (contiene == true) {
+        if (contiene) {
             return servicioEntity;
         }
         throw new BusinessLogicException("El servicio no está asociado a la solicitud");
