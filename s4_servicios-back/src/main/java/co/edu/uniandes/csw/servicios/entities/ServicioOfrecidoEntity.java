@@ -31,7 +31,7 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable {
     /**
      * Precio por hora del servicio ofrecido.
      */
-    private double precio;
+    private Double precio;
 
     /**
      * Nombre del servio a ofrecer
@@ -81,7 +81,7 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable {
     /**
      * @return the precio
      */
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 

@@ -4,6 +4,9 @@ delete from FacturaEntity;
 insert into FacturaEntity (id, duracion, preciomateriales, fecha, pagada, primerpago, solicitud_id, tarjetapago_id) values (10, 10, 10, '8/20/1996', 0, 0, 1, null);
 
 delete from ServicioOfrecidoEntity;
+
+Select *  from ServicioOfrecidoEntity;
+
 insert into ServicioOfrecidoEntity (id,nombre, descripcion,precio,tipo)
             values(1,'Mantenimiento de lavadora','Se revisa y se realiza un mantenimiento preventivo a la labodora del cliente',123.2,'Plomeria');
 
