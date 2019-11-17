@@ -12,12 +12,14 @@ import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Estudiante
  */
+@Stateless
 public class ClienteLogic {
     
     private static final Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
@@ -34,7 +36,6 @@ public class ClienteLogic {
      */
     public ClienteEntity createCliente (ClienteEntity clienteEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
-        ClienteEntity newClienteEntity = null;
         if(clienteEntity.getNombre() == null || clienteEntity.getNombre().equals("")){
             throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el nombre es inválido");
         }
@@ -47,11 +48,11 @@ public class ClienteLogic {
         else if(clienteEntity.getTelefono() < 0 ){
             throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el número telefónico es inválido");
         }
-        else{
-            newClienteEntity = persistence.create(clienteEntity);
-        }
+        
+            clienteEntity = persistence.create(clienteEntity);
+        
         LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
-        return newClienteEntity;
+        return clienteEntity;
     }
     
     /**
@@ -104,11 +105,10 @@ public class ClienteLogic {
      */
     public void deleteCliente(Long clienteId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
-        List<SolicitudServicioEntity> servicios = getCliente(clienteId).getServicios();
 //        if (servicios.size() != 0) {
 //            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
 //        }
-        persistence.delete(getCliente(clienteId));
+        persistence.delete(clienteId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
     }
 }

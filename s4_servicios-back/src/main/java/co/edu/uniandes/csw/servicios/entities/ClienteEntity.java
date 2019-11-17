@@ -10,7 +10,9 @@ import co.edu.uniandes.csw.servicios.podam.TelefonoStrategy;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -24,7 +26,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
    
     @PodamExclude
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    @OneToMany
     private List<SolicitudServicioEntity> servicios;
    
     /**
@@ -33,14 +35,14 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String nombre; 
     
     @PodamExclude
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private PagoTarjetaEntity tarjeta;
     
     /**
      * El teléfono del cliente
      */
     @PodamStrategyValue(TelefonoStrategy.class)
-    private int telefono;
+    private Integer telefono;
     
     /**
      * El correo electrónico del cliente
@@ -63,6 +65,11 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      * La dirección del cliente
      */
     private String direccion;
+    
+    public ClienteEntity()
+    {
+        //Constructor vacio
+    }
     
     /**
      * Retorna la dirección del cliente
@@ -174,6 +181,20 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     public void setContrasena(String pContrasena){
         contrasena = pContrasena;
+    }
+
+    /**
+     * @return the tarjeta
+     */
+    public PagoTarjetaEntity getTarjeta() {
+        return tarjeta;
+    }
+
+    /**
+     * @param tarjeta the tarjeta to set
+     */
+    public void setTarjeta(PagoTarjetaEntity tarjeta) {
+        this.tarjeta = tarjeta;
     }
     
     
