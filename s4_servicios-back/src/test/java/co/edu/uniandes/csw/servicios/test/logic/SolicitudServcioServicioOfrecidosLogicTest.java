@@ -132,7 +132,7 @@ public class SolicitudServcioServicioOfrecidosLogicTest {
         Assert.assertEquals(servicioEntity.getId(), newServicio.getId());
         Assert.assertEquals(servicioEntity.getNombre(), newServicio.getNombre());
         Assert.assertEquals(servicioEntity.getDescripcion(), newServicio.getDescripcion());
-        Assert.assertTrue(servicioEntity.getPrecio()== newServicio.getPrecio());
+        Assert.assertEquals(servicioEntity.getPrecio(),newServicio.getPrecio(), 0.1);
         Assert.assertEquals(servicioEntity.getTipo(), newServicio.getTipo());
 
         ServicioOfrecidoEntity lastServicio = solicitudServiciosLogic.getServicio(solicitud.getId(), newServicio.getId());
@@ -140,7 +140,7 @@ public class SolicitudServcioServicioOfrecidosLogicTest {
         Assert.assertEquals(lastServicio.getId(), newServicio.getId());
         Assert.assertEquals(lastServicio.getNombre(), newServicio.getNombre());
         Assert.assertEquals(lastServicio.getDescripcion(), newServicio.getDescripcion());
-        Assert.assertTrue(lastServicio.getPrecio()== newServicio.getPrecio());
+        Assert.assertEquals(lastServicio.getPrecio(),newServicio.getPrecio(),0.1);
         Assert.assertEquals(lastServicio.getTipo(), newServicio.getTipo());
        
     }
@@ -173,7 +173,7 @@ public class SolicitudServcioServicioOfrecidosLogicTest {
         Assert.assertEquals(servicioEntity.getId(), servicio.getId());
         Assert.assertEquals(servicioEntity.getNombre(), servicio.getNombre());
         Assert.assertEquals(servicioEntity.getDescripcion(), servicio.getDescripcion());
-        Assert.assertTrue(servicioEntity.getPrecio()== servicio.getPrecio());
+        Assert.assertEquals(servicioEntity.getPrecio(), servicio.getPrecio(),0.1);
         Assert.assertEquals(servicioEntity.getTipo(), servicio.getTipo());
     }
     
@@ -191,7 +191,7 @@ public class SolicitudServcioServicioOfrecidosLogicTest {
         Assert.assertEquals(servicioEntity.getId(), servicio.getId());
         Assert.assertEquals(servicioEntity.getNombre(), servicio.getNombre());
         Assert.assertEquals(servicioEntity.getDescripcion(), servicio.getDescripcion());
-        Assert.assertTrue(servicioEntity.getPrecio()== servicio.getPrecio());
+        Assert.assertEquals(servicioEntity.getPrecio(),servicio.getPrecio(), 0.1);
         Assert.assertEquals(servicioEntity.getTipo(), servicio.getTipo());
     }
     
@@ -209,7 +209,7 @@ public class SolicitudServcioServicioOfrecidosLogicTest {
         Assert.assertEquals(servicioEntity.getId(), servicio.getId());
         Assert.assertEquals(servicioEntity.getNombre(), servicio.getNombre());
         Assert.assertEquals(servicioEntity.getDescripcion(), servicio.getDescripcion());
-        Assert.assertTrue(servicioEntity.getPrecio()== servicio.getPrecio());
+        Assert.assertEquals(servicioEntity.getPrecio(),servicio.getPrecio(),0.1);
         Assert.assertEquals(servicioEntity.getTipo(), servicio.getTipo());
     }
     
