@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la labodora del cliente\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 123.2,\r\n\"tipo\": \"Plomeria\"\r\n}\r\n",
+					"raw": "{\r\n\t\"tipo\": \"Plomeria\",\r\n\t\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la lavadora del cliente\",\r\n\t\"precio\": 123.2,\r\n\t\"nombre\": \"Mantenimiento de lavadora\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"descripcion\": \"Se cambia el color de una habitación según preferencias del cliente\",\r\n\"nombre\": \"Pintar habitación\",\r\n\"precio\": 23.08,\r\n\"tipo\": \"Pintura\"\r\n}",
+					"raw": "{\r\n\"descripcion\": \"Se cambia el color de una habitación según preferencias del cliente\",\r\n\"nombre\": \"Pintar habitacion\",\r\n\"precio\": 23.08,\r\n\"tipo\": \"Pintura\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -135,7 +135,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\"descripcion\": \"Se revisa y repara un tubo\",\r\n\"nombre\": \"Reparación tubo\",\r\n\"precio\": 123,\r\n\"tipo\": \"Plomeria-fail\"\r\n}\r\n",
+					"raw": "{\r\n\"descripcion\": \"Se revisa y repara un tubo\",\r\n\"nombre\": \"Reparacion tubo\",\r\n\"precio\": 123,\r\n\"tipo\": \"Plomeria-fail\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,7 +166,7 @@
 					"script": {
 						"id": "ed8788ab-642a-41c7-8c60-8c90ee42ab20",
 						"exec": [
-							"tests[\"No crea un servicio con el unombre otro ya existente\"] = responseCode.code === 412;",
+							"tests[\"No crea un servicio, ya existe otro con ese nombre\"] = responseCode.code === 412;",
 							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"existe un servicio con ese nombre\");"
 						],
 						"type": "text/javascript"
@@ -185,7 +185,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\"descripcion\": \"Se limpia y previene posibles fallas en la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 323.2,\r\n\"tipo\": \"Plomeria\"\r\n}\r\n",
+					"raw": "{\r\n\"descripcion\": \"Se limpia y previene posibles fallas en la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 323.2,\r\n\"tipo\": \"Plomeria\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -436,7 +436,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n    \"nombre\": \"Mantenimiento de lavadora\",\r\n    \"precio\": 300.0,\r\n    \"tipo\": \"Plomeria\"\r\n}",
+					"raw": "{\r\n\"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 300.0,\r\n\"tipo\": \"Plomeria\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

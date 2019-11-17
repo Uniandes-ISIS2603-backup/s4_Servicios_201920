@@ -190,7 +190,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(), entity.getPrecio(),0.1);
     }
     
     /**
@@ -205,7 +205,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(), entity.getPrecio(),0.1);
     }
     
     /**
@@ -220,7 +220,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(), entity.getPrecio(),0.1);
     }
     
     /**
@@ -239,7 +239,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
         Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
-        Assert.assertTrue(pojoEntity.getPrecio() == resp.getPrecio());
+        Assert.assertEquals(pojoEntity.getPrecio(),resp.getPrecio(),0.1);
     }
     
       /**

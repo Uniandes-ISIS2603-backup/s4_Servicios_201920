@@ -114,17 +114,8 @@ public class ReporteMensualLogicTest {
     @Test
     public void createReporteMensualTest()
     {
-     
-        try
-        {   
-            ReporteMensualEntity entity = logic.createReporteMensual(data.get(1));
-            
-            //To Do: ¿Cómo buscar en la base de datos por fecha?
-           // Assert.fail("Se deberia lanzar una excepción cuando ya existe un resporte con el mes dado");
-        }
-        catch(BusinessLogicException e)
-        {
-                    
-        }
+        
+        ReporteMensualEntity newEntity = factory.manufacturePojo(ReporteMensualEntity.class);
+
     }
 }
