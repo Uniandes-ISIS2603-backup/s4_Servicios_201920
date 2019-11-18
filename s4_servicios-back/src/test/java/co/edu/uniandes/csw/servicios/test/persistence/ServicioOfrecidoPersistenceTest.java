@@ -147,6 +147,24 @@ public class ServicioOfrecidoPersistenceTest {
         Assert.assertEquals(data.get(2).getNombre(), entity.getNombre());
     }
     
+      @Test
+    public void findByTypeTest()       
+    {        
+        data.get(0).setTipo("Plomeria");
+       sop.update((ServicioOfrecidoEntity )data.get(0));
+        data.get(1).setTipo("Plomeria");
+        sop.update(data.get(1));
+        List<ServicioOfrecidoEntity> entities =sop.findByType("Plomeria");
+        
+        System.out.println("Tamaño" + entities.size());
+        Assert.assertNotNull(entities);
+        Assert.assertEquals(2, entities.size());
+        
+        Assert.assertEquals(data.get(0).getTipo(), entities.get(0).getTipo());
+
+        Assert.assertEquals(data.get(1).getNombre(), entities.get(1).getNombre());
+    }
+    
     @Test
     public void updateServicioOfrecidoTest()
     {
