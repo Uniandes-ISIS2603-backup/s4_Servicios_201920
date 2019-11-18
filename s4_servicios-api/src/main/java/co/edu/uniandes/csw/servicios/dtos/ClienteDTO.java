@@ -150,16 +150,8 @@ public class ClienteDTO implements Serializable {
      * Retorna número de teléfono del cliente
      * @return el teléfono
      */
-    public int getTelefono(){
+    public Integer getTelefono(){
         return telefono;
-    }
-    
-    /**
-     * Cambia el número de teléfono del cliente por uno dado por parámetro
-     * @param pTelefono - El nuevo teléfono
-     */
-    public void setTelefono(int pTelefono){
-        telefono = pTelefono;
     }
     
     /**
@@ -211,6 +203,13 @@ public class ClienteDTO implements Serializable {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
     }
     
 }

@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -244,5 +246,8 @@ public TrabajadorEntity toEntity(){
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
     }
-       
+       @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }
