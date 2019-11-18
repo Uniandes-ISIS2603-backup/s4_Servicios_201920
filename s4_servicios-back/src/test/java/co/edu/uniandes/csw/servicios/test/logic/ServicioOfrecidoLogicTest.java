@@ -295,18 +295,18 @@ public class ServicioOfrecidoLogicTest {
     public void findByTypeTest() throws BusinessLogicException       
     {        
         ServicioOfrecidoEntity expected1= factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        expected1.setTipo("Plomeria");
+        expected1.setTipo("Electricidad");
         servicioOfrecidoLogic.createServicioOfrecido(expected1);
         ServicioOfrecidoEntity  expected2= factory.manufacturePojo(ServicioOfrecidoEntity.class);
-        expected2.setTipo("Plomeria");
+        expected2.setTipo("Electricidad");
         servicioOfrecidoLogic.createServicioOfrecido(expected2);
-        List<ServicioOfrecidoEntity> entities =servicioOfrecidoLogic.getServiciosOfrecidosByType("Plomeria");
+        List<ServicioOfrecidoEntity> entities =servicioOfrecidoLogic.getServiciosOfrecidosByType("Electricidad");
         
         Assert.assertNotNull(entities);
         Assert.assertEquals(2, entities.size());
         
-        Assert.assertEquals("Plomeria", entities.get(0).getTipo());
+        Assert.assertEquals("Electricidad", entities.get(0).getTipo());
 
-        Assert.assertEquals("Plomeria", entities.get(1).getTipo());
+        Assert.assertEquals("Electricidad", entities.get(1).getTipo());
     }
 }
