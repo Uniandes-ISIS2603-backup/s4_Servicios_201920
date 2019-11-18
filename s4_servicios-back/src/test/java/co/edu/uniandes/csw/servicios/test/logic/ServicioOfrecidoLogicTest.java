@@ -156,8 +156,7 @@ public class ServicioOfrecidoLogicTest {
         catch (BusinessLogicException e2)
         {
            
-        } 
-        
+        }
     }
     
      /**
@@ -190,7 +189,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(),entity.getPrecio(), 0.1);
     }
     
     /**
@@ -205,7 +204,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(), entity.getPrecio(), 0.1);
     }
     
     /**
@@ -220,7 +219,7 @@ public class ServicioOfrecidoLogicTest {
         Assert.assertEquals(resultEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(resultEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-        Assert.assertTrue(resultEntity.getPrecio() == entity.getPrecio());
+        Assert.assertEquals(resultEntity.getPrecio(),entity.getPrecio(),0.1);
     }
     
     /**
@@ -232,14 +231,48 @@ public class ServicioOfrecidoLogicTest {
     public void updateServicioTest()throws BusinessLogicException {
         ServicioOfrecidoEntity entity = data.get(0);
         ServicioOfrecidoEntity pojoEntity = factory.manufacturePojo(ServicioOfrecidoEntity.class);
+        pojoEntity.setTipo("No es un tipo válido");
         pojoEntity.setId(entity.getId());
-        servicioOfrecidoLogic.updateServicioOfrecido(pojoEntity.getId(), pojoEntity);
-        ServicioOfrecidoEntity resp = em.find(ServicioOfrecidoEntity.class, entity.getId());
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
-        Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
-        Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
-        Assert.assertTrue(pojoEntity.getPrecio() == resp.getPrecio());
+        
+        try 
+        {
+            ServicioOfrecidoEntity updateEntity = servicioOfrecidoLogic.updateServicioOfrecido(pojoEntity.getId(),pojoEntity);
+            Assert.fail("Se debería lanzar excepción cuando el tipo del servicio no se encuentra dentro de la oferta");
+        } 
+        catch (BusinessLogicException e)
+        { 
+            pojoEntity.setTipo("Aseo");
+             try
+             {
+                ServicioOfrecidoEntity updateEntity = servicioOfrecidoLogic.updateServicioOfrecido(pojoEntity.getId(),pojoEntity);
+                 
+                Assert.assertNotNull(updateEntity);
+                Assert.assertEquals(pojoEntity.getTipo(), updateEntity.getTipo());
+                Assert.assertEquals(pojoEntity.getDescripcion(), updateEntity.getDescripcion());
+                Assert.assertEquals(pojoEntity.getPrecio(), updateEntity.getPrecio(), 0.1);
+                Assert.assertEquals(pojoEntity.getNombre(), updateEntity.getNombre());
+                 
+             }
+             catch(BusinessLogicException e1)
+             {
+                 Assert.fail("No debería lanzar excepción cuando el tipo del servicio se encuentra dentro de la oferta");
+                 
+             }
+        }
+        
+        //Probamos que la regla de negocio para el nombre se cumpla. No se debe poder agregar un servicio con nombre repetido.
+       
+        pojoEntity.setTipo("Aseo");
+        pojoEntity.setNombre(data.get(2).getNombre());
+        try
+        {
+        ServicioOfrecidoEntity updateEntity = servicioOfrecidoLogic.updateServicioOfrecido(pojoEntity.getId(),pojoEntity);
+        Assert.fail("Debería lanzar excepción cuando el nombre es repetido");
+        }
+        catch (BusinessLogicException e2)
+        {
+           
+        }
     }
     
       /**
@@ -253,5 +286,27 @@ public class ServicioOfrecidoLogicTest {
         servicioOfrecidoLogic.deleteServicioOfrecido(entity.getId());
         ServicioOfrecidoEntity deleted = em.find(ServicioOfrecidoEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+      /*
+    Prueba para buscar la lista de ServicioOfrecido dado su tipo. 
+    */
+      @Test
+    public void findByTypeTest() throws BusinessLogicException       
+    {        
+        ServicioOfrecidoEntity expected1= factory.manufacturePojo(ServicioOfrecidoEntity.class);
+        expected1.setTipo("Plomeria");
+        servicioOfrecidoLogic.createServicioOfrecido(expected1);
+        ServicioOfrecidoEntity  expected2= factory.manufacturePojo(ServicioOfrecidoEntity.class);
+        expected2.setTipo("Plomeria");
+        servicioOfrecidoLogic.createServicioOfrecido(expected2);
+        List<ServicioOfrecidoEntity> entities =servicioOfrecidoLogic.getServiciosOfrecidosByType("Plomeria");
+        
+        Assert.assertNotNull(entities);
+        Assert.assertEquals(2, entities.size());
+        
+        Assert.assertEquals("Plomeria", entities.get(0).getTipo());
+
+        Assert.assertEquals("Plomeria", entities.get(1).getTipo());
     }
 }
