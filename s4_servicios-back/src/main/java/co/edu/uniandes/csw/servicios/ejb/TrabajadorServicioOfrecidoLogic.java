@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ServicioOfrecidoPersistence;
 import co.edu.uniandes.csw.servicios.persistence.TrabajadorPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
@@ -18,6 +19,7 @@ import javax.inject.Inject;
  * las entidades Trabajador y ServicioOfrecido. 
  * @Athor Violeta Rodriguez
  */
+@Stateless
 public class TrabajadorServicioOfrecidoLogic 
 {
     @Inject
@@ -36,6 +38,7 @@ public class TrabajadorServicioOfrecidoLogic
     public ServicioOfrecidoEntity addServicioOfrecido(Long trabajadorId, Long servicioOfrecidoId) {
         
         TrabajadorEntity  trabajadorEntity = trabajadorPersistence.find(trabajadorId);
+        
         ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(servicioOfrecidoId);
         trabajadorEntity.getServicios().add(servicioOfrecidoEntity);
         
