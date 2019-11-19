@@ -49,7 +49,7 @@ public class TrabajadorServicioOfrecidoResource
      */
     @POST
     @Path("{servicioOfrecidoId: \\d+}")
-    public ServicioOfrecidoDTO addServicio(@PathParam("trabajadorId") Long trabajadorId, @PathParam("servicioOfrecidoId") Long servicioOfrecidoId) {
+    public ServicioOfrecidoDTO addServicio(@PathParam("trabajadoresId") Long trabajadorId, @PathParam("servicioOfrecidoId") Long servicioOfrecidoId) {
         
         if (servicioOfrecidoLogic.getServicioOfrecido(servicioOfrecidoId) == null) {
             throw new WebApplicationException("El recurso /books/" + servicioOfrecidoId + " no existe.", 404);
@@ -64,7 +64,7 @@ public class TrabajadorServicioOfrecidoResource
      * @return JSONArray - los libros encontrados para el trabjador. 
      */
     @GET
-    public List<ServicioOfrecidoDTO> getServiciosOfrecidos(@PathParam("trbajadoresId") Long trabajadorId)
+    public List<ServicioOfrecidoDTO> getServiciosOfrecidos(@PathParam("trabajadoresId") Long trabajadorId)
     {
        List<ServicioOfrecidoDTO> list=servicioOfrecidoEntityToDTO(trabajadorServicioOfrecidoLogic.getServiciosOfrecidos(trabajadorId));  
        
@@ -81,7 +81,7 @@ public class TrabajadorServicioOfrecidoResource
      * Error de lógica que se genera cuando no se encuentra el serivicioOfrecido.
      */
     @GET
-    @Path("{serivcioOfrecidoId: \\d+}")
+    @Path("{servicioOfrecidoId: \\d+}")
     public ServicioOfrecidoDTO getServicioOfrecido(@PathParam("trabajadoresId") Long trabajadorId, @PathParam("servicioOfrecidoId") Long servicioOfrecidoId) throws BusinessLogicException
     {
         if(servicioOfrecidoLogic.getServicioOfrecido(trabajadorId)==null)

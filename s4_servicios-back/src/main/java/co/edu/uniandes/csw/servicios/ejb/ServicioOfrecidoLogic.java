@@ -135,7 +135,7 @@ public class ServicioOfrecidoLogic
 
         String tipo = newService.getTipo();
 
-        if(old != null ) 
+        if(old != null && old.getId()!=servicioId)  
         {
             throw new BusinessLogicException("Ya existe un servicio con ese nombre");
         }
