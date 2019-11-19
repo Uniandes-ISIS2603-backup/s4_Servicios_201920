@@ -358,6 +358,80 @@
 			"response": []
 		},
 		{
+			"name": "Fiiltrar por tipo Pintura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be2f1de8-8d1e-49d5-83d4-05ec59b429b3",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
+							"tests[\"El tipo es el esperado\"] = data[0].tipo === \"Pintura\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/Pintura",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"Pintura"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fiiltrar por tipo invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be2f1de8-8d1e-49d5-83d4-05ec59b429b3",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
+							"tests[\"No hay servicio del tipo\"] = data.isEmpty();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/Fail",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"Fail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Editar un servicioOfrecido que no existe",
 			"event": [
 				{
@@ -437,6 +511,108 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n\"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 300.0,\r\n\"tipo\": \"Plomeria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un servicioOfrecido con nombre repetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No crea un servicio, ya existe otro con ese nombre\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"existe un servicio con ese nombre\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n\"nombre\": \"Pintar habitacion\",\r\n\"precio\": 300.0,\r\n\"tipo\": \"Plomeria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un servicioOfrecido con tipo invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No crea un servicio con un tipo invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"no se encuentra dentro de la oferta\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"descripcion\": \"Se realiza mantenimiento preventivo de la lavadora\",\r\n\"nombre\": \"Mantenimiento de lavadora\",\r\n\"precio\": 300.0,\r\n\"tipo\": \"Plomeria-fail\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -31,17 +31,26 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ServicioOfrecidoPersistenceTest {
     
+    
     @Inject
     private ServicioOfrecidoPersistence sop;
     
     @PersistenceContext
     private EntityManager em;
     
+    /*
+    Lista con los datos que se utilizan para las pruebas.
+    */
     private ArrayList<ServicioOfrecidoEntity> data = new ArrayList();
     
     @Inject
     UserTransaction utx;
     
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
@@ -51,6 +60,9 @@ public class ServicioOfrecidoPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
      public void iniciarTest() {
         try {
@@ -69,10 +81,17 @@ public class ServicioOfrecidoPersistenceTest {
         }
     }
     
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
      private void clearData() {
         em.createQuery("delete from ServicioOfrecidoEntity").executeUpdate();
     }
      
+     /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
      private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -82,6 +101,9 @@ public class ServicioOfrecidoPersistenceTest {
         }
      }   
      
+     /*
+     Prueba para crear un ServicioOfrecido
+     */
     @Test
     public void createServicioOfrecidoTest()
     {
@@ -101,6 +123,9 @@ public class ServicioOfrecidoPersistenceTest {
        
     }
     
+    /*
+    Pruebas para encontrar un servicio ofrecido dado su id. 
+    */
     @Test
     public void findSerivicioOfrecidoTest()
     {     
@@ -113,6 +138,9 @@ public class ServicioOfrecidoPersistenceTest {
         Assert.assertEquals(data.get(1).getNombre(), entity.getNombre());
     }
     
+    /*
+    Prueba para buscara todos los servicisoOfrecidos
+    */
        @Test 
     public void findAllServicioOfrecidoTest()
     {   
@@ -135,6 +163,9 @@ public class ServicioOfrecidoPersistenceTest {
        
     }
     
+    /*
+    Prueba para buscar un ServicioOfrecido dado su nomnbre
+    */
        @Test
     public void findByNameTest()       
     {        
@@ -147,6 +178,29 @@ public class ServicioOfrecidoPersistenceTest {
         Assert.assertEquals(data.get(2).getNombre(), entity.getNombre());
     }
     
+     /*
+    Prueba para buscar la lista de ServicioOfrecido dado su tipo. 
+    */
+      @Test
+    public void findByTypeTest()       
+    {        
+        data.get(0).setTipo("Plomeria");
+        ServicioOfrecidoEntity expected1= sop.update((ServicioOfrecidoEntity )data.get(0));
+        data.get(1).setTipo("Plomeria");
+        ServicioOfrecidoEntity expected2 =sop.update(data.get(1));
+        List<ServicioOfrecidoEntity> entities =sop.findByType("Plomeria");
+        
+        Assert.assertNotNull(entities);
+        Assert.assertEquals(2, entities.size());
+        
+        Assert.assertEquals(data.get(0).getTipo(), entities.get(0).getTipo());
+
+        Assert.assertEquals(data.get(1).getTipo(), entities.get(1).getTipo());
+    }
+    
+    /*
+    Prueba para actualizar un serivicioOfrecido. 
+    */
     @Test
     public void updateServicioOfrecidoTest()
     {
@@ -165,6 +219,9 @@ public class ServicioOfrecidoPersistenceTest {
        Assert.assertEquals(newEntity.getNombre(), entitySearch.getNombre());        
     }
     
+    /*
+    Prueba para borrar un servicioOfrecido
+    */
     @Test
     public void deleteSerivicioOfrecidoTest()
     {
