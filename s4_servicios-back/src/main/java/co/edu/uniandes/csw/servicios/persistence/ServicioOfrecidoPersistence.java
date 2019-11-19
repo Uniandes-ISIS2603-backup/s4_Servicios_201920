@@ -55,9 +55,17 @@ public class ServicioOfrecidoPersistence {
         
         ServicioOfrecidoEntity sameName = (ServicioOfrecidoEntity) query.getSingleResult();
         
-        return sameName;
-                    
+        return sameName;      
+    }
+    
+    public List<ServicioOfrecidoEntity>  findByType(String tipo)
+    {
+       //Creamos un query para buscar el servicio por tipo. Aquí voy a gaurdar los resultados de la búsqueda.
+        TypedQuery query= em.createQuery("Select e From ServicioOfrecidoEntity e where e.tipo = :tipo", ServicioOfrecidoEntity.class);
         
+        query = query.setParameter("tipo", tipo );
+        
+        return query.getResultList();      
     }
     
     public ServicioOfrecidoEntity update(ServicioOfrecidoEntity servicioOfrecido)

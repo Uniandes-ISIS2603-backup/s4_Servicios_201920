@@ -6,7 +6,7 @@ insert into ClienteEntity (id, tarjeta_id) values (116, null);
 select * from ClienteEntity;
 delete from ServicioOfrecidoEntity;
 
-Select *  from ServicioOfrecidoEntity;
+Select *  from ServicioOfrecidoEntity; 
 
 insert into ServicioOfrecidoEntity (id,nombre, descripcion,precio,tipo)
             values(1,'Mantenimiento de lavadora','Se revisa y se realiza un mantenimiento preventivo a la labodora del cliente',123.2,'Plomeria');

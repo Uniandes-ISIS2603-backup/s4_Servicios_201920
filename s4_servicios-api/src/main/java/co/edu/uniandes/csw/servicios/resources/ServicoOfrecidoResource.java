@@ -81,6 +81,29 @@ public class ServicoOfrecidoResource
     }
     
     /**
+     * Busca los servicioOfrecido del tipo recibido en la URL y los devuelve.
+     *
+     * @param servicioOfrecidoId Identificador del servicioOfrecido que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON - El servicio ofrecido buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el libro.
+     */
+    @GET
+   @Path("{servicioOfrecidoTipo:[a-zA-Z]+}")
+    public List<ServicioOfrecidoDTO> getServiciosOfrecidosType(@PathParam("servicioOfrecidoTipo") String servicioOfrecidoType)
+    {
+        List<ServicioOfrecidoEntity> entities = servicioLogic.getServiciosOfrecidosByType(servicioOfrecidoType) ;
+        if (entities == null) {
+            throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioOfrecidoType + " no existe.", 404);
+        }
+        
+        List<ServicioOfrecidoDTO> serviciosDTO = toDTO(entities);
+        return serviciosDTO;
+    }
+    
+    
+    /**
      * Actualiza el servicioOfrecido con el id recibido en la URL con la 
      * informaci'on que recibe el el cuepo de la perticion
      * @param servicioId identificador del servicioOfrecido que se desea actualizar.
