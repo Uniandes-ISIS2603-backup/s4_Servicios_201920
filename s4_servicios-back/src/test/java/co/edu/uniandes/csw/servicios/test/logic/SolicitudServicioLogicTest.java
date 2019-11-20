@@ -226,31 +226,6 @@ public class SolicitudServicioLogicTest {
         solicitudLogic.createSolicitudServicio(newEntity);
     }
     
-     /**
-     * Prueba para crear una Solicitud sin Servicios.
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void createSolicitudServiciosNullTest() throws BusinessLogicException {
-        SolicitudServicioEntity newEntity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        newEntity.setCliente(clienteData.get(0));
-        newEntity.setServicios(null);
-        solicitudLogic.createSolicitudServicio(newEntity);
-    }
-    
-     /**
-     * Prueba para crear una Solicitud con Servicios vacio.
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void createSolicitudServiciosVacioTest() throws BusinessLogicException {
-        SolicitudServicioEntity newEntity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        newEntity.setCliente(clienteData.get(0));
-        newEntity.setServicios(new ArrayList<>());
-        solicitudLogic.createSolicitudServicio(newEntity);
-    }
     
      /**
      * Prueba para consultar la lista de Solicitudes.

@@ -26,7 +26,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
    
     @PodamExclude
-    @OneToMany
+    @OneToMany( mappedBy = "cliente")
     private List<SolicitudServicioEntity> servicios;
    
     /**
