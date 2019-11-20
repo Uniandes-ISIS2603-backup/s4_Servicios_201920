@@ -251,4 +251,6 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     public void setServicios(Collection<ServicioOfrecidoEntity> servicios) {
         this.servicios = servicios;
     }
+    
+    
 }
