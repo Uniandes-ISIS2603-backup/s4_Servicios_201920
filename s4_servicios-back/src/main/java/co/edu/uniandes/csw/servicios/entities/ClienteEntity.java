@@ -136,6 +136,22 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     }
     
     /**
+     * Retorna la información de la tarjeta del cliente
+     * @return el teléfono
+     */
+    public PagoTarjetaEntity getTarjeta(){
+        return tarjeta;
+    }
+    
+    /**
+     * Cambia la información de la tarjeta del cliente por una dada por parámetro. 
+     * @param pTelefono - El nuevo teléfono
+     */
+    public void setTarjeta(PagoTarjetaEntity pTarjeta){
+        tarjeta = pTarjeta;
+    }
+    
+    /**
      * Retorna el correo electrónico del cliente
      * @return el email
      */
@@ -181,21 +197,5 @@ public class ClienteEntity extends BaseEntity implements Serializable{
      */
     public void setContrasena(String pContrasena){
         contrasena = pContrasena;
-    }
-
-    /**
-     * @return the tarjeta
-     */
-    public PagoTarjetaEntity getTarjeta() {
-        return tarjeta;
-    }
-
-    /**
-     * @param tarjeta the tarjeta to set
-     */
-    public void setTarjeta(PagoTarjetaEntity tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-    
-    
+    }  
 }
