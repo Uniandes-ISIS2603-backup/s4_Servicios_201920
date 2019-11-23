@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.SolicitudServicioPersistence;
 import co.edu.uniandes.csw.servicios.persistence.TrabajadorPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Estudiante
  */
+@Stateless
 public class TrabajadorSolicitudServicioLogic {
      @Inject
     private SolicitudServicioPersistence  solicitudServicioPersistence;
