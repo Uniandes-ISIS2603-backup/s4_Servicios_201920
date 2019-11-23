@@ -45,7 +45,7 @@ public class ClienteLogic {
         else if(clienteEntity.getUsuario() == null || clienteEntity.getUsuario().equals("")){
             throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el usuario es inválido");
         }
-        else if(clienteEntity.getTelefono() < 0 ){
+        else if(clienteEntity.getTelefono() == null || clienteEntity.getTelefono() < 0){
             throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el número telefónico es inválido");
         }
         
@@ -73,11 +73,12 @@ public class ClienteLogic {
      * @param clienteId Identificador de la instancia a consultar
      * @return Instancia de ClienteEntity con los datos del cliente consultado.
      */
-    public ClienteEntity getCliente(Long clienteId) {
+    public ClienteEntity getCliente(Long clienteId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el cliente con id = {0}", clienteId);
         ClienteEntity clienteEntity = persistence.find(clienteId);
         if (clienteEntity == null) {
             LOGGER.log(Level.SEVERE, "El cliente con el id = {0} no existe", clienteId);
+            throw new BusinessLogicException("El cliente con el id =" + clienteId + "no existe");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el cliente con id = {0}", clienteId);
         return clienteEntity;
@@ -105,9 +106,6 @@ public class ClienteLogic {
      */
     public void deleteCliente(Long clienteId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
-//        if (servicios.size() != 0) {
-//            throw new BusinessLogicException("No se puede borrar el cliente con id = " + clienteId + " porque tiene servicios asociados");
-//        }
         persistence.delete(clienteId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
     }
