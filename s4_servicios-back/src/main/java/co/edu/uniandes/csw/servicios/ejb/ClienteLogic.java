@@ -36,17 +36,30 @@ public class ClienteLogic {
      */
     public ClienteEntity createCliente (ClienteEntity clienteEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del cliente");
-        if(clienteEntity.getNombre() == null || clienteEntity.getNombre().equals("")){
-            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el nombre es inválido");
+        String error = "No se puede crear un cliente con id";
+        if(clienteEntity.getNombre() == null){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el nombre es null");
         }
-        else if(clienteEntity.getMail() == null || !clienteEntity.getMail().matches("^(.+)@(.+)$")){
-            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el correo es inválido");
+        else if(clienteEntity.getNombre().equals("")){
+            throw new BusinessLogicException(error + clienteEntity.getId() + "porque el nombre es vacío");
         }
-        else if(clienteEntity.getUsuario() == null || clienteEntity.getUsuario().equals("")){
-            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el usuario es inválido");
+        else if(clienteEntity.getMail() == null){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el correo es null");
         }
-        else if(clienteEntity.getTelefono() == null || clienteEntity.getTelefono() < 0){
-            throw new BusinessLogicException("No se puede crear un cliente con id" + clienteEntity.getId() + " porque el número telefónico es inválido");
+        else if(!clienteEntity.getMail().matches("^(.+)@(.+)$")){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el correo es inválido");
+        }
+        else if(clienteEntity.getUsuario() == null){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el usuario es null");
+        }
+        else if( clienteEntity.getUsuario().equals("")){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el usuario es vacío");
+        }
+        else if(clienteEntity.getTelefono() == null){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el número telefónico es null");
+        }
+        else if(clienteEntity.getTelefono() < 0){
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque el número telefónico es inválido");
         }
         
             clienteEntity = persistence.create(clienteEntity);
