@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"tipo\": \"Plomeria\",\r\n\t\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la lavadora del cliente\",\r\n\t\"precio\": 123.2,\r\n\t\"nombre\": \"Mantenimiento de lavadora\"\r\n}\r\n",
+					"raw": "{\r\n\"tipo\": \"Plomeria\",\r\n\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la lavadora del cliente\",\r\n\"precio\": 123.2,\r\n\"nombre\": \"Mantenimiento de lavadora\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

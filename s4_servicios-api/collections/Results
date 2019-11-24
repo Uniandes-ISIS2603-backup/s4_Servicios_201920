@@ -1,0 +1,116 @@
+newman
+
+ServicioOfrecido-Test
+
+→ Crear un servicioOfrecido
+  POST http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos [200 OK, 662B, 176ms]
+  √  No genera error en el Post
+
+→ Crear un servicioOfrecido 2
+  POST http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos [200 OK, 646B, 33ms]
+  √  No genera error en el Post
+
+→ Crear un servicioOfrecido con tipo erroneo
+  POST http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos [412 Precondition Failed, 588B, 25ms]
+  √  No crea un servicio con un tipo invalido
+  √  Mensaje correcto de error
+
+→ Crear un servicio con el mimso nombre
+  POST http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos [412 Precondition Failed, 536B, 19ms]
+  √  No crea un servicio, ya existe otro con ese nombre
+  √  Mensaje correcto de error
+
+→ Obtener todos los serviciosOfrecidos
+  GET http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos [200 OK, 821B, 28ms]
+  √  No genera error en el Get all
+  √  Contador de servicios
+
+→ Obtener un servicioOfrecido
+  GET http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/60 [200 OK, 662B, 28ms]
+  ┌
+  │ '{"descripcion":"Se revisa y se realiza un mantenimien
+  │ to preventivo a la lavadora del cliente","id":60,"nomb
+  │ re":"Mantenimiento de lavadora","precio":123.2,"tipo":
+  │ "Plomeria"}'
+  └
+  √  No genera error en el Get
+
+→ Obtener un servicioOfrecdio que no existe
+  GET http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/0 [404 Not Found, 533B, 23ms]
+  √  No consulta con id que no existe
+  √  Mensaje correcto de error
+
+→ Fiiltrar por tipo Pintura
+  GET http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/Pintura [200 OK, 648B, 28ms]
+  ┌
+  │ '[{"descripcion":"Se cambia el color de una habitación
+  │  según preferencias del cliente","id":61,"nombre":"Pin
+  │ tar habitacion","precio":23.08,"tipo":"Pintura"}]'
+  └
+  √  No genera error en el Get
+  √  El tipo es el esperado
+
+→ Fiiltrar por tipo invalido
+  GET http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/Fail [200 OK, 490B, 32ms]
+  ┌
+  │ '[]'
+  └
+  √  No genera error en el Get
+  √  No hay servicio del tipo
+
+→ Editar un servicioOfrecido que no existe
+  PUT http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/0 [404 Not Found, 533B, 35ms]
+  √  No actualiza con id que no existe
+  √  Mensaje correcto de error
+
+→ Editar un servicioOfrecido
+  PUT http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/60 [200 OK, 636B, 56ms]
+  ┌
+  │ '{"descripcion":"Se realiza mantenimiento preventivo d
+  │ e la lavadora","id":60,"nombre":"Mantenimiento de lava
+  │ dora","precio":300.0,"tipo":"Plomeria"}'
+  └
+  √  No genera error en el Put
+
+→ Editar un servicioOfrecido con nombre repetido
+  PUT http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/60 [412 Precondition Failed, 536B, 50ms]
+  √  No crea un servicio, ya existe otro con ese nombre
+  √  Mensaje correcto de error
+
+→ Editar un servicioOfrecido con tipo invalido
+  PUT http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/60 [412 Precondition Failed, 588B, 59ms]
+  √  No crea un servicio con un tipo invalido
+  √  Mensaje correcto de error
+
+→ Borrar un ServicioOfrecido
+  DELETE http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/60 [204 No Content, 445B, 60ms]
+  √  No genera error en el Delete
+
+→ Borrar un ServicioOfrecido 2
+  DELETE http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/61 [204 No Content, 445B, 47ms]
+  √  No genera error en el Delete
+
+→ Borrar un servicioOfrecido que no existe
+  DELETE http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/0 [404 Not Found, 533B, 31ms]
+  √  No borra con id que no existe
+  √  Mensaje correcto de error
+
+┌─────────────────────────┬───────────────────┬───────────────────┐
+│                         │          executed │            failed │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              iterations │                 1 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│                requests │                16 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│            test-scripts │                16 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│      prerequest-scripts │                 0 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              assertions │                26 │                 0 │
+├─────────────────────────┴───────────────────┴───────────────────┤
+│ total run duration: 1423ms                                      │
+├─────────────────────────────────────────────────────────────────┤
+│ total data received: 1.48KB (approx)                            │
+├─────────────────────────────────────────────────────────────────┤
+│ average response time: 45ms [min: 19ms, max: 176ms, s.d.: 36ms] │
+└─────────────────────────────────────────────────────────────────┘
