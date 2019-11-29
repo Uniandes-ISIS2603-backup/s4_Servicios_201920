@@ -86,7 +86,7 @@ public class ClienteResource {
      */
     @GET
     @Path("{clientesId: \\d+}")
-    public ClienteDetailDTO getCliente(@PathParam("clientesId") Long clientesId) {
+    public ClienteDetailDTO getCliente(@PathParam("clientesId") Long clientesId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ClienterResource getCliente: input: {0}", clientesId);
         ClienteEntity clienteEntity = clienteLogic.getCliente(clientesId);
         if (clienteEntity == null) {
@@ -111,7 +111,7 @@ public class ClienteResource {
      */
     @PUT
     @Path("{clientesId: \\d+}")
-    public ClienteDetailDTO updateCliente(@PathParam("clientesId") Long clientesId, ClienteDetailDTO cliente) {
+    public ClienteDetailDTO updateCliente(@PathParam("clientesId") Long clientesId, ClienteDetailDTO cliente) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: clientesId: {0} , cliente: {1}", new Object[]{clientesId, cliente});
         cliente.setId(clientesId);
         if (clienteLogic.getCliente(clientesId) == null) {
@@ -140,7 +140,7 @@ public class ClienteResource {
      * @return El servicio de Servicios para ese autor en paricular.
      */
     @Path("{clientesId: \\d+}/servicios")
-    public Class<ClienteSolicitudServicioResource> getAuthorBooksResource(@PathParam("clientesId") Long clientesId) {
+    public Class<ClienteSolicitudServicioResource> getAuthorBooksResource(@PathParam("clientesId") Long clientesId) throws BusinessLogicException {
         if (clienteLogic.getCliente(clientesId) == null) {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }

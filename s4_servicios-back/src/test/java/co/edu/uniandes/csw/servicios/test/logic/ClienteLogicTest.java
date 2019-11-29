@@ -154,7 +154,12 @@ public class ClienteLogicTest {
     @Test
     public void getClienteTest() {
         ClienteEntity entity = data.get(0);
-        ClienteEntity resultEntity = clienteLogic.getCliente(entity.getId());
+        ClienteEntity resultEntity = null;
+        try{
+            resultEntity = clienteLogic.getCliente(entity.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
@@ -195,8 +200,31 @@ public class ClienteLogicTest {
         Assert.assertNull(deleted);
     }
     
+    
     /**
-     * Prueba para crear un cliente con un mal correo asociado a un libro
+     * Prueba para crear un cliente con un nombre vacío 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteSinNombreTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setMail(null);
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un cliente con un nombre vacío
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteConNombreVacio() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setMail("");
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un cliente con un nombre null 
      * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
@@ -207,7 +235,19 @@ public class ClienteLogicTest {
     }
     
     /**
-     * Prueba para crear un cliente con un mal telefono asociado a un libro
+     * Prueba para crear un cliente con un nombre null 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteSinCorreoTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setMail(null);
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    
+    /**
+     * Prueba para crear un cliente con un mal telefonos
      * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
@@ -215,6 +255,27 @@ public class ClienteLogicTest {
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         newEntity.setTelefono(-1);
         ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    
+    /**
+     * Prueba para crear un cliente con un mal telefonos
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteSinTelefonoTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setTelefono(null);
+        ClienteEntity result = clienteLogic.createCliente(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un cliente con un mal telefono
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void getClienteQueNoExisteTest() throws BusinessLogicException {
+        ClienteEntity resultEntity = clienteLogic.getCliente((long)-1);
     }
 
 }

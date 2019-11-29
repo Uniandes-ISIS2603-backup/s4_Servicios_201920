@@ -56,10 +56,7 @@ public class SolicitudServicioLogic {
        {
            throw new BusinessLogicException("La solicitud debe tener un cliente.");
        }
-       if(solicitud.getServicios() == null || solicitud.getServicios().isEmpty())
-       {
-           throw new BusinessLogicException("La solicitud debe tener al menos un servicio a ofrecer.");
-       }
+      
        solicitud = persistence.create(solicitud);
        LOGGER.log(Level.INFO, "Termina proceso de creación de la solicitud");
         return solicitud;

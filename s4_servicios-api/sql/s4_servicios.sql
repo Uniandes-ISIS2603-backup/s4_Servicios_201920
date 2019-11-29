@@ -1,5 +1,5 @@
 delete from ClienteEntity;
-delete from FacturaEntity;
+delete from ServicioOfrecidoEntity;
 
 insert into FacturaEntity (id, duracion, preciomateriales, fecha, pagada, primerpago, solicitud_id, tarjetapago_id) values (10, 10, 10, '8/20/1996', 0, 0, 1, null);
 insert into ClienteEntity (id, tarjeta_id) values (116, null);
