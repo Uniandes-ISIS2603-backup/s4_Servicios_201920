@@ -518,12 +518,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_servicios-api",
 						"api",
@@ -569,12 +569,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_servicios-api",
 						"api",
@@ -620,12 +620,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{id_1}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s4_servicios-api",
 						"api",
