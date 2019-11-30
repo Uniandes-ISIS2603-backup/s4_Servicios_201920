@@ -8,7 +8,7 @@
     <class>co.edu.uniandes.csw.bookstore.servicios.ClienteEntity</class>
     <class>co.edu.uniandes.csw.bookstore.servicios.PagoTarjetaEntity</class>
     <class>co.edu.uniandes.csw.bookstore.servicios.ReporteMensualEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.servicios.ServicioOfrecidoEntity</class>
+    <class>co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity</class>
     <class>co.edu.uniandes.csw.bookstore.servicios.SolicitudServicioEntity</class>
     <class>co.edu.uniandes.csw.bookstore.servicios.TrabajadorEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
