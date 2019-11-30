@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
  * @author Estudiante
  */
 @RunWith(Arquillian.class)
-public class FacturaTI {
+public class FacturaIT {
     private static final String COLLECTION = "FacturaResourceTest.postman_collection";
 
     @Deployment(testable = true)
