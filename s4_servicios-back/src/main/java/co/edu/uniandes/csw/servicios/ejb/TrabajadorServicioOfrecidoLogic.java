@@ -68,12 +68,15 @@ public class TrabajadorServicioOfrecidoLogic
     public ServicioOfrecidoEntity getServicioOfrecido   (Long trabajadorId, Long servicioOfrecidoId) throws BusinessLogicException {
       
         List<ServicioOfrecidoEntity> servicios = (List<ServicioOfrecidoEntity>) trabajadorPersistence.find(trabajadorId).getServicios();
-        ServicioOfrecidoEntity servicioOfrecidoEntity = servicioOfrecidoPersistence.find(servicioOfrecidoId);
-        int index = servicios.indexOf(servicioOfrecidoEntity);
-        if (index >= 0) {
-            return servicios.get(index);
+        for (ServicioOfrecidoEntity i: servicios)
+        {
+            if(i.getId().equals(servicioOfrecidoId))
+            {
+                return i;
+            }
         }
-        throw new BusinessLogicException("El trbajador no ofrece el servicio");
+
+        throw new BusinessLogicException("El trbajador no ofrece el servicio "+ servicioOfrecidoId);
         
     }
     
@@ -90,19 +93,19 @@ public class TrabajadorServicioOfrecidoLogic
     }
         
         
-    public List<ServicioOfrecidoEntity> replaceServicioOfrecido(Long trabajadorId, List<ServicioOfrecidoEntity> servicios )
+    public List<ServicioOfrecidoEntity> replaceServicioOfrecido(Long trabajadorId, List<ServicioOfrecidoEntity> servicios ) throws BusinessLogicException
     {
         TrabajadorEntity trabajadorEntity = trabajadorPersistence.find(trabajadorId);
-        List<ServicioOfrecidoEntity> servicioList= servicioOfrecidoPersistence.findAll();
-        for (ServicioOfrecidoEntity servicio:servicioList )
+        for (ServicioOfrecidoEntity servicio:servicios )
         {
-            if(servicios.contains(servicio))
+            if(servicioOfrecidoPersistence.find(servicio.getId())==null)
             {
-               trabajadorEntity.getServicios().remove(servicio);
+               throw new BusinessLogicException("El recurso serviciosOfrecidos/"+ servicio.getId() + " no existe");
             }
-            trabajadorEntity.setServicios(servicios);
         }
-        return (List<ServicioOfrecidoEntity>) trabajadorEntity.getServicios();
+          trabajadorEntity.setServicios(servicios);
+          
+        return (List<ServicioOfrecidoEntity>) trabajadorPersistence.update(trabajadorEntity).getServicios();
     }
    
      

@@ -18,6 +18,7 @@ insert into ServicioOfrecidoEntity (id,nombre, descripcion,precio,tipo)
             values(2,'Pintar habitación','Se cambia el color de una habitación según preferencias del cliente',23.08,'Pintura');
 
 delete from TrabajadorEntity;
+select * from TrabajadorEntity;
 
 delete from CalificacionEntity;
 delete from SolicitudServicioEntity;

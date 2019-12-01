@@ -37,7 +37,7 @@ private Boolean disponibilidad;
 
 private String riesgos;
 
-private String seguroSocial;
+private String seguroSocial;        
 
 
 public TrabajadorDTO(){
