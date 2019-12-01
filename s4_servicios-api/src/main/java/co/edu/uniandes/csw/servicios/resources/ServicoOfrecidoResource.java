@@ -27,7 +27,8 @@ import javax.ws.rs.WebApplicationException;
  *Clase que implementa el recurso "ServicioOfrecido"
  * 
  * @author Violeta Rodríguez
- */@Path("serviciosOfrecidos")
+ */
+@Path("serviciosOfrecidos")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

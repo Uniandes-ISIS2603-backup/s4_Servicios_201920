@@ -22,18 +22,20 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     
     //estos van en la clase Cuenta
     private String nombre;
-    private String usuario;
     private String contrasena;
     private Integer telefono;
-    private String correo;
+    private String usuario;
     private String foto;
+    private String correo;
+    
     
     //atributos
-    private boolean disponibilidad;
+    private Boolean esApto;
     private String hojaVida;
-    private boolean esApto;
-    private String seguroSocial;
+    private Boolean disponibilidad;
     private String riesgos;
+    private String seguroSocial;
+   
 
     //asociaciones
     @PodamExclude
@@ -139,14 +141,14 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     /**
      * @return the disponibilidad
      */
-    public boolean isDisponibilidad() {
+    public Boolean isDisponibilidad() {
         return disponibilidad;
     }
 
     /**
      * @param disponibilidad the disponibilidad to set
      */
-    public void setDisponibilidad(boolean disponibilidad) {
+    public void setDisponibilidad(Boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
@@ -167,14 +169,14 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     /**
      * @return the esApto
      */
-    public boolean isEsApto() {
+    public Boolean isEsApto() {
         return esApto;
     }
 
     /**
      * @param esApto the esApto to set
      */
-    public void setEsApto(boolean esApto) {
+    public void setEsApto(Boolean esApto) {
         this.esApto = esApto;
     }
 

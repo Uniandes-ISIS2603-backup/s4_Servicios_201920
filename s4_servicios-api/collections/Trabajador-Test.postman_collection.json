@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "91b8b2d4-5f75-483c-a045-004cac0e820c",
+		"name": "Trabajador-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8cb78cd-fdcd-4dbf-9c23-ea4f04d59a6a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(data.id)",
+							"postman.setGlobalVariable(\"id_worker1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"nombre\": \"Albeto Ramirez\",\r\n\"contrasenia\": \"xxx\",\r\n\"telefono\": 1234,\r\n\"usuario\": \"al.ramirez\",\r\n\"foto\": \"fotot\",\r\n\"correo\": \"aramirez@gmail.com\",\r\n\"esApto\": true,\r\n\"hojaVida\": \"hojaVida\",\r\n\"disponibilidad\": false,\r\n\"riesgos\": \"riesgos\",\r\n\"seguroSocial\": \"seguroSocial\",\r\n\"solicitudes\": [],\r\n\"servicios\": [],\r\n\"calificaciones\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un trabajador 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8cb78cd-fdcd-4dbf-9c23-ea4f04d59a6a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_worker2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"fperez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"Hola\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Fabio Perez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"fa.perez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un trabajador con usuario repetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8cb78cd-fdcd-4dbf-9c23-ea4f04d59a6a",
+						"exec": [
+							"",
+							"tests[\"No crea una trabajador con un usuario ya registrado\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"existe un trabajador\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"otrocorreo@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"al.ramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un trabajador con correo repetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8cb78cd-fdcd-4dbf-9c23-ea4f04d59a6a",
+						"exec": [
+							"",
+							"tests[\"No crea una trabajador con un usuario ya registrado\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"existe un trabajador\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"aramirez@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"otrosuaario\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los trabajadores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea81078b-df1d-47c8-9b92-b707ee825ed7",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de servicios\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				},
+				"description": "Se crea un nuevo servicio ofrecido"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/s4_servicios-api/ServicioOfrecido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s4_servicios-api",
+								"ServicioOfrecido"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Obtener un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{id_worker2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{id_worker2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un trabajador que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b5bc40c-ad14-4b45-8f31-7140e3014684",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /trabajadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un  trabajador que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dc4c764-0003-487f-9b60-1fec86f24a72",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /trabajadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"aramirez@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"al.ramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"aramirez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida2\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial_cambio\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"al.ramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{id_worker1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{id_worker1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un trabajador 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{id_worker2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{id_worker2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un trabajador que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /trabajadores /0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1fc53274-46a8-46b4-9576-d102536d1bec",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5007f0fb-eb4f-40c2-aad9-4e17eed85177",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
