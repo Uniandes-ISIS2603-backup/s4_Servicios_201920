@@ -84,12 +84,12 @@ public class TrabajadorServicioOfrecidoResource
     @Path("{servicioOfrecidoId: \\d+}")
     public ServicioOfrecidoDTO getServicioOfrecido(@PathParam("trabajadoresId") Long trabajadorId, @PathParam("servicioOfrecidoId") Long servicioOfrecidoId) throws BusinessLogicException
     {
-        if(servicioOfrecidoLogic.getServicioOfrecido(trabajadorId)==null)
+        if(servicioOfrecidoLogic.getServicioOfrecido(servicioOfrecidoId)==null)
         {
          throw new WebApplicationException("El recurso /SeriviciosOfrecidos/" + servicioOfrecidoId    + " no existe.", 404);   
         }
         
-        ServicioOfrecidoDTO dto = new ServicioOfrecidoDTO(trabajadorServicioOfrecidoLogic.getServicioOfrecido(trabajadorId, trabajadorId));
+        ServicioOfrecidoDTO dto = new ServicioOfrecidoDTO(trabajadorServicioOfrecidoLogic.getServicioOfrecido(trabajadorId, servicioOfrecidoId));
         return dto;   
     }
     
@@ -100,7 +100,7 @@ public class TrabajadorServicioOfrecidoResource
      * @return JSONArray - la lista actualziada
      */
     @PUT 
-    public List<ServicioOfrecidoDTO> replaceServiciosOfrecidos(@PathParam("trabajadoresId") Long trabjadorId, List<ServicioOfrecidoDTO> servicios)
+    public List<ServicioOfrecidoDTO> replaceServiciosOfrecidos(@PathParam("trabajadoresId") Long trabjadorId, List<ServicioOfrecidoDTO> servicios) throws BusinessLogicException
     {
         for (ServicioOfrecidoDTO servicio : servicios) {
             if (servicioOfrecidoLogic.getServicioOfrecido(servicio.getId()) == null) {

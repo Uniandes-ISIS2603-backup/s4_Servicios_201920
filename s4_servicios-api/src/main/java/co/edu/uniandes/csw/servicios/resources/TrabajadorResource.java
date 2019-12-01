@@ -25,19 +25,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 
 /**
  * @author c.otalora
  *
  */
 @Path("/trabajadores")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/json")
+@Consumes("application/json")
 @RequestScoped
 public class TrabajadorResource {
     
-        private static final Logger LOGGER = Logger.getLogger(TrabajadorResource.class.getName());
+        
+    private static final Logger LOGGER = Logger.getLogger(TrabajadorResource.class.getName());
 
     
     @Inject
@@ -49,7 +49,7 @@ public class TrabajadorResource {
         TrabajadorDTO trabajadorDTO = new TrabajadorDTO(trabajadorLogic.crearTrabajador(trabajador.toEntity()));
         LOGGER.log(Level.INFO, "TrabajadorResource createTrabajador: output: {0}", trabajadorDTO);
         
-        return trabajador;
+        return trabajadorDTO;
     }
   
     @PUT
@@ -58,7 +58,7 @@ public class TrabajadorResource {
         LOGGER.log(Level.INFO, "TrabajadorResource updateTrabajador: input: trabajadorsId: {0} , trabajador: {1}", new Object[]{trabajadorId, trabajador});
         trabajador.setId(trabajadorId);
         if (trabajadorLogic.getTrabajador(trabajadorId) == null) {
-            throw new WebApplicationException("El recurso /trabajadors/" + trabajadorId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /trabajadores/" + trabajadorId + " no existe.", 404);
         }
         TrabajadorDetailDTO detailDTO = new TrabajadorDetailDTO(trabajadorLogic.updateTrabajador(trabajadorId, trabajador.toEntity()));
         LOGGER.log(Level.INFO, "TrabajadorResource updateTrabajador: output: {0}", detailDTO);
@@ -66,7 +66,7 @@ public class TrabajadorResource {
     }
     
     @GET
-    public List<TrabajadorDetailDTO> getTrabajador() {
+    public List<TrabajadorDetailDTO> getTrabajadores() {
         LOGGER.info("TrabajadorResource getTrabajadors: input: void");
         List<TrabajadorDetailDTO> listaTrabajadors = listEntity2DTO(trabajadorLogic.getTrabajadores());
         LOGGER.log(Level.INFO, "TrabajadorResource getTrabajador: output: {0}", listaTrabajadors);
@@ -75,11 +75,11 @@ public class TrabajadorResource {
     
     @GET
     @Path("{trabajadorId: \\d+}")
-    public TrabajadorDTO getTrabajador(@PathParam("trabajadorId") Long trabajadorId) {
+    public TrabajadorDetailDTO getTrabajador(@PathParam("trabajadorId") Long trabajadorId) {
         LOGGER.log(Level.INFO, "TrabajadorrResource getTrabajador: input: {0}", trabajadorId);
         TrabajadorEntity trabajadorEntity = trabajadorLogic.getTrabajador(trabajadorId);
         if (trabajadorEntity == null) {
-            throw new WebApplicationException("El recurso /trabajador/" + trabajadorId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /trabajadores/" + trabajadorId + " no existe.", 404);
         }
         TrabajadorDetailDTO detailDTO = new TrabajadorDetailDTO(trabajadorEntity);
         LOGGER.log(Level.INFO, "TrabajadorResource getTrabajador: output: {0}", detailDTO);
@@ -91,7 +91,7 @@ public class TrabajadorResource {
     public void deleteTrabajador(@PathParam("trabajadorId") Long trabajadorId) {
         LOGGER.log(Level.INFO, "AuthorResource deleteAuthor: input: {0}", trabajadorId);
         if (trabajadorLogic.getTrabajador(trabajadorId) == null) {
-            throw new WebApplicationException("El recurso /authors/" + trabajadorId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /trabajadores /" + trabajadorId + " no existe.", 404);
         }
         trabajadorLogic.deleteTrabajador(trabajadorId);
         LOGGER.info("TrabajadorResource deleteTrabajador: output: void");

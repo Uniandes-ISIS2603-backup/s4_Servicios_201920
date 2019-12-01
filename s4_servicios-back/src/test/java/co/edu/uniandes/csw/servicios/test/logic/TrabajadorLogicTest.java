@@ -94,24 +94,131 @@ public class TrabajadorLogicTest {
         }
     }
     
+   /**
+    * Prueba crear un trabajador
+    * @throws BusinessLogicException 
+    */
     @Test
     public void createTrabajadorTest() throws BusinessLogicException{
         PodamFactory factory = new PodamFactoryImpl();
         TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
         
+        TrabajadorEntity newEntityFail = newEntity;
+        
+        //No se puede agregar un tabajador con el mismo correo
+       try
+        {
+            newEntityFail.setCorreo(data.get(0).getCorreo());
+            TrabajadorEntity creado = trabajadorLogic.crearTrabajador(newEntityFail);
+            Assert.fail("No se deberia poder crear un Trabajador con un correo que ya existe.");
+        }
+        catch (BusinessLogicException e){}
+          //No se puede agregar un tabajador con el mismo usuario
+        try
+        {
+            newEntityFail=newEntity;
+            newEntityFail.setUsuario(data.get(0).getUsuario());
+            TrabajadorEntity creado = trabajadorLogic.crearTrabajador(newEntityFail);
+            Assert.fail("No se deberia poder crear un Trabajador con un usuario que ya existe.");
+        }
+        catch (BusinessLogicException e){}
+        
+        //Se puede crear un trabajador   
+        try
+        {
+        newEntity = factory.manufacturePojo(TrabajadorEntity.class);
         TrabajadorEntity ee = trabajadorLogic.crearTrabajador(newEntity);
-        
-        Assert.assertNotNull("No crea nada", ee);
-        
-        TrabajadorEntity entity= em.find(TrabajadorEntity.class, ee.getId());
-        
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertNotNull("No crea nada", ee);        
+        Assert.assertEquals(newEntity.getNombre(), ee.getNombre());
+        Assert.assertEquals(newEntity.getUsuario(), ee.getUsuario());
+        Assert.assertEquals(newEntity.getContrasena(), ee.getContrasena());
+        Assert.assertEquals(newEntity.getTelefono(), ee.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), ee.getCorreo());
+        Assert.assertEquals(newEntity.getFoto(), ee.getFoto());
+        Assert.assertEquals(newEntity.isDisponibilidad(), ee.isDisponibilidad());
+        Assert.assertEquals(newEntity.getHojaVida(), ee.getHojaVida());
+        Assert.assertEquals(newEntity.isEsApto(), ee.isEsApto());
+        Assert.assertEquals(newEntity.getSeguroSocial(), ee.getSeguroSocial());
+        Assert.assertEquals(newEntity.getRiesgos(), ee.getRiesgos());
+        }
+        catch(BusinessLogicException e)
+        {
+            Assert.fail(newEntity.getUsuario());
+
+        }  
     }
     
-    @Test(expected = BusinessLogicException.class)
-    public void crearTrabaJadorCOnMismoID()throws BusinessLogicException{
-        TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
-        trabajadorLogic.crearTrabajador(newEntity);
-        trabajadorLogic.crearTrabajador(newEntity);
+       /**
+     * Prueba para consultar la lista deTrabajadores
+     */
+    @Test
+    public void getTrabajadoresTest() 
+    {
+        List<TrabajadorEntity> list = trabajadorLogic.getTrabajadores();
+        Assert.assertEquals(data.size(), list.size());
+        for (TrabajadorEntity entity : list) {
+            boolean found = false;
+            for (TrabajadorEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
+
+      /**
+     * Prueba para consultar un trabajodr
+     */
+    @Test
+    public void getServicio1Test() {
+        TrabajadorEntity newEntity = data.get(0);
+        TrabajadorEntity ee = trabajadorLogic.getTrabajador(newEntity.getId());
+        Assert.assertNotNull(ee);
+        Assert.assertEquals(newEntity.getNombre(), ee.getNombre());
+        Assert.assertEquals(newEntity.getUsuario(), ee.getUsuario());
+        Assert.assertEquals(newEntity.getContrasena(), ee.getContrasena());
+        Assert.assertEquals(newEntity.getTelefono(), ee.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), ee.getCorreo());
+        Assert.assertEquals(newEntity.getFoto(), ee.getFoto());
+        Assert.assertEquals(newEntity.isDisponibilidad(), ee.isDisponibilidad());
+        Assert.assertEquals(newEntity.getHojaVida(), ee.getHojaVida());
+        Assert.assertEquals(newEntity.isEsApto(), ee.isEsApto());
+        Assert.assertEquals(newEntity.getSeguroSocial(), ee.getSeguroSocial());
+        Assert.assertEquals(newEntity.getRiesgos(), ee.getRiesgos());
+    }
+    
+     /**
+     * Prueba para actualizar un trabajador.
+     * 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void updateServicioTest()throws BusinessLogicException {
+        TrabajadorEntity newEntity = data.get(0);
+        TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+        
+        newEntity.setCorreo("Nuevo Correo");
+        newEntity.setDisponibilidad(false);
+        newEntity.setSeguroSocial("Otro seguro social");
+        
+        TrabajadorEntity ee = trabajadorLogic.updateTrabajador(newEntity.getId(),newEntity);
+        
+        Assert.assertNotNull(ee);        
+        Assert.assertEquals(newEntity.getNombre(), ee.getNombre());
+        Assert.assertEquals(newEntity.getUsuario(), ee.getUsuario());
+        Assert.assertEquals(newEntity.getContrasena(), ee.getContrasena());
+        Assert.assertEquals(newEntity.getTelefono(), ee.getTelefono());
+        Assert.assertEquals(newEntity.getCorreo(), ee.getCorreo());
+        Assert.assertEquals(newEntity.getFoto(), ee.getFoto());
+        Assert.assertEquals(newEntity.isDisponibilidad(), ee.isDisponibilidad());
+        Assert.assertEquals(newEntity.getHojaVida(), ee.getHojaVida());
+        Assert.assertEquals(newEntity.isEsApto(), ee.isEsApto());
+        Assert.assertEquals(newEntity.getSeguroSocial(), ee.getSeguroSocial());
+        Assert.assertEquals(newEntity.getRiesgos(), ee.getRiesgos());
+        
+    }
+    
+    
+    
 }

@@ -1,0 +1,890 @@
+{
+	"info": {
+		"_postman_id": "c17c8cbf-ba47-4e36-a4ad-152a7a2d6cfe",
+		"name": "TrabajadorServicioOfrecido-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un servicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d3be4c3-c205-41f2-aef1-4fc31a8cbf8b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"servicio_id_1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"tipo\": \"Plomeria\",\r\n\t\"descripcion\": \"Se revisa y se realiza un mantenimiento preventivo a la lavadora del cliente\",\r\n\t\"precio\": 123.2,\r\n\t\"nombre\": \"Mantenimiento de lavadora\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un servicioOfrecido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "992b4ed8-4eb9-4636-90ae-fb6cff2a536e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"servicio_id_2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"descripcion\": \"Se cambia el color de una habitación según preferencias del cliente\",\r\n\"nombre\": \"Pintar habitacion\",\r\n\"precio\": 23.08,\r\n\"tipo\": \"Pintura\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un servicioOfrecido 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "992b4ed8-4eb9-4636-90ae-fb6cff2a536e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"servicio_id_3\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"descripcion\": \"Se cambia un baño según gusto del cliente\",\r\n\"nombre\": \"Renovar baño\",\r\n\"precio\": 53.08,\r\n\"tipo\": \"Plomeria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8cb78cd-fdcd-4dbf-9c23-ea4f04d59a6a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"trabajador_id\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"aramirez@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"al.ramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar servicio a trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57ecfea9-4362-43be-8362-5abced8eecc3",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/{{servicio_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar servicio a trabajador 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb26751b-4600-458a-90a2-d439c3e02472",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/{{servicio_id_2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"{{servicio_id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los servicios de un trabajadores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7fa3e8d2-8f4a-43e6-bf1e-c898f8e55da5",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de servicios\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un servicio de un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b50931c9-16a5-4c06-be63-7007fa14bd84",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/{{servicio_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un servicio de un trabajador que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b50931c9-16a5-4c06-be63-7007fa14bd84",
+						"exec": [
+							"",
+							"tests[\"No retorna un servicio de un trabjador que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"recurso /trabajadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/0/servicios/{{servicio_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"0",
+						"servicios",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un servicio que no existe de un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b50931c9-16a5-4c06-be63-7007fa14bd84",
+						"exec": [
+							"tests[\"No retorna un servicio no existe de un trabjador\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /SeriviciosOfrecidos/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un servicio que no presta un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b50931c9-16a5-4c06-be63-7007fa14bd84",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"trbajador no ofrece el servicio\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/{{servicio_id_3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"{{servicio_id_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar servicios un trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n\"descripcion\": \"Se cambia un baño según gustos del cliente\",\r\n\"nombre\": \"Renovar baño\",\r\n\"id\":{{servicio_id_3}},\r\n\"precio\": 53.08,\r\n\"tipo\": \"Plomeria\"\r\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar servicio de un  trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/{{servicio_id_3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"{{servicio_id_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar servicio  que no existe de un  trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /servicioOfrecido/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}/servicios/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}",
+						"servicios",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar servicio  de un  trabajador que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /trabajadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/0/servicios/{{servicio_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"0",
+						"servicios",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar uns servicioOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error ene delete\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{servicio_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un servicioOfrecido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error ene delete\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{servicio_id_2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{servicio_id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un servicioOfrecido 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error ene delete\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/serviciosOfrecidos/{{servicio_id_3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"serviciosOfrecidos",
+						"{{servicio_id_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un  trabajador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a63293b-4d55-4ed1-8f1a-1047f68e630a",
+						"exec": [
+							"tests[\"No genera error ene delete\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{trabajador_id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{trabajador_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

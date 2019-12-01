@@ -29,15 +29,15 @@ private String foto;
 
 private String correo;
   
-private boolean esApto;
+private Boolean esApto;
 
 private String hojaVida;
 
-private boolean disponibilidad;
+private Boolean disponibilidad;
 
 private String riesgos;
 
-private String seguroSocial;
+private String seguroSocial;        
 
 
 public TrabajadorDTO(){
@@ -194,14 +194,14 @@ public TrabajadorEntity toEntity(){
     /**
      * @return the disponibilidad
      */
-    public boolean isDisponibilidad() {
+    public Boolean isDisponibilidad() {
         return disponibilidad;
     }
 
     /**
      * @param disponibilidad the disponibilidad to set
      */
-    public void setDisponibilidad(boolean disponibilidad) {
+    public void setDisponibilidad(Boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
@@ -222,14 +222,14 @@ public TrabajadorEntity toEntity(){
     /**
      * @return the esApto
      */
-    public boolean isEsApto() {
+    public Boolean isEsApto() {
         return esApto;
     }
 
     /**
      * @param esApto the esApto to set
      */
-    public void setEsApto(boolean esApto) {
+    public void setEsApto(Boolean esApto) {
         this.esApto = esApto;
     }
 
