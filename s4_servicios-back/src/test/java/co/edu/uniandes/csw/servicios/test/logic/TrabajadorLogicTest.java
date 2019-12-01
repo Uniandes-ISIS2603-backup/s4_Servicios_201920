@@ -9,14 +9,12 @@ import co.edu.uniandes.csw.servicios.ejb.TrabajadorLogic;
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.TrabajadorPersistence;
-import com.google.common.math.BigIntegerMath;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.glassfish.pfl.basic.tools.argparser.ElementParser;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -25,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.AllTests;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -171,7 +168,7 @@ public class TrabajadorLogicTest {
      * Prueba para consultar un trabajodr
      */
     @Test
-    public void getServicio1Test() {
+    public void getTrabajador1Test() {
         TrabajadorEntity newEntity = data.get(0);
         TrabajadorEntity ee = trabajadorLogic.getTrabajador(newEntity.getId());
         Assert.assertNotNull(ee);
@@ -194,7 +191,7 @@ public class TrabajadorLogicTest {
      * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
      */
     @Test
-    public void updateServicioTest()throws BusinessLogicException {
+    public void updateTrabajadorTest()throws BusinessLogicException {
         TrabajadorEntity newEntity = data.get(0);
         TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
         
@@ -219,6 +216,41 @@ public class TrabajadorLogicTest {
         
     }
     
+    /**
+     * Prueba para obtener un trabajador por Usuario. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void getTrabajadorPorUsuarioTest() throws BusinessLogicException {
+        TrabajadorEntity entity = data.get(0);
+        TrabajadorEntity resultEntity = trabajadorLogic.getTrabajadorPorUsuario(entity.getUsuario(), entity.getContrasena());        
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
+        Assert.assertEquals(entity.getCorreo(), resultEntity.getCorreo());
+    }
     
+    /**
+     * Prueba para obtener un trabajador con un usuario que no existe. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void getTrabajadorPorUsuarioTestConUsuarioNoExistente() throws BusinessLogicException {
+        TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+        newEntity.setUsuario(null);
+        TrabajadorEntity result = trabajadorLogic.getTrabajadorPorUsuario(newEntity.getUsuario(), newEntity.getContrasena());
+    }
+    
+    /**
+     * Prueba para obtener un trabajador con una contraseña que no corresponde. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void getTrabajadorPorUsuarioTestContrasenaIncorrecta() throws BusinessLogicException {
+        TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+        newEntity.setContrasena("Ahora esta mal: " + newEntity.getContrasena());
+        TrabajadorEntity result = trabajadorLogic.getTrabajadorPorUsuario(newEntity.getUsuario(), newEntity.getContrasena());
+    
+    }
     
 }

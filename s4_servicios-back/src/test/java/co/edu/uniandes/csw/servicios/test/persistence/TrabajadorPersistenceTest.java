@@ -161,4 +161,18 @@ public class TrabajadorPersistenceTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * Prueba para consultasr un Trabajador por usuario.
+     */
+    @Test
+    public void findTrabajadorByUsuarioTest() {
+        TrabajadorEntity entity = data.get(0);
+        TrabajadorEntity newEntity = ep.findByUsuario(entity.getUsuario());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getUsuario(), newEntity.getUsuario());
+
+        newEntity = ep.findByUsuario(null);
+        Assert.assertNull(newEntity);
+    }
+    
 }

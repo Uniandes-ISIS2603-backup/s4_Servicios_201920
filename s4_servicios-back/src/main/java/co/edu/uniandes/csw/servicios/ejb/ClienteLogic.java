@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.servicios.ejb;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import java.util.List;
@@ -133,7 +132,7 @@ public class ClienteLogic {
      *
      * @param clienteUsuario Usuario de la instancia a consultar
      * @param clienteContrasena Contrasena de la instancia a consultar
-     * @throws BusinessLogicException si el cliente tiene servicios asociados.
+     * @throws BusinessLogicException 
      * @return Instancia de ClienteEntity con los datos del cliente consultado.
      */
     public ClienteEntity getClientePorUsuario(String clienteUsuario, String clienteContrasena) throws BusinessLogicException{
@@ -141,7 +140,7 @@ public class ClienteLogic {
         ClienteEntity clienteEntity = persistence.findByUsuario(clienteUsuario);
         if (clienteEntity == null) {
             LOGGER.log(Level.SEVERE, "El cliente con el usuario = {0} no existe", clienteUsuario);
-            throw new BusinessLogicException("El cliente con el usuario =" + clienteUsuario + "no existe");
+            throw new BusinessLogicException("El cliente con el usuario = " + clienteUsuario + " no existe");
         }
         else if(!clienteEntity.getContrasena().equals(clienteContrasena))
         {

@@ -106,6 +106,31 @@ public class TrabajadorResource {
         return TrabajadorServicioOfrecidoResource.class;
     }
     
+    /**
+     * Busca el Trabajador con el usuario y contrasena asociado recibido en la URL y lo devuelve.
+     *
+     * @param trabajadorUs Usuario del cliente que se esta buscando. Este debe
+     * ser una cadena de caracteres y/o digitos.
+     * @param trabajadorPs Contrasena del cliente que se esta buscando. Este debe
+     * ser una cadena de caracteres y/o digitps.
+     * @return JSON {@link ClienteDetailDTO} - El trabajador buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el trabajador.
+     * @throws BusinessLogicException
+     */
+    @GET
+    @Path("{trabajadorUs: [A-Za-z0-9][A-Za-z0-9]*}/{trabajadorPs: [A-Za-z0-9][A-Za-z0-9]*}")
+    public TrabajadorDetailDTO getTrabajadorPorUsuario(@PathParam("trabajadorUs") String trabajadorUs, @PathParam("trabajadorPs") String trabajadorPs) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "TrabajadorResource getTrabajadorPorUsuario: input: {0}", trabajadorUs);
+        TrabajadorEntity trabajadorEntity = trabajadorLogic.getTrabajadorPorUsuario(trabajadorUs, trabajadorPs);
+        if (trabajadorEntity == null) {
+            throw new WebApplicationException("El recurso /trabajadores/" + trabajadorUs + "/" + trabajadorPs +  "no existe.", 404);
+        }
+        TrabajadorDetailDTO detailDTO = new TrabajadorDetailDTO(trabajadorEntity);
+        LOGGER.log(Level.INFO, "TrabajadorResource getTrabajadorPorUsuario: output: {0}", detailDTO);
+        return detailDTO;
+    }
+    
     
     private List<TrabajadorDetailDTO> listEntity2DTO(List<TrabajadorEntity> entityList) {
         List<TrabajadorDetailDTO> list = new ArrayList<>();

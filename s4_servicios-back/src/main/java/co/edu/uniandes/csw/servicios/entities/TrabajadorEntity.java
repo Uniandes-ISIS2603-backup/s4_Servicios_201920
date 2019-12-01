@@ -21,21 +21,20 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     
     
     //estos van en la clase Cuenta
-    private String nombre;
     private String contrasena;
+    private String nombre;
     private Integer telefono;
-    private String usuario;
     private String foto;
+    private String usuario;
     private String correo;
     
     
     //atributos
-    private Boolean esApto;
     private String hojaVida;
+    private Boolean esApto;
     private Boolean disponibilidad;
-    private String riesgos;
     private String seguroSocial;
-   
+    private String riesgos;
 
     //asociaciones
     @PodamExclude

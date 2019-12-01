@@ -157,6 +157,7 @@ public class ClienteResource {
      * @return JSON {@link ClienteDetailDTO} - El cliente buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el cliente.
+     * @throws BusinessLogicException
      */
     @GET
     @Path("{clientesUs: [A-Za-z0-9][A-Za-z0-9]*}/{clientesPs: [A-Za-z0-9][A-Za-z0-9]*}")
@@ -164,7 +165,7 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienterResource getClientePorUsuario: input: {0}", clientesUs);
         ClienteEntity clienteEntity = clienteLogic.getClientePorUsuario(clientesUs, clientesPs);
         if (clienteEntity == null) {
-            throw new WebApplicationException("El recurso /cliente/" + clientesUs + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + clientesUs + "/" + clientesPs + " no existe.", 404);
         }
         ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
         LOGGER.log(Level.INFO, "ClienteResource getClientePorUsuario: output: {0}", detailDTO);

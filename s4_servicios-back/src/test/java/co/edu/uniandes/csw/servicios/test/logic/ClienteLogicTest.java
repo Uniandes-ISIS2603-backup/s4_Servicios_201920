@@ -7,8 +7,6 @@ package co.edu.uniandes.csw.servicios.test.logic;
 
 import co.edu.uniandes.csw.servicios.ejb.ClienteLogic;
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
-import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import java.util.ArrayList;

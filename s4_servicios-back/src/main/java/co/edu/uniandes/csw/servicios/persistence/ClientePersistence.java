@@ -64,7 +64,7 @@ public class ClientePersistence {
      * @return - El cliente encontrado
      */
     public ClienteEntity find(long clienteId){
-        LOGGER.log(Level.INFO, "Se está buscando el cliente con id", clienteId);
+        LOGGER.log(Level.INFO, "Se está buscando el cliente con id: {0}", clienteId);
         return em.find(ClienteEntity.class, clienteId);
     }
     
@@ -75,7 +75,7 @@ public class ClientePersistence {
      * @return - el cliente con los datos ya actualizados. 
      */
     public ClienteEntity update(ClienteEntity pClienteEntity){
-        LOGGER.log(Level.INFO, "Se está actualizando el libro con id", pClienteEntity.getId());
+        LOGGER.log(Level.INFO, "Se está actualizando el libro con id: {0}", pClienteEntity.getId());
         return em.merge(pClienteEntity);
     }
     
@@ -97,7 +97,7 @@ public class ClientePersistence {
      * existe alguno devuelve el primero.
      */
      public ClienteEntity findByUsuario(String usuario) {
-        LOGGER.log(Level.INFO, "Consultando clientes por usuario ", usuario);
+        LOGGER.log(Level.INFO, "Consultando clientes por usuario: {0} ", usuario);
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.usuario = :usuario", ClienteEntity.class);
         query = query.setParameter("usuario", usuario);
         List<ClienteEntity> sameUsuario = query.getResultList();
@@ -109,7 +109,7 @@ public class ClientePersistence {
         } else {
             result = sameUsuario.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por usuario ", usuario);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por usuario: {0} ", usuario);
         return result;
     }
 }
