@@ -294,6 +294,11 @@ public class ServicioOfrecidoLogicTest {
       @Test
     public void findByTypeTest() throws BusinessLogicException       
     {        
+        List<ServicioOfrecidoEntity> antes =servicioOfrecidoLogic.getServiciosOfrecidosByType("Electricidad");
+        for (ServicioOfrecidoEntity serv : antes) {
+            serv.setTipo("Aseo");
+            servicioOfrecidoLogic.updateServicioOfrecido(serv.getId(), serv);
+        }
         ServicioOfrecidoEntity expected1= factory.manufacturePojo(ServicioOfrecidoEntity.class);
         expected1.setTipo("Electricidad");
         servicioOfrecidoLogic.createServicioOfrecido(expected1);

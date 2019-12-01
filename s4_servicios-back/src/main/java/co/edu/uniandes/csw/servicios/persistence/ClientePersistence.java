@@ -88,4 +88,28 @@ public class ClientePersistence {
         ClienteEntity clienteEntity = em.find(ClienteEntity.class, tID);
         em.remove(clienteEntity);
     }
+    
+    /**
+     * Busca si hay algun cliente con el usuario que se envía de argumento
+     *
+     * @param usuario: Usuario del cliente que se está buscando
+     * @return null si no existe ningun cliente con el usuario del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+     public ClienteEntity findByUsuario(String usuario) {
+        LOGGER.log(Level.INFO, "Consultando clientes por usuario ", usuario);
+        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.usuario = :usuario", ClienteEntity.class);
+        query = query.setParameter("usuario", usuario);
+        List<ClienteEntity> sameUsuario = query.getResultList();
+        ClienteEntity result;
+        if (sameUsuario == null) {
+            result = null;
+        } else if (sameUsuario.isEmpty()) {
+            result = null;
+        } else {
+            result = sameUsuario.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por usuario ", usuario);
+        return result;
+    }
 }

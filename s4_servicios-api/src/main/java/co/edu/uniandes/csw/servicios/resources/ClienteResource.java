@@ -139,14 +139,38 @@ public class ClienteResource {
      * servicio.
      * @return El servicio de Servicios para ese autor en paricular.
      */
-    @Path("{clientesId: \\d+}/servicios")
-    public Class<ClienteSolicitudServicioResource> getAuthorBooksResource(@PathParam("clientesId") Long clientesId) throws BusinessLogicException {
+    @Path("{clientesId: \\d+}/solicitudes")
+    public Class<ClienteSolicitudServicioResource> getClienteSolicitudesResource(@PathParam("clientesId") Long clientesId) throws BusinessLogicException {
         if (clienteLogic.getCliente(clientesId) == null) {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }
         return ClienteSolicitudServicioResource.class;
     }
     
+    /**
+     * Busca el cliente con el usuario y contrasena asociado recibido en la URL y lo devuelve.
+     *
+     * @param clientesUs Usuario del cliente que se esta buscando. Este debe
+     * ser una cadena de caracteres y/o digitos.
+     * @param clientesPs Contrasena del cliente que se esta buscando. Este debe
+     * ser una cadena de caracteres y/o digitps.
+     * @return JSON {@link ClienteDetailDTO} - El cliente buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el cliente.
+     */
+    @GET
+    @Path("{clientesUs: [A-Za-z0-9][A-Za-z0-9]*}/{clientesPs: [A-Za-z0-9][A-Za-z0-9]*}")
+    public ClienteDetailDTO getClientePorUsuario(@PathParam("clientesUs") String clientesUs, @PathParam("clientesPs") String clientesPs) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ClienterResource getClientePorUsuario: input: {0}", clientesUs);
+        ClienteEntity clienteEntity = clienteLogic.getClientePorUsuario(clientesUs, clientesPs);
+        if (clienteEntity == null) {
+            throw new WebApplicationException("El recurso /cliente/" + clientesUs + " no existe.", 404);
+        }
+        ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
+        LOGGER.log(Level.INFO, "ClienteResource getClientePorUsuario: output: {0}", detailDTO);
+        return detailDTO;
+    }
+
 
     /**
      * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
