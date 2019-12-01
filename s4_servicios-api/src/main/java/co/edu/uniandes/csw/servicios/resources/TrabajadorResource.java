@@ -66,7 +66,7 @@ public class TrabajadorResource {
     }
     
     @GET
-    public List<TrabajadorDetailDTO> getTrabajador() {
+    public List<TrabajadorDetailDTO> getTrabajadores() {
         LOGGER.info("TrabajadorResource getTrabajadors: input: void");
         List<TrabajadorDetailDTO> listaTrabajadors = listEntity2DTO(trabajadorLogic.getTrabajadores());
         LOGGER.log(Level.INFO, "TrabajadorResource getTrabajador: output: {0}", listaTrabajadors);
@@ -75,7 +75,7 @@ public class TrabajadorResource {
     
     @GET
     @Path("{trabajadorId: \\d+}")
-    public TrabajadorDTO getTrabajador(@PathParam("trabajadorId") Long trabajadorId) {
+    public TrabajadorDetailDTO getTrabajador(@PathParam("trabajadorId") Long trabajadorId) {
         LOGGER.log(Level.INFO, "TrabajadorrResource getTrabajador: input: {0}", trabajadorId);
         TrabajadorEntity trabajadorEntity = trabajadorLogic.getTrabajador(trabajadorId);
         if (trabajadorEntity == null) {

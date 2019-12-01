@@ -22,11 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package co.edu.uniandes.csw.servicios.tests.postman;
-
 import co.edu.uniandes.csw.servicios.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.servicios.dtos.CascaraDTO;
 import co.edu.uniandes.csw.servicios.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
+import co.edu.uniandes.csw.servicios.dtos.ServicioOfrecidoDTO;
 import java.io.File;
 import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -57,7 +56,7 @@ public class ServicioOfrecidoIT {
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
                 .addPackage(RestConfig.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-                .addPackage(CascaraDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(ServicioOfrecidoDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")

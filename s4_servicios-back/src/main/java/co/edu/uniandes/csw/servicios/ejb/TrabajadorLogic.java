@@ -28,10 +28,16 @@ public class TrabajadorLogic {
     
     public TrabajadorEntity crearTrabajador (TrabajadorEntity trabajador) throws BusinessLogicException{
         
-        if(persistence.find(trabajador.getId())!=null){
-            throw new BusinessLogicException("Ya existe un trabajador con este id");
-        }
-        
+         List<TrabajadorEntity> workers = persistence.findAll();
+         
+         for (TrabajadorEntity i: workers)
+         {
+            if(trabajador.getUsuario().equals(i.getUsuario())  || trabajador.getCorreo().equals(i.getCorreo()))
+            {
+            throw new BusinessLogicException("Ya existe un trabajador con este correo o con este usuario");
+            } 
+         }
+
         trabajador=persistence.create(trabajador);
         return trabajador;
     }

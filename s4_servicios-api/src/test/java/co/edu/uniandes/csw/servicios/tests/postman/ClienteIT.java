@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.servicios.tests.postman;
 
 
 import co.edu.uniandes.csw.servicios.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.servicios.dtos.CascaraDTO;
 import co.edu.uniandes.csw.servicios.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import co.edu.uniandes.csw.servicios.dtos.ClienteDTO;
@@ -41,7 +40,7 @@ public class ClienteIT {
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(ClienteResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
+                .addPackage(RestConfig.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
                 .addPackage(ClienteDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
