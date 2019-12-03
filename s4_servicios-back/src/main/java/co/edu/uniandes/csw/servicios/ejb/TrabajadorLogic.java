@@ -26,7 +26,7 @@ public class TrabajadorLogic {
     @Inject
     private TrabajadorPersistence persistence;
     
-    public TrabajadorEntity crearTrabajador (TrabajadorEntity trabajador) throws BusinessLogicException{
+        public TrabajadorEntity crearTrabajador (TrabajadorEntity trabajador) throws BusinessLogicException{
         
          List<TrabajadorEntity> workers = persistence.findAll();
          

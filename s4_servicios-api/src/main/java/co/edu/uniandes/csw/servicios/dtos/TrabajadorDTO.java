@@ -47,35 +47,35 @@ public TrabajadorDTO(){
     
 public TrabajadorDTO( TrabajadorEntity trabajadorEntity ){
     if(trabajadorEntity != null){
-        id = trabajadorEntity.getId();
-        nombre = trabajadorEntity.getNombre();
-        usuario = trabajadorEntity.getUsuario();
-        contrasena = trabajadorEntity.getContrasena();
-        telefono = trabajadorEntity.getTelefono();
-        correo = trabajadorEntity.getCorreo();
-        foto = trabajadorEntity.getFoto();
-        disponibilidad = trabajadorEntity.isDisponibilidad();
-        hojaVida = trabajadorEntity.getHojaVida();
-        esApto = trabajadorEntity.isEsApto();
-        seguroSocial = trabajadorEntity.getSeguroSocial();
-        riesgos = trabajadorEntity.getRiesgos();
+        this.id = trabajadorEntity.getId();
+        this.nombre = trabajadorEntity.getNombre();
+        this.usuario = trabajadorEntity.getUsuario();
+        this.contrasena = trabajadorEntity.getContrasena();
+        this.telefono = trabajadorEntity.getTelefono();
+        this.correo = trabajadorEntity.getCorreo();
+        this.foto = trabajadorEntity.getFoto();
+        this.disponibilidad = trabajadorEntity.isDisponibilidad();
+        this.hojaVida = trabajadorEntity.getHojaVida();
+        this.esApto = trabajadorEntity.isEsApto();
+        this.seguroSocial = trabajadorEntity.getSeguroSocial();
+        this.riesgos = trabajadorEntity.getRiesgos();
         }
     }
         
 public TrabajadorEntity toEntity(){
         TrabajadorEntity trabajadorEntity = new TrabajadorEntity();
-        trabajadorEntity.setId(id);
-        trabajadorEntity.setNombre(nombre);
-        trabajadorEntity.setUsuario(usuario);
-        trabajadorEntity.setContrasena(contrasena);
-        trabajadorEntity.setTelefono(telefono);
-        trabajadorEntity.setCorreo(correo);
-        trabajadorEntity.setFoto(foto);
-        trabajadorEntity.setDisponibilidad(disponibilidad);
-        trabajadorEntity.setHojaVida(hojaVida);
-        trabajadorEntity.setEsApto(esApto);
-        trabajadorEntity.setSeguroSocial(seguroSocial);
-        trabajadorEntity.setRiesgos(riesgos);
+        trabajadorEntity.setId(this.id);
+        trabajadorEntity.setNombre(this.nombre);
+        trabajadorEntity.setUsuario(this.usuario);
+        trabajadorEntity.setContrasena(this.contrasena);
+        trabajadorEntity.setTelefono(this.telefono);
+        trabajadorEntity.setCorreo(this.correo);
+        trabajadorEntity.setFoto(this.foto);
+        trabajadorEntity.setDisponibilidad(this.disponibilidad);
+        trabajadorEntity.setHojaVida(this.hojaVida);
+        trabajadorEntity.setEsApto(this.esApto);
+        trabajadorEntity.setSeguroSocial(this.seguroSocial);
+        trabajadorEntity.setRiesgos(this.riesgos);
         return trabajadorEntity;
     }
 
@@ -233,6 +233,14 @@ public TrabajadorEntity toEntity(){
         this.esApto = esApto;
     }
 
+    public Boolean getEsApto() {
+        return esApto;
+    }
+
+    public Boolean getDisponibilidad() {
+        return disponibilidad;
+    }
+
     /**
      * @return the riesgos
      */
@@ -246,8 +254,5 @@ public TrabajadorEntity toEntity(){
     public void setRiesgos(String riesgos) {
         this.riesgos = riesgos;
     }
-       @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
+
 }
