@@ -45,6 +45,7 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany
     private Collection<ServicioOfrecidoEntity>servicios;
+   
     
     
     /**
@@ -233,6 +234,14 @@ public class TrabajadorEntity extends BaseEntity implements Serializable {
      */
     public void setServicios(Collection<ServicioOfrecidoEntity> servicios) {
         this.servicios = servicios;
+    }
+
+    public Boolean getEsApto() {
+        return esApto;
+    }
+
+    public Boolean getDisponibilidad() {
+        return disponibilidad;
     }
     
     

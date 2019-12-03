@@ -198,4 +198,5 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     public void setContrasena(String pContrasena){
         contrasena = pContrasena;
     }  
+    
 }

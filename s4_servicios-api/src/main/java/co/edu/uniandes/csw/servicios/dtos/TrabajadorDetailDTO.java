@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.servicios.dtos;
 
-import co.edu.uniandes.csw.servicios.entities.CalificacionEntity;
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
@@ -20,7 +19,6 @@ import java.util.List;
 public class TrabajadorDetailDTO extends TrabajadorDTO implements Serializable{
     private List<SolicitudServicioDTO> solicitudes;
     private List<ServicioOfrecidoDTO> servicios;
-    private List<CalificacionDTO> calificaciones;
     
     public TrabajadorDetailDTO(){
         super();
@@ -93,19 +91,6 @@ public class TrabajadorDetailDTO extends TrabajadorDTO implements Serializable{
         this.servicios = servicios;
     }
 
-    /**
-     * @return the calificaciones
-     */
-    public List<CalificacionDTO> getCalificaciones() {
-        return calificaciones;
-    }
-
-    /**
-     * @param calificaciones the calificaciones to set
-     */
-    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
     
  
 }

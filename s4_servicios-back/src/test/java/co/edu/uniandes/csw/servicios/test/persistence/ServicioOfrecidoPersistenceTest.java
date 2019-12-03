@@ -181,7 +181,7 @@ public class ServicioOfrecidoPersistenceTest {
      /*
     Prueba para buscar la lista de ServicioOfrecido dado su tipo. 
     */
-      @Test
+       @Test
     public void findByTypeTest()       
     {        
         data.get(0).setTipo("Plomeria");
