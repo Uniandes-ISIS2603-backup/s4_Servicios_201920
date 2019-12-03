@@ -39,7 +39,7 @@ public class SolicitudServicioLogic {
      */
     public SolicitudServicioEntity createSolicitudServicio(SolicitudServicioEntity solicitud) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la solicitud");
+       LOGGER.log(Level.INFO, "Inicia proceso de creación de la solicitud");
        if(solicitud.getDescripcion() == null || solicitud.getDescripcion().equals(""))
        {
             throw new BusinessLogicException("La solicitud debe tener descripción.");
@@ -56,6 +56,7 @@ public class SolicitudServicioLogic {
        {
            throw new BusinessLogicException("La solicitud debe tener un cliente.");
        }
+
       
        solicitud = persistence.create(solicitud);
        LOGGER.log(Level.INFO, "Termina proceso de creación de la solicitud");
