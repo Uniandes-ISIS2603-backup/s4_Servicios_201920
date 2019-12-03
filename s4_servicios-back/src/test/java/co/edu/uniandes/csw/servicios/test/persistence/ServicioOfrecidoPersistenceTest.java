@@ -184,6 +184,12 @@ public class ServicioOfrecidoPersistenceTest {
        @Test
     public void findByTypeTest()       
     {        
+                List<ServicioOfrecidoEntity> after =sop.findByType("Plomeria");
+                for (ServicioOfrecidoEntity servicioOfrecidoEntity : after) {
+            servicioOfrecidoEntity.setTipo("Aseo");
+            sop.update(servicioOfrecidoEntity);
+        }
+
         data.get(0).setTipo("Plomeria");
         ServicioOfrecidoEntity expected1= sop.update((ServicioOfrecidoEntity )data.get(0));
         data.get(1).setTipo("Plomeria");
