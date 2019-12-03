@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"nombre\": \"Albeto Ramirez\",\r\n\"contrasenia\": \"xxx\",\r\n\"telefono\": 1234,\r\n\"usuario\": \"al.ramirez\",\r\n\"foto\": \"fotot\",\r\n\"correo\": \"aramirez@gmail.com\",\r\n\"esApto\": true,\r\n\"hojaVida\": \"hojaVida\",\r\n\"disponibilidad\": false,\r\n\"riesgos\": \"riesgos\",\r\n\"seguroSocial\": \"seguroSocial\",\r\n\"solicitudes\": [],\r\n\"servicios\": [],\r\n\"calificaciones\": []\r\n}",
+					"raw": "{\r\n\"nombre\": \"Albeto Ramirez\",\r\n\"contrasenia\": \"xxx\",\r\n\"telefono\": 1234,\r\n\"usuario\": \"al.ramirez\",\r\n\"foto\": \"fotot\",\r\n\"correo\": \"aramirez@gmail.com\",\r\n\"esApto\": true,\r\n\"hojaVida\": \"hojaVida\",\r\n\"disponibilidad\": false,\r\n\"riesgos\": \"riesgos\",\r\n\"seguroSocial\": \"seguroSocial\",\r\n\"solicitudes\": [],\r\n\"servicios\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,7 +87,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"correo\": \"fperez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"Hola\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Fabio Perez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"fa.perez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"raw": "{\r\n    \"correo\": \"fperez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"Hola\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Fabio Perez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"fa.perez\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
