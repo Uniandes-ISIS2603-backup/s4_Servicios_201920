@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.adapters.DateAdapter;
 import co.edu.uniandes.csw.servicios.entities.PagoTarjetaEntity;
+import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -14,15 +15,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Estudiante
  */
-public class PagoTarjetaDTO {
+public class PagoTarjetaDTO implements Serializable{
 
     private Long id;
 
-    private int noTarjeta;
+    private Integer noTarjeta;
 
     private String banco;
 
-    private int csv;
+    private Integer csv;
 
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaV;
@@ -57,7 +58,7 @@ public class PagoTarjetaDTO {
         return banco;
     }
 
-    public int getCsv() {
+    public Integer getCsv() {
         return csv;
     }
 
@@ -69,7 +70,7 @@ public class PagoTarjetaDTO {
         return id;
     }
 
-    public int getNoTarjeta() {
+    public Integer getNoTarjeta() {
         return noTarjeta;
     }
 
@@ -77,7 +78,7 @@ public class PagoTarjetaDTO {
         this.banco = banco;
     }
 
-    public void setCsv(int csv) {
+    public void setCsv(Integer csv) {
         this.csv = csv;
     }
 
@@ -89,7 +90,7 @@ public class PagoTarjetaDTO {
         this.id = id;
     }
 
-    public void setNoTarjeta(int noTarjeta) {
+    public void setNoTarjeta(Integer noTarjeta) {
         this.noTarjeta = noTarjeta;
     }
 

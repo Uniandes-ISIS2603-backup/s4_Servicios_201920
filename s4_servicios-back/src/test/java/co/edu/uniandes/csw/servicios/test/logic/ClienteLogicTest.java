@@ -342,9 +342,7 @@ public class ClienteLogicTest {
      */
     @Test(expected = BusinessLogicException.class)
     public void getClientePorUsuarioTestContrasenaIncorrecta() throws BusinessLogicException {
-        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
-        newEntity.setContrasena("Ahora esta mal: " + newEntity.getContrasena());
-        ClienteEntity result = clienteLogic.getClientePorUsuario(newEntity.getUsuario(), newEntity.getContrasena());
-    
+        ClienteEntity newEntity = data.get(0);
+        ClienteEntity result = clienteLogic.getClientePorUsuario(newEntity.getUsuario(), "Ahora está mal:" + newEntity.getContrasena());
     }
 }
