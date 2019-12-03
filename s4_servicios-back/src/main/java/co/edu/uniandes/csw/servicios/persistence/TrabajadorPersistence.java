@@ -46,4 +46,26 @@ public class TrabajadorPersistence {
     public TrabajadorEntity update(TrabajadorEntity t) {
         return em.merge(t);
     }
+    
+    /**
+     * Busca si hay algun trabajador con el usuario que se envía de argumento
+     *
+     * @param usuario: Usuario del trabajador que se está buscando
+     * @return null si no existe ningun trabajador con el usuario del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+     public TrabajadorEntity findByUsuario(String usuario) {
+        TypedQuery query = em.createQuery("Select e From TrabajadorEntity e where e.usuario = :usuario", TrabajadorEntity.class);
+        query = query.setParameter("usuario", usuario);
+        List<TrabajadorEntity> sameUsuario = query.getResultList();
+        TrabajadorEntity result;
+        if (sameUsuario == null) {
+            result = null;
+        } else if (sameUsuario.isEmpty()) {
+            result = null;
+        } else {
+            result = sameUsuario.get(0);
+        }
+        return result;
+    }
 }

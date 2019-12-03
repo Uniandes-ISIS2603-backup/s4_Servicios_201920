@@ -51,20 +51,6 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    /**
      * @return the descripcion
      */
     public String getDescripcion() {
@@ -76,6 +62,20 @@ public class ServicioOfrecidoEntity extends BaseEntity implements Serializable {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     /**

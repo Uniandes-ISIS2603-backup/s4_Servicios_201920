@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.servicios.ejb;
 
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import java.util.List;
@@ -55,6 +54,10 @@ public class ClienteLogic {
         else if( clienteEntity.getUsuario().equals("")){
             throw new BusinessLogicException(error + clienteEntity.getId() + " porque el usuario es vacío");
         }
+        else if (persistence.findByUsuario(clienteEntity.getUsuario()) != null)
+        {
+            throw new BusinessLogicException(error + clienteEntity.getId() + " porque ya existe un cliente con ese usuario");
+        }
         else if(clienteEntity.getTelefono() == null){
             throw new BusinessLogicException(error + clienteEntity.getId() + " porque el número telefónico es null");
         }
@@ -84,6 +87,7 @@ public class ClienteLogic {
      * Obtiene los datos de una instancia de Cliente a partir de su ID.
      *
      * @param clienteId Identificador de la instancia a consultar
+     * @throws BusinessLogicException si el cliente tiene servicios asociados.
      * @return Instancia de ClienteEntity con los datos del cliente consultado.
      */
     public ClienteEntity getCliente(Long clienteId) throws BusinessLogicException{
@@ -121,5 +125,29 @@ public class ClienteLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         persistence.delete(clienteId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
+    }
+    
+    /**
+     * Obtiene los datos de una instancia de Cliente a partir de su Usuario y Contrasena.
+     *
+     * @param clienteUsuario Usuario de la instancia a consultar
+     * @param clienteContrasena Contrasena de la instancia a consultar
+     * @throws BusinessLogicException 
+     * @return Instancia de ClienteEntity con los datos del cliente consultado.
+     */
+    public ClienteEntity getClientePorUsuario(String clienteUsuario, String clienteContrasena) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el cliente con usuario = {0}", clienteUsuario);
+        ClienteEntity clienteEntity = persistence.findByUsuario(clienteUsuario);
+        if (clienteEntity == null) {
+            LOGGER.log(Level.SEVERE, "El cliente con el usuario = {0} no existe", clienteUsuario);
+            throw new BusinessLogicException("El cliente con el usuario = " + clienteUsuario + " no existe");
+        }
+        else if(!clienteEntity.getContrasena().equals(clienteContrasena))
+        {
+            LOGGER.log(Level.SEVERE, "La contrasena no coincide");
+            throw new BusinessLogicException("El usuario o contrasena no son correctos. Por favor intente de nuevo.");
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el cliente con usuario = {0}", clienteUsuario);
+        return clienteEntity;
     }
 }

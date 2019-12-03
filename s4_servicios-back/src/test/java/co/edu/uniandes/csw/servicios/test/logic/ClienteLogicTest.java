@@ -7,8 +7,6 @@ package co.edu.uniandes.csw.servicios.test.logic;
 
 import co.edu.uniandes.csw.servicios.ejb.ClienteLogic;
 import co.edu.uniandes.csw.servicios.entities.ClienteEntity;
-import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
-import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ClientePersistence;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -292,6 +290,17 @@ public class ClienteLogicTest {
         ClienteEntity result = clienteLogic.createCliente(newEntity);
     }
     
+     /**
+     * Prueba para crear un Cliente con usuario existente.
+     *
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteTestConUsuarioExistente() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setUsuario(data.get(0).getUsuario());
+        clienteLogic.createCliente(newEntity);
+    }
     
     /**
      * Prueba para obtener un cliente que no existe. 
@@ -302,4 +311,38 @@ public class ClienteLogicTest {
         ClienteEntity resultEntity = clienteLogic.getCliente((long)-1);
     }
 
+    /**
+     * Prueba para obtener un cliente por Usuario. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void getClientePorUsuarioTest() throws BusinessLogicException {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity resultEntity = clienteLogic.getClientePorUsuario(entity.getUsuario(), entity.getContrasena());        
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
+        Assert.assertEquals(entity.getDireccion(), resultEntity.getDireccion());
+    }
+    
+    /**
+     * Prueba para obtener un cliente con un usuario que no existe. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void getClientePorUsuarioTestConUsuarioNoExistente() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setUsuario(null);
+        ClienteEntity result = clienteLogic.getClientePorUsuario(newEntity.getUsuario(), newEntity.getContrasena());
+    }
+    
+    /**
+     * Prueba para obtener un cliente con una contraseña que no corresponde. 
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void getClientePorUsuarioTestContrasenaIncorrecta() throws BusinessLogicException {
+        ClienteEntity newEntity = data.get(0);
+        ClienteEntity result = clienteLogic.getClientePorUsuario(newEntity.getUsuario(), "Ahora está mal:" + newEntity.getContrasena());
+    }
 }

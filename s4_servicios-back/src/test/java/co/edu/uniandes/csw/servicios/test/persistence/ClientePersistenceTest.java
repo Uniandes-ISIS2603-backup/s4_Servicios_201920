@@ -181,4 +181,17 @@ public class ClientePersistenceTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * Prueba para consultasr un Cliente por usuario.
+     */
+    @Test
+    public void findClienteByUsuarioTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = persistence.findByUsuario(entity.getUsuario());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getUsuario(), newEntity.getUsuario());
+
+        newEntity = persistence.findByUsuario(null);
+        Assert.assertNull(newEntity);
+    }
 }
