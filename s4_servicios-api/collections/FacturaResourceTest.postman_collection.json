@@ -1,20 +1,292 @@
 {
 	"info": {
-		"_postman_id": "39dc9ade-5cc8-45cb-b1c9-9fdd63ef3f21",
+		"_postman_id": "0059ec3c-c1f2-4f50-bcdf-12edb6c77a95",
 		"name": "FacturaResourceTest",
 		"description": "Factura Resource Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+			"name": "Crear una factura con duracion invalida",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "a8e82054-4d2b-4a70-ab62-90e3614c8c29",
+						"id": "dc21d260-b998-47fc-8836-95ef69fd26c7",
 						"exec": [
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+							"tests[\"No crea con duracion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La duracion del servicio debe ser mayor a 0.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 0,\n\t\"precioMateriales\": 140.03,\n\t\"fecha\": \"2019-11-11T00:00:00-05:00\",\n\t\"pagada\":false,\n\t\"primerPago\":true\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear factura con precio invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "063293d3-b7dd-4d85-b416-7d9135862c0e",
+						"exec": [
+							"tests[\"No crea con duracion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El precio de los materiales no puede ser negativo.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 10,\n\t\"precioMateriales\": -140.03,\n\t\"fecha\": \"2019-11-11T00:00:00-05:00\",\n\t\"pagada\":false,\n\t\"primerPago\":true\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear factura con primer pago invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1b42afd-ea3d-4113-b2ed-066fc7e2e092",
+						"exec": [
+							"tests[\"No crea con duracion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No se puede crear la factura sin recibir el primer pago.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 10,\n\t\"precioMateriales\": 140.03,\n\t\"fecha\": \"2019-11-11T00:00:00-05:00\",\n\t\"pagada\":false,\n\t\"primerPago\":false\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear factura con pagado invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1750684e-70c4-4704-8ecb-e2c2b4501518",
+						"exec": [
+							"tests[\"No crea con duracion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La factura no puede estar pagada al momento de su creacion.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 10,\n\t\"precioMateriales\": 140.03,\n\t\"fecha\": \"2019-11-11T00:00:00-05:00\",\n\t\"pagada\":true,\n\t\"primerPago\":true\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc7ef13c-76f5-40b5-9f7a-e689b1941c96",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(data.id)",
+							"postman.setGlobalVariable(\"id_factura1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 10,\n\t\"precioMateriales\": 140.03,\n\t\"fecha\": \"2019-11-11T00:00:00-05:00\",\n\t\"pagada\":false,\n\t\"primerPago\":true\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear factura 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c1fa2fc-1e9b-4544-99d2-f5783850b337",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(data.id)",
+							"postman.setGlobalVariable(\"id_factura2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"duracion\": 23,\n\t\"precioMateriales\": 260.73,\n\t\"fecha\": \"2019-01-12T00:00:00-05:00\",\n\t\"pagada\":false,\n\t\"primerPago\":true\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las facturas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f586d589-f83e-4fd2-9e12-bf3c694e3b1a",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de facturas\"] = data.length >= 0;"
 						],
 						"type": "text/javascript"
 					}
@@ -34,6 +306,225 @@
 						"s4_servicios-api",
 						"api",
 						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b3558ca-3e66-40c4-98bc-3944f98d0a0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/{{id_factura1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"{{id_factura1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una factura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a90b8368-91fe-43fc-ab8c-2691c3396753",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /facturas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una factura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fc06baf-5c74-4184-8afd-e64caf752695",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /facturas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"duracion\": 11,\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"pagada\": true,\r\n        \"precioMateriales\": 140.03,\r\n        \"primerPago\": true\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ddcc991a-ce46-4f09-9455-fcd183c61703",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/{{id_factura1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"{{id_factura1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una factura 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b218795e-69aa-470c-a493-3a6bb47b9fab",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/{{id_factura2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"{{id_factura2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una factura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bee9614f-b999-4f17-9df6-7a486ae5503e",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /facturas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/facturas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"facturas",
+						"0"
 					]
 				}
 			},
