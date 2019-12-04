@@ -48,11 +48,11 @@ public class TrabajadorSolicitudServicioResource {
      * @return JSON - solicitudServicio asociado
      */
     @POST
-    @Path("{solicitudServicioid: \\d+}")
-    public SolicitudServicioDTO addSolicitudServicio(@PathParam("trabajadorId") Long trabajadorId, @PathParam("solicitudServicioId") Long solicitudServicioId) {
+    @Path("{solicitudServicioId: \\d+}")
+    public SolicitudServicioDTO addSolicitudServicio(@PathParam("trabajadoresId") Long trabajadorId, @PathParam("solicitudServicioId") Long solicitudServicioId) {
         
         if (solicitudServicioLogic.getSolicitudServicio(solicitudServicioId) == null) {
-            throw new WebApplicationException("El recurso /books/" + solicitudServicioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /solicitudes/" + solicitudServicioId + " no existe.", 404);
         }
        SolicitudServicioDTO DTO = new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.addSolicitudServicio(trabajadorId, solicitudServicioId));
         return DTO;
@@ -64,7 +64,7 @@ public class TrabajadorSolicitudServicioResource {
      * @return JSONArray - los libros encontrados para el trabjador. 
      */
     @GET
-    public List<SolicitudServicioDTO> getServiciosOfrecidos(@PathParam("trbajadoresId") Long trabajadorId)
+    public List<SolicitudServicioDTO> getServiciosOfrecidos(@PathParam("trabajadoresId") Long trabajadorId)
     {
        List<SolicitudServicioDTO> list=solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.getServiciosOfrecidos(trabajadorId));  
        
@@ -81,15 +81,15 @@ public class TrabajadorSolicitudServicioResource {
      * Error de lógica que se genera cuando no se encuentra el serivicioOfrecido.
      */
     @GET
-    @Path("{serivcioOfrecidoId: \\d+}")
+    @Path("{solicitudServicioId: \\d+}")
     public SolicitudServicioDTO getSolicitudServicio(@PathParam("trabajadoresId") Long trabajadorId, @PathParam("solicitudServicioId") Long solicitudServicioId) throws BusinessLogicException
     {
-        if(solicitudServicioLogic.getSolicitudServicio(trabajadorId)==null)
+        if(solicitudServicioLogic.getSolicitudServicio(solicitudServicioId)==null)
         {
-         throw new WebApplicationException("El recurso /SeriviciosOfrecidos/" + solicitudServicioId    + " no existe.", 404);   
+         throw new WebApplicationException("El recurso /solicitudes/" + solicitudServicioId    + " no existe.", 404);   
         }
         
-        SolicitudServicioDTO dto = new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.getSolicitudServicio(trabajadorId, trabajadorId));
+        SolicitudServicioDTO dto = new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.getSolicitudServicio(trabajadorId, solicitudServicioId));
         return dto;   
     }
     
@@ -104,7 +104,7 @@ public class TrabajadorSolicitudServicioResource {
     {
         for (SolicitudServicioDTO servicio : servicios) {
             if (solicitudServicioLogic.getSolicitudServicio(servicio.getId()) == null) {
-                throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicio.getId() + " no existe.", 404);
+                throw new WebApplicationException("El recurso /solicitudes/" + servicio.getId() + " no existe.", 404);
             }
         }
         List<SolicitudServicioDTO> lista = solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.replaceSolicitudServicio(trabjadorId, solicitudServicioDTOToEntity(servicios)));
