@@ -349,35 +349,7 @@ public class SolicitudServicioLogicTest {
         pojoEntity.setId(entity.getId());
         solicitudLogic.updateSolicitudServicio(pojoEntity.getId(), pojoEntity);
     }
-    
-     /**
-     * Prueba para actualizar una Solicitud con Servicios null.
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void updateSolicitudServiciosNullTest() throws BusinessLogicException {
-        SolicitudServicioEntity entity = data.get(0);
-        SolicitudServicioEntity pojoEntity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        pojoEntity.setServicios(null);
-        pojoEntity.setId(entity.getId());
-        solicitudLogic.updateSolicitudServicio(pojoEntity.getId(), pojoEntity);
-    }
-    
-     /**
-     * Prueba para actualizar una Solicitud con Servicios vacios.
-     *
-     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void updateSolicitudServiciosVaciosTest() throws BusinessLogicException {
-        SolicitudServicioEntity entity = data.get(0);
-        SolicitudServicioEntity pojoEntity = factory.manufacturePojo(SolicitudServicioEntity.class);
-        pojoEntity.setServicios(new ArrayList<>());
-        pojoEntity.setId(entity.getId());
-        solicitudLogic.updateSolicitudServicio(pojoEntity.getId(), pojoEntity);
-    }
-    
+
     /**
      * Prueba para eliminar una Solicitud.
      *
