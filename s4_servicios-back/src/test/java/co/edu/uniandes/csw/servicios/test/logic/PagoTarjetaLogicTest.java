@@ -157,6 +157,36 @@ public class PagoTarjetaLogicTest {
         Assert.assertEquals(entity.getCsv(), resultEntity.getCsv());
     }
     
-    
+    /**
+     * Prueba para actualizar un PagoTarjeta.
+     */
+    @Test
+    public void updatePagoTarjetaTest() {
+        PagoTarjetaEntity entity = data.get(0);
+        PagoTarjetaEntity pojoEntity = factory.manufacturePojo(PagoTarjetaEntity.class);
+        pojoEntity.setId(entity.getId());
+        pagoTarjetaLogic.updatePagoTarjeta(pojoEntity.getId(), pojoEntity);
+
+        PagoTarjetaEntity resp = em.find(PagoTarjetaEntity.class, entity.getId());
+
+        Assert.assertNotNull(resp);
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getBanco(), resp.getBanco());
+        Assert.assertEquals(pojoEntity.getNumTarjeta(), resp.getNumTarjeta());
+        Assert.assertEquals(pojoEntity.getCsv(), resp.getCsv());
+    }
+
+    /**
+     * Prueba para eliminar la tarjeta de un cliente
+     * @throws co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException
+     */
+    @Test
+    public void deletePagoTarjetaTest() throws BusinessLogicException {
+        
+        PagoTarjetaEntity entity = data.get(1);
+        pagoTarjetaLogic.deletePagoTarjeta(entity.getId());
+        PagoTarjetaEntity deleted = em.find(PagoTarjetaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
     
 }

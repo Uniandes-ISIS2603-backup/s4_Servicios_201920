@@ -110,9 +110,9 @@ public class ClienteLogic {
      */
     public ClienteEntity updateCliente(Long clienteId, ClienteEntity clienteEntity) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el cliente con id = {0}", clienteId);
-        ClienteEntity newAuthorEntity = persistence.update(clienteEntity);
+        ClienteEntity newClienteEntity = persistence.update(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el autor con id = {0}", clienteId);
-        return newAuthorEntity;
+        return newClienteEntity;
     }
 
     /**

@@ -38,9 +38,9 @@ public class PagoTarjetaLogic {
     }
     
         
-    public PagoTarjetaEntity updatePagoTarjeta(Long idTarjeta, PagoTarjetaEntity tarjetaEntity) throws BusinessLogicException{
-        PagoTarjetaEntity newTarjetaEntity = persistence.update(tarjetaEntity);
-        return newTarjetaEntity;
+    public PagoTarjetaEntity updatePagoTarjeta(Long idTarjeta, PagoTarjetaEntity tarjetaEntity){
+        PagoTarjetaEntity newAuthorEntity = persistence.update(tarjetaEntity);
+        return newAuthorEntity;
     }
     
     public void deletePagoTarjeta(Long idTarjeta) {
