@@ -352,7 +352,7 @@
 					"script": {
 						"id": "718107f9-4dca-4755-b615-35242a105b42",
 						"exec": [
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El cliente con el usuario = 0 no existe\");",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El cliente con el id =0no existe\");",
 							"tests[\"No genera error en el Get\"] = responseCode.code === 412;"
 						],
 						"type": "text/javascript"
@@ -370,7 +370,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/0/{{pasword_client_2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/0/solicitudes/{{id_solicitud1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -381,7 +381,8 @@
 						"api",
 						"clientes",
 						"0",
-						"{{pasword_client_2}}"
+						"solicitudes",
+						"{{id_solicitud1}}"
 					]
 				}
 			},
