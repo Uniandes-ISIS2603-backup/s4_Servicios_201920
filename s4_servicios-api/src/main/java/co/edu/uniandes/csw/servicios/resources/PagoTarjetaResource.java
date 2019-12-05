@@ -41,8 +41,7 @@ public class PagoTarjetaResource {
     public PagoTarjetaDTO createPagoTarjeta(PagoTarjetaDTO pagoTarjeta) throws BusinessLogicException {
         PagoTarjetaEntity tarjetaEntity = pagoTarjeta.toEntity();
         PagoTarjetaEntity nuevaTarjetaEntity = pagoTarjetaLogic.createPagoTarjeta(tarjetaEntity);
-        PagoTarjetaDTO nuevaTarjetaDTO = new PagoTarjetaDTO(nuevaTarjetaEntity);
-        return nuevaTarjetaDTO;
+        return new PagoTarjetaDTO(nuevaTarjetaEntity);
     }
 
     @PUT
@@ -52,14 +51,12 @@ public class PagoTarjetaResource {
         if (pagoTarjetaLogic.getTarjeta(pagoTarjetaId) == null) {
             throw new WebApplicationException("El recurso /pagoTarjetas/" + pagoTarjetaId + " no existe.", 404);
         }
-        PagoTarjetaDTO detailDTO = new PagoTarjetaDTO(pagoTarjetaLogic.updatePagoTarjeta(pagoTarjeta.toEntity()));
-        return detailDTO;
+        return new PagoTarjetaDTO(pagoTarjetaLogic.updatePagoTarjeta(pagoTarjeta.toEntity()));
     }
 
     @GET
     public List<PagoTarjetaDTO> getPagoTarjetas() {
-        List<PagoTarjetaDTO> listaTarjetas = listEntity2DTO(pagoTarjetaLogic.getTarjetas());
-        return listaTarjetas;
+        return listEntity2DTO(pagoTarjetaLogic.getTarjetas());
     }
 
     @GET
@@ -69,8 +66,7 @@ public class PagoTarjetaResource {
         if (tarjetaEntity == null) {
             throw new WebApplicationException("El recurso /pagoTarjetas/" + pagoTarjetaId + " no existe.", 404);
         }
-        PagoTarjetaDTO detailDTO = new PagoTarjetaDTO(tarjetaEntity);
-        return detailDTO;
+        return new PagoTarjetaDTO(tarjetaEntity);
     }
 
     @DELETE

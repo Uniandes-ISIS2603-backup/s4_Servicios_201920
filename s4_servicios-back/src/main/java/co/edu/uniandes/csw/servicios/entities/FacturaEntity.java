@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 

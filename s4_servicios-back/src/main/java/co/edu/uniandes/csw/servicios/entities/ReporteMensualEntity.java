@@ -43,9 +43,7 @@ public class ReporteMensualEntity extends BaseEntity implements Serializable
      * Número de servicios prestados en el mes.
      */
     private Integer numSerivico;
-    @Id
-    private Long id;
-
+    
 
     public ReporteMensualEntity()
     {
@@ -83,15 +81,5 @@ public class ReporteMensualEntity extends BaseEntity implements Serializable
     public void setNumSerivico(Integer numSerivico) {
         this.numSerivico = numSerivico;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    
     
 }

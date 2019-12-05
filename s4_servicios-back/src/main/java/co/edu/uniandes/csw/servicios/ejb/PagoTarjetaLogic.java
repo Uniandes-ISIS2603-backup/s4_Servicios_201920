@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.servicios.ejb;
 
 import co.edu.uniandes.csw.servicios.entities.PagoTarjetaEntity;
-import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.PagoTarjetaPersistence;
 import java.util.List;
 import javax.ejb.Stateless;

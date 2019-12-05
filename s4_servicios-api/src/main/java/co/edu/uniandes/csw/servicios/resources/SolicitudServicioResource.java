@@ -91,9 +91,9 @@ public class SolicitudServicioResource {
         if (solicitudServicioEntity == null) {
             throw new WebApplicationException("El recurso /solicitudes/" + solicitudesId + " no existe.", 404);
         }
-        SolicitudServicioDetailDTO DTO = new SolicitudServicioDetailDTO(solicitudServicioEntity);
-        LOGGER.log(Level.INFO, "SolicitudServicioResource getSolicitudServicio: output: {0}", DTO);
-        return DTO;
+        SolicitudServicioDetailDTO dto = new SolicitudServicioDetailDTO(solicitudServicioEntity);
+        LOGGER.log(Level.INFO, "SolicitudServicioResource getSolicitudServicio: output: {0}", dto);
+        return dto;
     }
     
     /**
@@ -119,9 +119,9 @@ public class SolicitudServicioResource {
         if (solicitudServicioLogic.getSolicitudServicio(solicitudesId) == null) {
             throw new WebApplicationException("El recurso /solicitudes/" + solicitudesId + " no existe.", 404);
         }
-        SolicitudServicioDetailDTO DTO = new SolicitudServicioDetailDTO(solicitudServicioLogic.updateSolicitudServicio(solicitudesId, solicitudServicio.toEntity()));
-        LOGGER.log(Level.INFO, "SolicitudServicioResource updateSolicitudServicio: output: {0}", DTO);
-        return DTO;
+        SolicitudServicioDetailDTO dto = new SolicitudServicioDetailDTO(solicitudServicioLogic.updateSolicitudServicio(solicitudesId, solicitudServicio.toEntity()));
+        LOGGER.log(Level.INFO, "SolicitudServicioResource updateSolicitudServicio: output: {0}", dto);
+        return dto;
 
     }
     

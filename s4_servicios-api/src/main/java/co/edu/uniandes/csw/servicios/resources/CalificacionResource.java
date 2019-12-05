@@ -90,9 +90,9 @@ public class CalificacionResource {
         if (calificacionEntity == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
         }
-        CalificacionDTO DTO = new CalificacionDTO(calificacionEntity);
-        LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: output: {0}", DTO);
-        return DTO;
+        CalificacionDTO dto = new CalificacionDTO(calificacionEntity);
+        LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: output: {0}", dto);
+        return dto;
     }
     
     /**
@@ -118,9 +118,9 @@ public class CalificacionResource {
         if (calificacionLogic.getCalificacion(calificacionId) == null) {
             throw new WebApplicationException("El recurso /calificacion/" + calificacionId + " no existe.", 404);
         }
-        CalificacionDTO DTO = new CalificacionDTO(calificacionLogic.updateCalificacion(calificacionId, calificacion.toEntity()));
-        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: output: {0}", DTO);
-        return DTO;
+        CalificacionDTO dto = new CalificacionDTO(calificacionLogic.updateCalificacion(calificacionId, calificacion.toEntity()));
+        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacion: output: {0}", dto);
+        return dto;
 
     }
     
