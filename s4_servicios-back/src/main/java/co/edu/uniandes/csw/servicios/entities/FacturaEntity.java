@@ -40,15 +40,7 @@ public class FacturaEntity extends BaseEntity{
         // No est{a el constructor porque no es necesario.
     }
     
-    @Override
-    public boolean equals(Object object){
-        boolean respuesta = false;
-        FacturaEntity aComparar = (FacturaEntity) object;
-        if(Objects.equals(this.solicitud.getId(), aComparar.solicitud.getId())){
-            respuesta = true;
-        }
-        return respuesta;
-    }
+    
     
     public int getDuracion() {
         return duracion;

@@ -33,15 +33,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
         // Como no se neceista inicializar ninguna variable entonces permanece vacío el constructor. 
     }
     
-    @Override
-    public boolean equals(Object object){
-        boolean respuesta = false;
-        CalificacionEntity aComparar = (CalificacionEntity) object;
-        if(this.puntaje == aComparar.puntaje){
-            respuesta = true;
-        }
-        return respuesta;
-    }
+    
     
     /**
      * @return the puntaje
