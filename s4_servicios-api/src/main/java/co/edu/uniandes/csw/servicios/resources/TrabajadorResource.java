@@ -106,6 +106,14 @@ public class TrabajadorResource {
         return TrabajadorServicioOfrecidoResource.class;
     }
     
+     @Path("{trabajadoresId: \\d+}/solicitudes")
+    public Class<TrabajadorSolicitudServicioResource> getTrabajadorResourceSolicitudes(@PathParam("trabajadoresId") Long trabajadoresId) {
+        if (trabajadorLogic.getTrabajador(trabajadoresId) == null) {
+            throw new WebApplicationException("El recurso /trabajadores/" + trabajadoresId + " no existe.", 404);
+        }
+        return TrabajadorSolicitudServicioResource.class;
+    }
+    
     /**
      * Busca el Trabajador con el usuario y contrasena asociado recibido en la URL y lo devuelve.
      *

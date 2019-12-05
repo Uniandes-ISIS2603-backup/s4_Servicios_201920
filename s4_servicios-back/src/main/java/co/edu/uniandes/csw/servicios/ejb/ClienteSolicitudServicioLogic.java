@@ -51,11 +51,9 @@ public class ClienteSolicitudServicioLogic {
 
     
     public SolicitudServicioEntity getSolicitudServicio(Long clientesId, Long solicitudServiciosId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el servicio con id = {0} del cliente con id = " + clientesId, solicitudServiciosId);
         List<SolicitudServicioEntity> servicios = clientePersistence.find(clientesId).getServicios();
         SolicitudServicioEntity servicioEntity = solicitudServicioPersistence.find(solicitudServiciosId);
         int index = servicios.indexOf(servicioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el servicio con id = {0} del cliente con id = " + clientesId, solicitudServiciosId);
         if (index >= 0) {
             return servicios.get(index);
         }
@@ -65,7 +63,6 @@ public class ClienteSolicitudServicioLogic {
     public List<SolicitudServicioEntity> replaceSolicitudServicios(Long clientesId, List<SolicitudServicioEntity> servicios) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los servicios asocidos al clente con id = {0}", clientesId);
         ClienteEntity clienteEntity = clientePersistence.find(clientesId);
-        List<SolicitudServicioEntity> serviciosList = solicitudServicioPersistence.findAll();
         clienteEntity.setServicios(servicios);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los servicios asocidos al cliente con id = {0}", clientesId);
         return clienteEntity.getServicios();

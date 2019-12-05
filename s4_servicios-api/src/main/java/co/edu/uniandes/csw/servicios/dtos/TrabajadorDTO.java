@@ -7,8 +7,6 @@ package co.edu.uniandes.csw.servicios.dtos;
 
 import co.edu.uniandes.csw.servicios.entities.TrabajadorEntity;
 import java.io.Serializable;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -192,13 +190,6 @@ public TrabajadorEntity toEntity(){
     }
 
     /**
-     * @return the disponibilidad
-     */
-    public Boolean isDisponibilidad() {
-        return disponibilidad;
-    }
-
-    /**
      * @param disponibilidad the disponibilidad to set
      */
     public void setDisponibilidad(Boolean disponibilidad) {
@@ -217,13 +208,6 @@ public TrabajadorEntity toEntity(){
      */
     public void setSeguroSocial(String seguroSocial) {
         this.seguroSocial = seguroSocial;
-    }
-
-    /**
-     * @return the esApto
-     */
-    public Boolean isEsApto() {
-        return esApto;
     }
 
     /**

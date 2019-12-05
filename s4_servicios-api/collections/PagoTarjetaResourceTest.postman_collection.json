@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "0ee1a98f-f23e-4e02-a458-3b6f01650a8d",
+		"name": "PagoTarjetaResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b9bb89e4-0eba-48b9-9fa9-20e6a42aefa7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_tarjeta1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"noTarjeta\": 12345,\n\t\"banco\": \"Davivienda\",\n\t\"csv\": 345,\n\t\"fechaV\":\"2019-11-11T00:00:00-05:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una tarjeta 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b43a9a2-3974-45c3-8eb4-0b910107f4e9",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_tarjeta2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"noTarjeta\": 6789,\n\t\"banco\": \"Bancolombia\",\n\t\"csv\": 789,\n\t\"fechaV\":\"2019-11-10T00:00:00-05:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las tarjetas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "865bef9e-5cb1-41ce-8e48-e3b34b1d8938",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de tarjetas\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1a98dc2-2c53-43d8-ab49-17f8f220813e",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/{{id_tarjeta1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"{{id_tarjeta1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una tarjeta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9107ebd4-0121-440c-982c-7a308fb7e31a",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /pagoTarjetas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una tarjeta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75354d32-3339-469f-8f7f-e891ff13d3f7",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /pagoTarjetas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"noTarjeta\": 123456789,\n\t\"banco\": \"Davivienda pirata\",\n\t\"csv\": 34565,\n\t\"fechaV\":\"2019-11-01T00:00:00-05:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dbdc8a7-e7b7-4412-9ec5-62fe989bac5b",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"noTarjeta\": 123456789,\n\t\"banco\": \"Davivienda pirata\",\n\t\"csv\": 34565,\n\t\"fechaV\":\"2019-11-01T00:00:00-05:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/{{id_tarjeta1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"{{id_tarjeta1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "323b2e7c-a534-48e8-b09b-21f4b2d2a851",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/{{id_tarjeta1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"{{id_tarjeta1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una tarjeta 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50123857-f384-4580-941a-cd15774a5a57",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/{{id_tarjeta2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"{{id_tarjeta2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una tarjeta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3fc1fa7a-4659-4dcd-a1f0-1ea2fce6e017",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /pagoTarjetas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/tarjetas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"tarjetas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

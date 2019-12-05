@@ -66,12 +66,11 @@ public class TrabajadorSolicitudServicioLogic {
       
         List<SolicitudServicioEntity> servicios = (List<SolicitudServicioEntity>) trabajadorPersistence.find(trabajadorId).getSolicitudes();
         SolicitudServicioEntity solicitudServicioEntity = solicitudServicioPersistence.find(solicitudServicioId);
-        int index = servicios.indexOf(solicitudServicioEntity);
-        if (index >= 0) {
-            return servicios.get(index);
+          boolean contiene = servicios.contains(solicitudServicioEntity);
+          if (contiene) {
+            return solicitudServicioEntity;
         }
-        throw new BusinessLogicException("El trbajador no ofrece el servicio");
-        
+        throw new BusinessLogicException("La solicitud no está asociado al trabajador");
     }
     
     /**

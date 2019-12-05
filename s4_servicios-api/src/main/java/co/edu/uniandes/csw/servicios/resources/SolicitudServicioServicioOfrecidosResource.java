@@ -7,9 +7,7 @@ package co.edu.uniandes.csw.servicios.resources;
 
 import co.edu.uniandes.csw.servicios.dtos.ServicioOfrecidoDTO;
 import co.edu.uniandes.csw.servicios.dtos.SolicitudServicioDTO;
-import co.edu.uniandes.csw.servicios.dtos.SolicitudServicioDetailDTO;
 import co.edu.uniandes.csw.servicios.ejb.ServicioOfrecidoLogic;
-import co.edu.uniandes.csw.servicios.ejb.SolicitudServicioLogic;
 import co.edu.uniandes.csw.servicios.ejb.SolicitudServicioServicioOfrecidosLogic;
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
@@ -51,9 +49,9 @@ public class SolicitudServicioServicioOfrecidosResource {
     @Path("{servicioId: \\d+}")
     public ServicioOfrecidoDTO addServicio(@PathParam("solicitudId") Long solicitudId, @PathParam("servicioId") Long servicioId) {
         LOGGER.log(Level.INFO, "SolicitudServicioServicioOfrecidosResource addServicio: input: solicitudId {0} , servicioId {1}", new Object[]{solicitudId, servicioId});
-        ServicioOfrecidoDTO DTO = new ServicioOfrecidoDTO(soliciudServicioLogic.addServicio(solicitudId, servicioId));
-        LOGGER.log(Level.INFO, "SolicitudServicioServicioOfrecidosResource addServicio: output: {0}", DTO);
-        return DTO;
+        ServicioOfrecidoDTO servicioDTO = new ServicioOfrecidoDTO(soliciudServicioLogic.addServicio(solicitudId, servicioId));
+        LOGGER.log(Level.INFO, "SolicitudServicioServicioOfrecidosResource addServicio: output: {0}", servicioDTO);
+        return servicioDTO;
     }
     
      /**

@@ -67,9 +67,9 @@ public class SolicitudServicioResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<SolicitudServicioDetailDTO> getSolicitudServicioes() {
+    public List<SolicitudServicioDTO> getSolicitudServicioes() {
         LOGGER.info("SolicitudServicioResource getSolicitudServicioes: input: void");
-        List<SolicitudServicioDetailDTO> listaSolicitudServicioes = listEntity2DTO(solicitudServicioLogic.getSolicitudServicios());
+        List<SolicitudServicioDTO> listaSolicitudServicioes = listEntity2DTO(solicitudServicioLogic.getSolicitudServicios());
         LOGGER.log(Level.INFO, "SolicitudServicioResource getSolicitudServicioes: output: {0}", listaSolicitudServicioes);
         return listaSolicitudServicioes;
     }
@@ -176,10 +176,10 @@ public class SolicitudServicioResource {
      * que vamos a convertir a DTO.
      * @return la lista de solicitudes en forma DTO (json)
      */
-    private List<SolicitudServicioDetailDTO> listEntity2DTO(List<SolicitudServicioEntity> entityList) {
-        List<SolicitudServicioDetailDTO> list = new ArrayList<>();
+    private List<SolicitudServicioDTO> listEntity2DTO(List<SolicitudServicioEntity> entityList) {
+        List<SolicitudServicioDTO> list = new ArrayList<>();
         for (SolicitudServicioEntity entity : entityList) {
-            list.add(new SolicitudServicioDetailDTO(entity));
+            list.add(new SolicitudServicioDTO(entity));
         }
         return list;
     }

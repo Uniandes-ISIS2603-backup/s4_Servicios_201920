@@ -1,0 +1,907 @@
+{
+	"info": {
+		"_postman_id": "37198b26-3784-4a32-bf25-cac8ea999804",
+		"name": "CalificacionResourceTest",
+		"description": "Calificacion Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66fc7137-288e-471a-a382-ce4fe910ac1f",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(data.id)",
+							"postman.setGlobalVariable(\"id_cliente1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contrasena\": \"XmenTheBest\",\r\n    \"direccion\": \"Mansion Xavier\",\r\n    \"id\": 25,\r\n    \"mail\": \"ProfesorX@xmen.com\",\r\n    \"nombre\": \"Charles Xavier\",\r\n    \"telefono\": 1234567,\r\n    \"usuario\": \"XavierTheBest\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5984a5c6-276b-40d4-bd24-986bdd6980f1",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b177d66-e914-4aeb-a728-be8d2bdcb8d4",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\":\"Acabo de comprar mi casa, pero necesito pintarla interna y externamente.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-12-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://mejorconsalud.com/wp-content/uploads/2018/04/consejos-para-pintar-una-casa-facil.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion con puntaje invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ed2fe58-aaad-49f1-9d81-6b626705f9c6",
+						"exec": [
+							"tests[\"No crea con puntaje invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje no es válido. Debe ser un número entre 1 y 5.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Excelente servicio. Muy recomendado.\",\n\t\"puntaje\": 0,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion con puntaje invalido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18c7a779-f989-43c3-b01c-1b96e684d1f8",
+						"exec": [
+							"tests[\"No crea con puntaje invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje no es válido. Debe ser un número entre 1 y 5.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Excelente servicio. Muy recomendado.\",\n\t\"puntaje\": 10,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion con solicitud invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bff938cf-afd9-4cf6-9ebd-04e1eb4c3e4b",
+						"exec": [
+							"tests[\"No crea con puntaje invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Excelente servicio. Muy recomendado.\",\n\t\"puntaje\": 5\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d82bcf7-8fa8-464a-872c-88eaeed5587b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_calificacion1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Excelente servicio. Muy recomendado.\",\n\t\"puntaje\": 5,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear calificacion 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "939e7772-e002-42cd-a3cb-3ba7fa8fa01b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_calificacion2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Pesima experiencia, no se lo recomiendo a nadie. Quiero mi dinero devuelta!!!\",\n\t\"puntaje\": 1,\n\t\"solicitud\": { \"id\": {{id_solicitud2}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fee839e6-6e26-4cfd-97c8-a9bbb113745a",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de calificaciones\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44775346-71fc-4a2b-a967-94e73ad3c6a0",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a45274bb-1e2d-46f9-b906-5a1e102638ce",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4928ded5-51b6-4550-9fa2-28ec66d72292",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificacion/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Buen servicio. Recomendado. Cambie un poco de opinion.\",\n\t\"puntaje\": 4,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion con puntaje invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36e726ca-690a-44bd-944a-6d572361a525",
+						"exec": [
+							"tests[\"No edita con puntaje invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje es inválido\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Buen servicio. Recomendado. Cambie un poco de opinion.\",\n\t\"puntaje\": 0,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion con puntaje invalido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3deafbb5-d499-4f5d-bcea-04082240ab96",
+						"exec": [
+							"tests[\"No edita con puntaje invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje es inválido\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Buen servicio. Recomendado. Cambie un poco de opinion.\",\n\t\"puntaje\": 10,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion con solicitud invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6c54340-f7a9-494b-8e3f-5074b42b586c",
+						"exec": [
+							"tests[\"No edita con solicitud invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La calificación debe tener una solicitud.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Buen servicio. Recomendado. Cambie un poco de opinion.\",\n\t\"puntaje\": 4\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "620aac14-074a-4020-9d7e-e28357d57d89",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comentario\": \"Buen servicio. Recomendado. Cambie un poco de opinion.\",\n\t\"puntaje\": 4,\n\t\"solicitud\": { \"id\": {{id_solicitud1}} }\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78708646-0515-48d9-bd1f-b6b32935d533",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una calificacion 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a259f89d-0109-44d7-9d45-db665cb401bf",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/{{id_calificacion2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"{{id_calificacion2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fda459ce-4796-4421-843f-b746b17b45a4",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"calificaciones",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a1377a5-5f77-4188-a127-49a509e702cd",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94f7ac7e-6706-4b1e-974f-e5a175a1b82b",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc16dcfd-c207-4a4f-b6ac-753f33573c24",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

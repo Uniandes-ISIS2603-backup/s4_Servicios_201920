@@ -1,0 +1,985 @@
+{
+	"info": {
+		"_postman_id": "a67cbe1d-07ce-474b-b1a6-e2287db35bc0",
+		"name": "SolicitudServicioResourceTest",
+		"description": "Test del recurso de SolicitudServicio.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63db588d-034f-4c88-81ae-8af56c605e53",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(data.id)",
+							"postman.setGlobalVariable(\"id_cliente1\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"contrasena\": \"XmenTheBest\",\r\n        \"direccion\": \"Mansion Xavier\",\r\n        \"mail\": \"ProfesorX@xmen.com\",\r\n        \"nombre\": \"Charles Xavier\",\r\n        \"telefono\": 1234567,\r\n        \"usuario\": \"XavierTheBest\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes"
+					]
+				},
+				"description": "Crea el cliente que generará las solicitudes."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con descripcion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9df4f614-87a1-4916-a2c2-7d48d6e14228",
+						"exec": [
+							"tests[\"No crea con descripcion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener descripción.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con descripcion invalida 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c4fbe3c9-b300-4c56-a41e-fa6a778f7bf4",
+						"exec": [
+							"tests[\"No crea con descripcion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener descripción.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\":\"\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con estado invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbce55e7-7aea-48d6-a8bd-5244c9bae00c",
+						"exec": [
+							"tests[\"No crea con estado invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un estado válido.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con estado invalido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9bc5346b-c1cf-4262-af9e-f0305f6c123a",
+						"exec": [
+							"tests[\"No crea con estado invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un estado válido.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con fecha invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14957f4c-77a8-4410-b73c-6ce71c407fc5",
+						"exec": [
+							"tests[\"No crea con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un fecha de inicio.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"Validacion\",\n\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud con cliente invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bbdcf717-f09b-491c-b539-56afdc4ac4c9",
+						"exec": [
+							"tests[\"No crea con cliente invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un cliente.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8de303d4-3197-49d8-9864-d32cdb0b8a50",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				},
+				"description": "Crea una solicitud sin problemas."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c4b4e061-9e1d-4d9f-a72d-5a8cc9fae978",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\":\"Acabo de comprar mi casa, pero necesito pintarla interna y externamente.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-12-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://mejorconsalud.com/wp-content/uploads/2018/04/consejos-para-pintar-una-casa-facil.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las solicitudes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "caf7d59d-f83b-40d2-a800-b137ac98bb83",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Contador de solicitudes\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5de66dd8-f06d-499d-bafe-d72fec2d504b",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicitud que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b457f9af-8f4d-4ff6-887f-7292a9ad662a",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /solicitudes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f4964870-e967-42fb-ba32-3ca2be0e0a5d",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /solicitudes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso. Se ha modificado la solicitud.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud con descripcion invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f4bc30c-a950-4253-b38a-e07367ac8c1c",
+						"exec": [
+							"tests[\"No edita con descripcion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener una descripción.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud con descripcion invalida 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb476de4-381b-4f17-a0c4-40f32ebf1df8",
+						"exec": [
+							"tests[\"No edita con descripcion invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener una descripción.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud con estado invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89ebb451-6263-44f7-87da-ea2b383a35cd",
+						"exec": [
+							"tests[\"No edita con estado invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un estado válido.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso. Se ha modificado la solicitud.\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud con estado invalido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "416d675e-cb4e-4e01-8e96-a85382d03bd1",
+						"exec": [
+							"tests[\"No edita con estado invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un estado válido.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso. Se ha modificado la solicitud.\",\n\t\"estado\": \"\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud con fecha invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a10efdc5-31dc-4482-b4fe-95848c63bc41",
+						"exec": [
+							"tests[\"No edita con fecha invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La solicitud debe tener un fecha de inicio.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso. Se ha modificado la solicitud.\",\n\t\"estado\": \"Validacion\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0038b4d0-ab68-4711-8684-1952963aeb00",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso. Se ha modificado la solicitud.\",\n\t\"estado\": \"Revision\",\n\t\"fechaInicio\":\"2019-12-10T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente1}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f4fcded3-561f-4f0a-814c-a238786148fc",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79d86f2e-3dea-4601-b835-05bf710838e3",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una solicitud que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8aadf3f-7a25-4297-8893-a0091ace193f",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /solicitudes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a1cc0ad-f7a0-4834-83cd-f8dc204caed5",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

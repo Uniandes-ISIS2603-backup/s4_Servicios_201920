@@ -121,10 +121,7 @@ public class SolicitudServicioLogic {
        {
            throw new BusinessLogicException("La solicitud debe tener un fecha de inicio.");
        }
-       if(solicitudEntity.getServicios() == null || solicitudEntity.getServicios().isEmpty())
-       {
-           throw new BusinessLogicException("La solicitud debe tener al menos un servicio a ofrecer.");
-       }
+       
         SolicitudServicioEntity newEntity = persistence.update(solicitudEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la solicitud con id = {0}", solicitudEntity.getId());
         return newEntity;

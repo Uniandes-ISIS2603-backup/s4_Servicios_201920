@@ -58,7 +58,7 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienteResource createCliente: input: {0}", cliente);
         ClienteDTO clienteDTO = new ClienteDTO(clienteLogic.createCliente(cliente.toEntity()));
         LOGGER.log(Level.INFO, "ClienteResource createCliente: output: {0}", clienteDTO);
-        return cliente;
+        return clienteDTO;
     }
 
     /**
@@ -68,9 +68,9 @@ public class ClienteResource {
      * aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<ClienteDetailDTO> getClientes() {
+    public List<ClienteDTO> getClientes() {
         LOGGER.info("ClienteResource getClientes: input: void");
-        List<ClienteDetailDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
+        List<ClienteDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
         LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", listaClientes);
         return listaClientes;
     }
@@ -179,10 +179,10 @@ public class ClienteResource {
      * @param entityList Lista de ClienteEntity a convertir.
      * @return Lista de ClienteDetailDTO convertida.
      */
-    private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList) {
-        List<ClienteDetailDTO> list = new ArrayList<>();
+    private List<ClienteDTO> listEntity2DTO(List<ClienteEntity> entityList) {
+        List<ClienteDTO> list = new ArrayList<>();
         for (ClienteEntity entity : entityList) {
-            list.add(new ClienteDetailDTO(entity));
+            list.add(new ClienteDTO(entity));
         }
         return list;
     }
