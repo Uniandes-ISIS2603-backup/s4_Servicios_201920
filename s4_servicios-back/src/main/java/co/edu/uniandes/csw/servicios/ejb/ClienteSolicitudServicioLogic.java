@@ -61,11 +61,15 @@ public class ClienteSolicitudServicioLogic {
     }
 
     public List<SolicitudServicioEntity> replaceSolicitudServicios(Long clientesId, List<SolicitudServicioEntity> servicios) {
-        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los servicios asocidos al clente con id = {0}", clientesId);
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los servicios asocidos al clente con id = {0}", clientesId);   
         ClienteEntity clienteEntity = clientePersistence.find(clientesId);
         clienteEntity.setServicios(servicios);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los servicios asocidos al cliente con id = {0}", clientesId);
         return clienteEntity.getServicios();
+    }
+
+    public void removeSolicitudServicio(Long clientesId, Long serviciosId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

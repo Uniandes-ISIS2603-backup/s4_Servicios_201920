@@ -81,20 +81,20 @@ public class ClienteSolicitudServicioResource {
         LOGGER.log(Level.INFO, "ClienteSolicitudServicioResource replaceSolicitudesServicio: output: {0}", lista);
         return lista;
     }
-
-//    /*
-//     * Elimina la conexión entre el servicio y el cliente recibidos en la URL.
-//     */
-//    @DELETE
-//    @Path("{serviciosId: \\d+}")
-//    public void removeSolicitudServicio(@PathParam("clientesId") Long clientesId, @PathParam("serviciosId") Long serviciosId) {
-//        LOGGER.log(Level.INFO, "ClienteSolicitudServicioResource deleteServicio: input: clientesId {0} , serviciosId {1}", new Object[]{clientesId, serviciosId});
-//        if (solicitudServicioLogic.getSolicitudServicio(serviciosId) == null) {
-//            throw new WebApplicationException("El recurso /servicios/" + serviciosId + " no existe.", 404);
-//        }
-//        clienteSolicitudServicioLogic.removeSolicitudServicio(clientesId, serviciosId);
-//        LOGGER.info("AuthorBooksResource deleteBook: output: void");
-//    }
+    
+    /*
+    * Elimina la conexión entre el servicio y el cliente recibidos en la URL.
+     */
+   /* @DELETE
+    @Path("{serviciosId: \\d+}")
+    public void removeSolicitudServicio(@PathParam("clientesId") Long clientesId, @PathParam("serviciosId") Long serviciosId) {
+        LOGGER.log(Level.INFO, "ClienteSolicitudServicioResource deleteServicio: input: clientesId {0} , serviciosId {1}", new Object[]{clientesId, serviciosId});
+        if (solicitudServicioLogic.getSolicitudServicio(serviciosId) == null) {
+            throw new WebApplicationException("El recurso /servicios/" + serviciosId + " no existe.", 404);
+       }
+        clienteSolicitudServicioLogic.removeSolicitudServicio(clientesId, serviciosId);
+        LOGGER.info("AuthorBooksResource deleteBook: output: void");
+    }*/
 
 
     private List<SolicitudServicioDTO> serviciosListEntity2DTO(List<SolicitudServicioEntity> entityList) {

@@ -1,0 +1,701 @@
+{
+	"info": {
+		"_postman_id": "ab56e13e-0ab5-4bc0-84e1-05c904914e9f",
+		"name": "ClienteSolicitudServicio-Test",
+		"description": "Cliente Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f963073-ee23-425c-8c16-8c2cc127959e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_cliente\", data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contrasena\" : \"contrasenita\",\n\t\"direccion\" : \"direccionsta\",\n\t\"mail\" : \"s.cala@uniandes.com\",\n\t\"nombre\" : \"santiago\",\n\t\"telefono\" : 3138894,\n\t\"usuario\" : \"holasantiago\",\n\t\"tarjeta\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Cliente 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f963073-ee23-425c-8c16-8c2cc127959e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_cliente2\", data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contrasena\" : \"contrasenita2\",\n\t\"direccion\" : \"direccionsta2\",\n\t\"mail\" : \"s.cala2@uniandes.com\",\n\t\"nombre\" : \"santiago2\",\n\t\"telefono\" : 3138894,\n\t\"usuario\" : \"holasantiago2\",\n\t\"tarjeta\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8de303d4-3197-49d8-9864-d32cdb0b8a50",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito ayuda para arreglar la tubería de mi cocina. Al abrir el grifo del agua, se inunda el piso.\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-11T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				},
+				"description": "Crea una solicitud sin problemas."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8de303d4-3197-49d8-9864-d32cdb0b8a50",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Necesito atuda con mi lavadora, dejo de funcionar. .\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-13T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				},
+				"description": "Crea una solicitud sin problemas."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una solicitud 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8de303d4-3197-49d8-9864-d32cdb0b8a50",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_solicitud3\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"Quiero renovar mi cocina\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-20T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente2}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes"
+					]
+				},
+				"description": "Crea una solicitud sin problemas."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas solicitudes de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f198c607-84c6-46d3-bf44-ccb268fe02a9",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
+							"tests[\"Contador de solicitudes\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente}}/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente}}",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicitud de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "28dd6707-c8fc-4788-a59d-7b5cc36f0517",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente}}/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente}}",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicutd de un cliente que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El cliente con el usuario = 0 no existe\");",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/0/{{pasword_client_2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"0",
+						"{{pasword_client_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicitud que no existe de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b5bc40c-ad14-4b45-8f31-7140e3014684",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /servicios/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente}}/solicitudes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente}}",
+						"solicitudes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una solicitud que no está asociada al cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El servicio no está asociado al cliente\");",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente}}/solicitudes/{{id_solicitud3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente}}",
+						"solicitudes",
+						"{{id_solicitud3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar las solcitudes de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"descripcion\": \"Quiero renovar mi baño\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-30T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\",\n\t\"id\":{{id_solicitud3}}\n}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/{{id_cliente}}/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"{{id_cliente}}",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar las solcitudes de un cliente que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No genera error en el Put\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El cliente con el id =0no existe\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"descripcion\": \"Quiero renovar mi baño\",\n\t\"estado\": \"Validacion\",\n\t\"fechaInicio\":\"2019-11-30T00:00:00-05:00\",\n\t\t\"cliente\":{ \"id\": {{id_cliente}} },\n\t\"foto\": \"https://www.seguroscatalanaoccidente.com/blog/assets/multimedia/2016/11/tuberias.jpg\",\n\t\"id\":{{id_solicitud3}}\n}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/clientes/0/solicitudes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"clientes",
+						"0",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una solicitud",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una solicitud 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una solicitud 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7139bf9e-d27a-40c8-9e99-7173a21c8932",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/solicitudes/{{id_solicitud3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"solicitudes",
+						"{{id_solicitud3}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
