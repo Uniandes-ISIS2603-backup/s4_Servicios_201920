@@ -52,7 +52,7 @@ public class PagoTarjetaResource {
         if (pagoTarjetaLogic.getTarjeta(pagoTarjetaId) == null) {
             throw new WebApplicationException("El recurso /pagoTarjetas/" + pagoTarjetaId + " no existe.", 404);
         }
-        PagoTarjetaDTO detailDTO = new PagoTarjetaDTO(pagoTarjetaLogic.updatePagoTarjeta(pagoTarjetaId, pagoTarjeta.toEntity()));
+        PagoTarjetaDTO detailDTO = new PagoTarjetaDTO(pagoTarjetaLogic.updatePagoTarjeta(pagoTarjeta.toEntity()));
         return detailDTO;
     }
 
