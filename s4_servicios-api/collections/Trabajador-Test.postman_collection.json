@@ -16,6 +16,8 @@
 							"var data = JSON.parse(responseBody);",
 							"console.log(data.id)",
 							"postman.setGlobalVariable(\"id_worker1\",data.id);",
+							"postman.setGlobalVariable(\"usuario_worker1\",data.usuario);",
+							"postman.setGlobalVariable(\"pasword_worker1\",data.contrasena);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -35,7 +37,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"nombre\": \"Albeto Ramirez\",\r\n\"contrasenia\": \"xxx\",\r\n\"telefono\": 1234,\r\n\"usuario\": \"al.ramirez\",\r\n\"foto\": \"fotot\",\r\n\"correo\": \"aramirez@gmail.com\",\r\n\"esApto\": true,\r\n\"hojaVida\": \"hojaVida\",\r\n\"disponibilidad\": false,\r\n\"riesgos\": \"riesgos\",\r\n\"seguroSocial\": \"seguroSocial\",\r\n\"solicitudes\": [],\r\n\"servicios\": []\r\n}",
+					"raw": "{\r\n\"nombre\": \"Albeto Ramirez\",\r\n\"contrasena\": \"xxx\",\r\n\"telefono\": 1234,\r\n\"usuario\": \"alramirez\",\r\n\"foto\": \"fotot\",\r\n\"correo\": \"aramirez@gmail.com\",\r\n\"esApto\": true,\r\n\"hojaVida\": \"hojaVida\",\r\n\"disponibilidad\": false,\r\n\"riesgos\": \"riesgos\",\r\n\"seguroSocial\": \"seguroSocial\",\r\n\"solicitudes\": [],\r\n\"servicios\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,6 +70,8 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"id_worker2\",data.id);",
+							"postman.setGlobalVariable(\"usuario_worker2\",data.usuario);",
+							"postman.setGlobalVariable(\"pasword_worker2\",data.contrasena);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							""
 						],
@@ -87,7 +91,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"correo\": \"fperez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"Hola\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Fabio Perez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"fa.perez\"\r\n}",
+					"raw": "{\r\n    \"correo\": \"fperez@gmail.com\",\r\n    \"disponibilidad\": true,\r\n    \"esApto\": true,\r\n    \"foto\": \"Hola\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Fabio Perez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"fa.perez\",\r\n    \"contrasena\":\"yyy\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -138,7 +142,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"correo\": \"otrocorreo@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"al.ramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
+					"raw": "{\r\n    \"correo\": \"otrocorreo@gmail.com\",\r\n    \"disponibilidad\": false,\r\n    \"esApto\": true,\r\n    \"foto\": \"fotot\",\r\n    \"hojaVida\": \"hojaVida\",\r\n    \"nombre\": \"Albeto Ramirez\",\r\n    \"riesgos\": \"riesgos\",\r\n    \"seguroSocial\": \"seguroSocial\",\r\n    \"telefono\": 1234,\r\n    \"usuario\": \"alramirez\",\r\n    \"servicios\": [  ],\r\n    \"solicitudes\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -321,6 +325,136 @@
 						"api",
 						"trabajadores",
 						"{{id_worker2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un trabajador por usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{usuario_worker1}}/{{pasword_worker1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{usuario_worker1}}",
+						"{{pasword_worker1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un trabajador por usuario con contraña incorrecta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El usuario o contrasena no son correctos\");",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/{{usuario_worker1}}/{{pasword_worker2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"{{usuario_worker1}}",
+						"{{pasword_worker2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un trabajador por un  usuario que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "718107f9-4dca-4755-b615-35242a105b42",
+						"exec": [
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El trabajador con el usuario = trabajadoresIncorrecto no existe\");",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 412;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s4_servicios-api/api/trabajadores/trabajadoresIncorrecto/{{pasword_worker1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s4_servicios-api",
+						"api",
+						"trabajadores",
+						"trabajadoresIncorrecto",
+						"{{pasword_worker1}}"
 					]
 				}
 			},
