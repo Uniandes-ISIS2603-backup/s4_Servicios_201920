@@ -55,11 +55,10 @@ public class TrabajadorLogic {
         if (trabajadorEntity == null) {
             LOGGER.log(Level.SEVERE, "Trabajador con el id = {0} no existe", trabajadorId);
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el trabajador con id = x", trabajadorId);
         return trabajadorEntity;
     }
      
-     public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajadorEntity) throws BusinessLogicException {
+     public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajadorEntity) {
         
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el trabajador con id = {0}", trabajadorId);
         TrabajadorEntity newEntity = persistence.update(trabajadorEntity);

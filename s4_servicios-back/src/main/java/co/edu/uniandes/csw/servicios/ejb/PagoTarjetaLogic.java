@@ -22,25 +22,21 @@ public class PagoTarjetaLogic {
     @Inject
     private PagoTarjetaPersistence persistence;
     
-    public PagoTarjetaEntity createPagoTarjeta(PagoTarjetaEntity pagoTarjeta) throws BusinessLogicException{
-        pagoTarjeta = persistence.create(pagoTarjeta);
-        return pagoTarjeta;
+    public PagoTarjetaEntity createPagoTarjeta(PagoTarjetaEntity pagoTarjeta){
+        return persistence.create(pagoTarjeta);
     }
     
     public List<PagoTarjetaEntity> getTarjetas() {
-        List<PagoTarjetaEntity> lista = persistence.findAll();
-        return lista;
+        return persistence.findAll();
     }
     
     public PagoTarjetaEntity getTarjeta(Long idTarjeta) {
-        PagoTarjetaEntity tarjetaEntity = persistence.find(idTarjeta);
-        return tarjetaEntity;
+        return persistence.find(idTarjeta);
     }
     
         
-    public PagoTarjetaEntity updatePagoTarjeta(Long idTarjeta, PagoTarjetaEntity tarjetaEntity){
-        PagoTarjetaEntity newAuthorEntity = persistence.update(tarjetaEntity);
-        return newAuthorEntity;
+    public PagoTarjetaEntity updatePagoTarjeta(PagoTarjetaEntity tarjetaEntity){
+        return persistence.update(tarjetaEntity);
     }
     
     public void deletePagoTarjeta(Long idTarjeta) {

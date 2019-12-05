@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.servicios.entities;
 import co.edu.uniandes.csw.servicios.podam.CorreoStrategy;
 import co.edu.uniandes.csw.servicios.podam.TelefonoStrategy;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -69,6 +68,15 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     public ClienteEntity()
     {
         //Constructor vacio
+    }
+    
+    
+    public boolean equals(ClienteEntity aComparar){
+        boolean respuesta = false;
+        if(this.usuario.equals(aComparar.usuario)){
+            respuesta = true;
+        }
+        return respuesta;
     }
     
     /**

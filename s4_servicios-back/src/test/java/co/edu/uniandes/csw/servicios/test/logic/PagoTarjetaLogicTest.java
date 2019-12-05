@@ -165,7 +165,7 @@ public class PagoTarjetaLogicTest {
         PagoTarjetaEntity entity = data.get(0);
         PagoTarjetaEntity pojoEntity = factory.manufacturePojo(PagoTarjetaEntity.class);
         pojoEntity.setId(entity.getId());
-        pagoTarjetaLogic.updatePagoTarjeta(pojoEntity.getId(), pojoEntity);
+        pagoTarjetaLogic.updatePagoTarjeta(pojoEntity);
 
         PagoTarjetaEntity resp = em.find(PagoTarjetaEntity.class, entity.getId());
 

@@ -21,7 +21,7 @@ public class ReporteMensualLogic {
     @Inject
     private ReporteMensualPersistence persistencia;
     
-    public ReporteMensualEntity createReporteMensual(ReporteMensualEntity entity) throws BusinessLogicException
+    public ReporteMensualEntity createReporteMensual() throws BusinessLogicException
     {   
        return null;
     }

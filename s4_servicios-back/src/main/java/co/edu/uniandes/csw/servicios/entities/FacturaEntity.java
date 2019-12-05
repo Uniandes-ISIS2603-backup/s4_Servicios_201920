@@ -36,7 +36,15 @@ public class FacturaEntity extends BaseEntity{
     private PagoTarjetaEntity tarjetaPago;
     
     public FacturaEntity(){
-        
+        // No est{a el constructor porque no es necesario.
+    }
+    
+    public boolean equals(FacturaEntity aComparar){
+        boolean respuesta = false;
+        if(this.solicitud == aComparar.solicitud){
+            respuesta = true;
+        }
+        return respuesta;
     }
     
     public int getDuracion() {

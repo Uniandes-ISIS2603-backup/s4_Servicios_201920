@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.servicios.persistence.ServicioOfrecidoPersistence;
 import co.edu.uniandes.csw.servicios.persistence.SolicitudServicioPersistence;
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -70,11 +69,9 @@ public class SolicitudServicioServicioOfrecidosLogic {
      * @throws BusinessLogicException Si el servicio no está asociado a la solicitud
      */
     public ServicioOfrecidoEntity getServicio(Long solicitudId, Long servicioId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el servicio con id = {0} de la solicitud con id = " + solicitudId, servicioId);
         Collection<ServicioOfrecidoEntity> servicios = solicitudPersistence.find(solicitudId).getServicios();
         ServicioOfrecidoEntity servicioEntity = servicioPersistence.find(servicioId);
         boolean contiene = servicios.contains(servicioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el servicio con id = {0} de la solicitud con id = " + solicitudId, servicioId);
         if (contiene) {
             return servicioEntity;
         }
