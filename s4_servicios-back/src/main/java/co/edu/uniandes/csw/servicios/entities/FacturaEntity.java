@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.servicios.entities;
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -39,9 +40,11 @@ public class FacturaEntity extends BaseEntity{
         // No est{a el constructor porque no es necesario.
     }
     
-    public boolean equals(FacturaEntity aComparar){
+    @Override
+    public boolean equals(Object object){
         boolean respuesta = false;
-        if(this.solicitud == aComparar.solicitud){
+        FacturaEntity aComparar = (FacturaEntity) object;
+        if(Objects.equals(this.solicitud.getId(), aComparar.solicitud.getId())){
             respuesta = true;
         }
         return respuesta;

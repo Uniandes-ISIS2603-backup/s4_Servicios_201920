@@ -70,8 +70,9 @@ public class ClienteEntity extends BaseEntity implements Serializable{
         //Constructor vacio
     }
     
-    
-    public boolean equals(ClienteEntity aComparar){
+    @Override
+    public boolean equals(Object object){
+        ClienteEntity aComparar = (ClienteEntity) object;
         boolean respuesta = false;
         if(this.usuario.equals(aComparar.usuario)){
             respuesta = true;
