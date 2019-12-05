@@ -52,6 +52,10 @@ public class TrabajadorLogic {
      public TrabajadorEntity getTrabajador(Long trabajadorId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el trabajador con id = {0}", trabajadorId);
         TrabajadorEntity trabajadorEntity = persistence.find(trabajadorId);
+        if (trabajadorEntity == null) {
+            LOGGER.log(Level.SEVERE, "Trabajador con el id = {0} no existe", trabajadorId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el trabajador con id = x", trabajadorId);
         return trabajadorEntity;
     }
      
@@ -90,6 +94,6 @@ public class TrabajadorLogic {
             throw new BusinessLogicException("El usuario o contrasena no son correctos. Por favor intente de nuevo.");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el trabajador con usuario = {0}", trabajadorUsuario);
-        return trabajadorEntity;        
+        return trabajadorEntity;
     }
 }
