@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.servicios.entities;
 import co.edu.uniandes.csw.servicios.podam.CorreoStrategy;
 import co.edu.uniandes.csw.servicios.podam.TelefonoStrategy;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -70,6 +69,8 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     {
         //Constructor vacio
     }
+    
+    
     
     /**
      * Retorna la dirección del cliente

@@ -58,7 +58,7 @@ public class SolicitudServicioEntity extends BaseEntity implements Serializable{
     
     public SolicitudServicioEntity()
     {
-        
+        //Este constructor es vacío porque no se necesita inicializar parámetros. 
     }
     
     

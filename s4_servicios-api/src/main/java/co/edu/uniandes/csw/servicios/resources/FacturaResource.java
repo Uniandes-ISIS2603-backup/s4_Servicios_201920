@@ -41,8 +41,7 @@ public class FacturaResource {
     public FacturaDTO createTarjeta(FacturaDTO factura) throws BusinessLogicException {
         FacturaEntity facturaEntity = factura.toEntity();
         FacturaEntity nuevaFacturaEntity = facturaLogic.createFactura(facturaEntity);
-        FacturaDTO nuevaFacturaDTO = new FacturaDTO(nuevaFacturaEntity);
-        return nuevaFacturaDTO;
+        return new FacturaDTO(nuevaFacturaEntity);
     }
 
     @PUT
@@ -52,14 +51,12 @@ public class FacturaResource {
         if (facturaLogic.getFactura(facturaId) == null) {
             throw new WebApplicationException("El recurso /facturas/" + facturaId + " no existe.", 404);
         }
-        FacturaDTO detailDTO = new FacturaDTO(facturaLogic.updateFactura(facturaId, factura.toEntity()));
-        return detailDTO;
+        return new FacturaDTO(facturaLogic.updateFactura(factura.toEntity()));
     }
 
     @GET
     public List<FacturaDTO> getFacturas() {
-        List<FacturaDTO> listaFacturas = listEntity2DTO(facturaLogic.getFacturas());
-        return listaFacturas;
+        return listEntity2DTO(facturaLogic.getFacturas());
     }
 
     @GET
@@ -69,8 +66,7 @@ public class FacturaResource {
         if (facturaEntity == null) {
             throw new WebApplicationException("El recurso /facturas/" + facturaId + " no existe.", 404);
         }
-        FacturaDTO detailDTO = new FacturaDTO(facturaEntity);
-        return detailDTO;
+        return new FacturaDTO(facturaEntity);
     }
 
     @DELETE

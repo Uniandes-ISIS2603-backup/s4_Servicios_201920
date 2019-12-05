@@ -174,7 +174,7 @@ public class FacturaLogicTest {
         pojoEntity.setId(entity.getId());
         pojoEntity.setSolicitud(new SolicitudServicioEntity());
         pojoEntity.getSolicitud().setEstado("En curso");
-        facturaLogic.updateFactura(pojoEntity.getId(), pojoEntity);
+        facturaLogic.updateFactura(pojoEntity);
         FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
@@ -196,6 +196,6 @@ public class FacturaLogicTest {
         pojoEntity.setSolicitud(new SolicitudServicioEntity());
         pojoEntity.getSolicitud().setEstado("Finalizado");
         pojoEntity.setId(entity.getId());
-        facturaLogic.updateFactura(pojoEntity.getId(), pojoEntity);
+        facturaLogic.updateFactura(pojoEntity);
     }
 }

@@ -63,7 +63,7 @@ public class FacturaLogic {
         return persistence.find(idFactura);
     }
 
-    public FacturaEntity updateFactura(Long idFactura, FacturaEntity facturaEntity) throws BusinessLogicException {
+    public FacturaEntity updateFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
         //Si servicio finalizo
         if (facturaEntity.getSolicitud().getEstado().equals("Finalizado")) {
             throw new BusinessLogicException("No se puede modificar una factura de un servicio finalizado.");

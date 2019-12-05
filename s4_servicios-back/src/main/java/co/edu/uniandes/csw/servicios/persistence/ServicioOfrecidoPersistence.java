@@ -8,9 +8,7 @@ package co.edu.uniandes.csw.servicios.persistence;
 import co.edu.uniandes.csw.servicios.entities.ServicioOfrecidoEntity;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -53,9 +51,8 @@ public class ServicioOfrecidoPersistence {
         
         query = query.setParameter("nombre", nombre );
         
-        ServicioOfrecidoEntity sameName = (ServicioOfrecidoEntity) query.getSingleResult();
+        return (ServicioOfrecidoEntity) query.getSingleResult();
         
-        return sameName;      
     }
     
     public List<ServicioOfrecidoEntity>  findByType(String tipo)

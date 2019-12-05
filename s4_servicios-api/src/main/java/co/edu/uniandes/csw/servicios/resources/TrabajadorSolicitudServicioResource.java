@@ -6,14 +6,12 @@
 package co.edu.uniandes.csw.servicios.resources;
 
 import co.edu.uniandes.csw.servicios.dtos.SolicitudServicioDTO;
-import co.edu.uniandes.csw.servicios.dtos.TrabajadorDetailDTO;
 import co.edu.uniandes.csw.servicios.ejb.SolicitudServicioLogic;
 import co.edu.uniandes.csw.servicios.ejb.TrabajadorSolicitudServicioLogic;
 import co.edu.uniandes.csw.servicios.entities.SolicitudServicioEntity;
 import co.edu.uniandes.csw.servicios.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -54,8 +52,8 @@ public class TrabajadorSolicitudServicioResource {
         if (solicitudServicioLogic.getSolicitudServicio(solicitudServicioId) == null) {
             throw new WebApplicationException("El recurso /solicitudes/" + solicitudServicioId + " no existe.", 404);
         }
-       SolicitudServicioDTO DTO = new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.addSolicitudServicio(trabajadorId, solicitudServicioId));
-        return DTO;
+        return new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.addSolicitudServicio(trabajadorId, solicitudServicioId));
+       
     }
     
     /**
@@ -66,9 +64,8 @@ public class TrabajadorSolicitudServicioResource {
     @GET
     public List<SolicitudServicioDTO> getServiciosOfrecidos(@PathParam("trabajadoresId") Long trabajadorId)
     {
-       List<SolicitudServicioDTO> list=solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.getServiciosOfrecidos(trabajadorId));  
+       return solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.getServiciosOfrecidos(trabajadorId));  
        
-       return list;
     }
     
     /**
@@ -89,8 +86,8 @@ public class TrabajadorSolicitudServicioResource {
          throw new WebApplicationException("El recurso /solicitudes/" + solicitudServicioId    + " no existe.", 404);   
         }
         
-        SolicitudServicioDTO dto = new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.getSolicitudServicio(trabajadorId, solicitudServicioId));
-        return dto;   
+        return new SolicitudServicioDTO(trabajadorSolicitudServicioLogic.getSolicitudServicio(trabajadorId, solicitudServicioId));
+         
     }
     
     /**
@@ -107,8 +104,8 @@ public class TrabajadorSolicitudServicioResource {
                 throw new WebApplicationException("El recurso /solicitudes/" + servicio.getId() + " no existe.", 404);
             }
         }
-        List<SolicitudServicioDTO> lista = solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.replaceSolicitudServicio(trabjadorId, solicitudServicioDTOToEntity(servicios)));
-        return lista;
+        return solicitudServicioEntityToDTO(trabajadorSolicitudServicioLogic.replaceSolicitudServicio(trabjadorId, solicitudServicioDTOToEntity(servicios)));
+        
     }
     
     @DELETE

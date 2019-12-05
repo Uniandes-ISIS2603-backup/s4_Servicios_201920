@@ -36,8 +36,10 @@ public class FacturaEntity extends BaseEntity{
     private PagoTarjetaEntity tarjetaPago;
     
     public FacturaEntity(){
-        
+        // No est{a el constructor porque no es necesario.
     }
+    
+    
     
     public int getDuracion() {
         return duracion;

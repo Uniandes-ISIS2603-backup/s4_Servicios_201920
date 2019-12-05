@@ -47,16 +47,14 @@ public class ServicoOfrecidoResource
     @POST
     public ServicioOfrecidoDTO createServicioOfrecido(ServicioOfrecidoDTO servicio) throws BusinessLogicException {
     
-        ServicioOfrecidoDTO newService = new ServicioOfrecidoDTO (servicioLogic.createServicioOfrecido(servicio.toEntity()));
-        return newService;
+        return new ServicioOfrecidoDTO (servicioLogic.createServicioOfrecido(servicio.toEntity()));
     }
     
     @GET 
     public List<ServicioOfrecidoDTO> getServiciosOfrecidos() {
        
-        List<ServicioOfrecidoDTO> listaServicioOfrecidos = toDTO(servicioLogic.getServiciosOfrecidos());
-       
-        return listaServicioOfrecidos;
+        return toDTO(servicioLogic.getServiciosOfrecidos());
+      
     }
     
     /**
@@ -77,8 +75,7 @@ public class ServicoOfrecidoResource
             throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioOfrecidoId + " no existe.", 404);
         }
         
-        ServicioOfrecidoDTO servicioDTO = new ServicioOfrecidoDTO(entity);
-        return servicioDTO;
+        return new ServicioOfrecidoDTO(entity);
     }
     
     /**
@@ -99,8 +96,7 @@ public class ServicoOfrecidoResource
             throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioOfrecidoType + " no existe.", 404);
         }
         
-        List<ServicioOfrecidoDTO> serviciosDTO = toDTO(entities);
-        return serviciosDTO;
+        return toDTO(entities);
     }
     
     
@@ -127,8 +123,7 @@ public class ServicoOfrecidoResource
             throw new WebApplicationException("El recurso /serviciosOfrecidos/" + servicioId + " no existe.", 404);
         }
         
-        ServicioOfrecidoDTO servicioDTO = new ServicioOfrecidoDTO(servicioLogic.updateServicioOfrecido(servicioId, servicio.toEntity()));
-        return servicioDTO;
+        return new ServicioOfrecidoDTO(servicioLogic.updateServicioOfrecido(servicioId, servicio.toEntity()));
     }
     
     

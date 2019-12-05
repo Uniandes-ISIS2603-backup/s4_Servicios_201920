@@ -15,8 +15,7 @@ public class PuntajeStrategy implements AttributeStrategy<Integer>{
 
     @Override
     public Integer getValue() {
-        int r = (int)(Math.random() * 5) + 1;
-        return r;
+        return (int)(Math.random() * 5) + 1;
     }
     
 }

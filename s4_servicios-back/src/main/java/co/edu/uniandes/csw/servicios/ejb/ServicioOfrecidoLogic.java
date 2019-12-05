@@ -22,7 +22,7 @@ public class ServicioOfrecidoLogic
     @Inject
     private ServicioOfrecidoPersistence persistencia;
     
-    private final String[] tipos ={"Pintura", "Plomeria", "Electricidad", "Cerrajeria", "Ventaneria", "Carpinteria", "Aseo"};
+    private static final String[] tipos ={"Pintura", "Plomeria", "Electricidad", "Cerrajeria", "Ventaneria", "Carpinteria", "Aseo"};
     
     
     /**
@@ -36,7 +36,7 @@ public class ServicioOfrecidoLogic
     public ServicioOfrecidoEntity createServicioOfrecido(ServicioOfrecidoEntity newService) throws BusinessLogicException
     {
         // Validamos que no haya otro servicio con el mismo nnombre:
-        ServicioOfrecidoEntity old = null;//persistencia.findByName(newService.getNombre());
+        ServicioOfrecidoEntity old = null;
         String nombre = newService.getNombre();
         List<ServicioOfrecidoEntity> list = persistencia.findAll();
         for(ServicioOfrecidoEntity i: list)
@@ -91,8 +91,7 @@ public class ServicioOfrecidoLogic
      */
    public List<ServicioOfrecidoEntity> getServiciosOfrecidos()
    {
-       List<ServicioOfrecidoEntity> services = persistencia.findAll();
-       return  services;
+       return  persistencia.findAll();
    }
    
    /**
@@ -124,7 +123,7 @@ public class ServicioOfrecidoLogic
     */
    public ServicioOfrecidoEntity updateServicioOfrecido(Long servicioId, ServicioOfrecidoEntity newService) throws BusinessLogicException
    {
-        ServicioOfrecidoEntity old = null;//persistencia.findByName(newService.getNombre());
+        ServicioOfrecidoEntity old = null;
         String nombre = newService.getNombre();
         List<ServicioOfrecidoEntity> list = persistencia.findAll();
         for(ServicioOfrecidoEntity i: list)
@@ -158,7 +157,7 @@ public class ServicioOfrecidoLogic
     * @param servicioId identificador del servicio a eliminar.
     * @throws BusinessLogicException 
     */
-   public void deleteServicioOfrecido(Long servicioId) throws BusinessLogicException
+   public void deleteServicioOfrecido(Long servicioId)
    {
        persistencia.delete(servicioId);
    }

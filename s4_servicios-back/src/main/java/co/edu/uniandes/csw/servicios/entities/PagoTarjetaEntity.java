@@ -35,7 +35,7 @@ public class PagoTarjetaEntity extends BaseEntity{
     private ClienteEntity cliente;
     
     public PagoTarjetaEntity(){
-        
+        //El constructor es vacío porque no se necesita inicializar parámetros
     }
 
     public int getNumTarjeta() {

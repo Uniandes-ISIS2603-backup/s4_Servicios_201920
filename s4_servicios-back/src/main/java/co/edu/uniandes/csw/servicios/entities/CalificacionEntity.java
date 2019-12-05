@@ -8,8 +8,6 @@ package co.edu.uniandes.csw.servicios.entities;
 import co.edu.uniandes.csw.servicios.podam.PuntajeStrategy;
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
@@ -32,8 +30,10 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     
     public CalificacionEntity()
     {
-        
+        // Como no se neceista inicializar ninguna variable entonces permanece vacío el constructor. 
     }
+    
+    
     
     /**
      * @return the puntaje
