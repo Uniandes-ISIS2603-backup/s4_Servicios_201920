@@ -34,11 +34,11 @@ public class FacturaLogic {
         }
 
         // primerPago = true
-        else if (factura.isPrimerPago() == false) {
+        else if (!factura.isPrimerPago()) {
             throw new BusinessLogicException("No se puede crear la factura sin recibir el primer pago.");
         }
         // pagada = false
-        else if (factura.isPagada() == true) {
+        else if (factura.isPagada()) {
             throw new BusinessLogicException("La factura no puede estar pagada al momento de su creacion.");
         }
         factura = persistence.create(factura);
@@ -56,13 +56,11 @@ public class FacturaLogic {
     }
 
     public List<FacturaEntity> getFacturas() {
-        List<FacturaEntity> lista = persistence.findAll();
-        return lista;
+        return persistence.findAll();
     }
 
     public FacturaEntity getFactura(Long idFactura) {
-        FacturaEntity facturaEntity = persistence.find(idFactura);
-        return facturaEntity;
+        return persistence.find(idFactura);
     }
 
     public FacturaEntity updateFactura(Long idFactura, FacturaEntity facturaEntity) throws BusinessLogicException {
@@ -70,8 +68,7 @@ public class FacturaLogic {
         if (facturaEntity.getSolicitud().getEstado().equals("Finalizado")) {
             throw new BusinessLogicException("No se puede modificar una factura de un servicio finalizado.");
         }
-        FacturaEntity newFacturaEntity = persistence.update(facturaEntity);
-        return newFacturaEntity;
+        return persistence.update(facturaEntity);
     }
 
     public void deleteFactura(Long idFactura) {
